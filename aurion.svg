@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <!-- Фоновый круг -->
+  <circle cx="16" cy="16" r="15" fill="#0d0d0d" stroke="#d4af37" stroke-width="1.5" />
+  
+  <!-- Внутреннее золотое кольцо с текстурой/точками -->
+  <circle cx="16" cy="16" r="11" fill="none" stroke="#b38f27" stroke-width="0.75" stroke-dasharray="0.8, 1.5" />
+  <circle cx="16" cy="16" r="9" fill="#141414" stroke="#d4af37" stroke-width="0.5" />
+
+  <!-- Точки по кругу -->
+  <circle cx="16" cy="8" r="0.5" fill="#d4af37" />
+  <circle cx="24" cy="16" r="0.5" fill="#d4af37" />
+  <circle cx="16" cy="24" r="0.5" fill="#d4af37" />
+  <circle cx="8" cy="16" r="0.5" fill="#d4af37" />
+
+  <!-- Центральный геометрический логотип (ромб/кристалл) -->
+  <g fill="#d4af37">
+    <!-- Верхняя левая грань -->
+    <polygon points="16,10 11,15 16,17" />
+    <!-- Верхняя правая грань -->
+    <polygon points="16,10 21,15 16,17" />
+    <!-- Нижний левый элемент -->
+    <polygon points="11,16.5 16,22 16,18.5" />
+    <!-- Нижний правый элемент -->
+    <polygon points="21,16.5 16,22 16,18.5" />
+  </g>
+</svg>
