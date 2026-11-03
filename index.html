@@ -1,72 +1,599 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
 <meta name="google-site-verification" content="RJ-u_lufdlMgI9HQVd4QmeeY5IWIaamaUFMWpwTYUtc" />
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>AURION (AUR) — Utility Token on BNB Smart Chain</title>
-<meta name="description" content="AURION (AUR) is a utility token on BNB Smart Chain (BSC). Explore the official AURION project, its principles, token information and development updates.">
+
+<title>AURION — Digital Utility Ecosystem on BNB Smart Chain</title>
+<meta name="description" content="AURION is a community-oriented digital utility project on BNB Smart Chain. Explore its principles, development directions, token information and roadmap.">
+<meta name="theme-color" content="#0b1020">
+
 <style>
-body{margin:0;background:#0b1020;color:white;font-family:Arial,sans-serif;line-height:1.7}
-header{text-align:center;padding:50px 20px;background:#111a32}
-.logo{width:150px;height:150px;object-fit:contain}
-h1{font-size:42px;letter-spacing:5px}
-.gold,h2{color:#e1c477}
-main{max-width:850px;margin:auto;padding:25px 20px}
-section{margin:25px 0;padding:24px;background:#141e36;border-radius:12px}
-a{color:#e1c477}
-.address{overflow-wrap:anywhere}
-footer{text-align:center;padding:30px;color:#aab2c5}
+:root {
+--bg: #080e1d;
+--panel: #111b32;
+--panel2: #16223d;
+--gold: #e4c477;
+--gold2: #c99a32;
+--text: #f4f5f8;
+--muted: #aeb8ca;
+--border: rgba(228,196,119,.18);
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+margin: 0;
+background: var(--bg);
+color: var(--text);
+font-family: Arial, sans-serif;
+line-height: 1.7;
+}
+
+a { color: var(--gold); }
+
+header {
+text-align: center;
+padding: 65px 20px 55px;
+background:
+radial-gradient(ellipse at top, rgba(201,154,50,.14), transparent 65%),
+linear-gradient(180deg, #121e38, #080e1d);
+}
+
+.logo {
+width: 145px;
+height: 145px;
+object-fit: contain;
+margin-bottom: 12px;
+}
+
+h1 {
+margin: 5px 0;
+font-size: clamp(38px, 7vw, 58px);
+letter-spacing: 8px;
+}
+
+.gold { color: var(--gold); }
+
+.tagline {
+max-width: 650px;
+margin: 12px auto;
+color: var(--muted);
+font-size: 18px;
+}
+
+header .subtitle {
+color: var(--gold);
+letter-spacing: 3px;
+text-transform: uppercase;
+font-size: 13px;
+}
+
+nav {
+position: sticky;
+top: 0;
+z-index: 10;
+display: flex;
+justify-content: center;
+align-items: center;
+flex-wrap: wrap;
+gap: 8px 22px;
+padding: 14px 15px;
+background: rgba(8,14,29,.96);
+border-top: 1px solid var(--border);
+border-bottom: 1px solid var(--border);
+backdrop-filter: blur(10px);
+}
+
+nav a {
+color: var(--text);
+text-decoration: none;
+font-size: 14px;
+}
+
+nav a:hover { color: var(--gold); }
+
+.language {
+border: 1px solid var(--gold2);
+border-radius: 7px;
+background: transparent;
+color: var(--gold);
+padding: 7px 12px;
+cursor: pointer;
+font-weight: bold;
+}
+
+main {
+max-width: 1050px;
+margin: auto;
+padding: 25px 20px 55px;
+}
+
+section {
+margin: 30px 0;
+padding: 30px;
+background: linear-gradient(145deg, var(--panel), #10192d);
+border: 1px solid var(--border);
+border-radius: 15px;
+scroll-margin-top: 90px;
+}
+
+h2 {
+color: var(--gold);
+font-size: 26px;
+margin-top: 0;
+margin-bottom: 18px;
+}
+
+h3 {
+color: var(--gold);
+margin-top: 0;
+}
+
+p { color: var(--muted); }
+
+strong { color: var(--text); }
+
+.grid {
+display: grid;
+grid-template-columns: repeat(2, minmax(0, 1fr));
+gap: 16px;
+}
+
+.tile {
+background: var(--panel2);
+border: 1px solid var(--border);
+border-radius: 12px;
+padding: 22px;
+}
+
+.tile p { margin-bottom: 0; }
+
+.number {
+color: var(--gold);
+font-size: 13px;
+letter-spacing: 2px;
+font-weight: bold;
+}
+
+.status {
+display: inline-block;
+padding: 5px 10px;
+border: 1px solid var(--border);
+border-radius: 20px;
+color: var(--gold);
+font-size: 12px;
+margin-bottom: 10px;
+}
+
+.address {
+overflow-wrap: anywhere;
+color: var(--gold);
+}
+
+.token-button {
+display: inline-block;
+background: linear-gradient(135deg, #f5d77a, #c99a32);
+color: #101827;
+padding: 15px 35px;
+border-radius: 10px;
+font-weight: bold;
+text-decoration: none;
+font-size: 16px;
+letter-spacing: 1px;
+transition: transform .2s, box-shadow .2s;
+}
+
+.token-button:hover {
+transform: translateY(-2px);
+box-shadow: 0 5px 22px rgba(228,196,119,.22);
+}
+
+.center { text-align: center; }
+
+footer {
+text-align: center;
+padding: 35px 20px;
+border-top: 1px solid var(--border);
+color: var(--muted);
+font-size: 13px;
+}
+
+footer p {
+max-width: 700px;
+margin: 10px auto;
+}
+
+@media (max-width: 650px) {
+nav { gap: 10px 14px; }
+nav a { font-size: 12px; }
+section { padding: 22px 18px; }
+.grid { grid-template-columns: 1fr; }
+.logo { width: 120px; height: 120px; }
+}
 </style>
 </head>
+
 <body>
+
 <header>
 <img class="logo" src="logotip.png" alt="AURION logo">
 <h1>AURION</h1>
-<p class="gold">Digital Utility Project</p>
-<p> AURION (AUR) is a digital utility token built on BNB Smart Chain (BSC).</p>
+<p class="subtitle" data-i18n="subtitle">Цифровая экосистема</p>
+<p class="tagline" data-i18n="tagline">
+Цифровой проект на базе BNB Smart Chain, ориентированный на практическую полезность, развитие и сообщество.
+</p>
 </header>
+
+<nav>
+<a href="#about" data-i18n="navAbout">О проекте</a>
+<a href="#principles" data-i18n="navPrinciples">Принципы</a>
+<a href="#directions" data-i18n="navDirections">Направления</a>
+<a href="#marketplace" data-i18n="navMarket">Marketplace</a>
+<a href="#token" data-i18n="navToken">Токен AUR</a>
+<a href="#roadmap" data-i18n="navRoadmap">Roadmap</a>
+<a href="#contacts" data-i18n="navContacts">Контакты</a>
+<button class="language" id="languageButton" type="button" onclick="toggleLanguage()">EN</button>
+</nav>
+
 <main>
-<section>
-<h2>About AURION</h2>
-<p>AURION (AUR) is an early-stage digital utility token project built on the BNB Smart Chain (BSC).</p>
-<p>The project aims to develop a transparent, accessible and community-oriented blockchain ecosystem focused on practical digital utility.</p>
-<p>AURION is currently under development. Future utility features are planned but are not yet available. No returns or financial outcomes are guaranteed.</p>
-</section>
-<section>
-<h2>Our Principles</h2>
-<p><strong>Transparency:</strong> Providing clear, accurate and accessible information about the AURION project and its development.</p>
-<p><strong>Accessibility:</strong> Built on BNB Smart Chain (BSC), an established blockchain network.</p>
-<p><strong>Utility:</strong> Focused on developing practical blockchain use cases and digital utility features.</p>
-<p><strong>Community:</strong> Encouraging an open, informed and engaged community around the AURION ecosystem.</p>
-</section>
-<section>
-<h2>Token Information</h2>
-<p><strong>Token Name:</strong> AURION</p>
-<p><strong>Token Symbol:</strong> AUR</p>
-<p><strong>Blockchain Network:</strong> BNB Smart Chain (BSC)</p>
-<p><strong>Contract Address:</strong></p>
-<p class="address">0x6B7616c71ED6e5c48432E1693B3F47f910bB9325</p>
-<p><strong>Utility Status:</strong> Planned — development in progress, features not yet live.</p>
-<p><strong>Token Explorer:</strong> <a href="https://bscscan.com/token/0x6B7616c71ED6e5c48432E1693B3F47f910bB9325" target="_blank">View AURION on BscScan</a></p>
-<p style="text-align: center; margin: 25px 0;">
-  <a href="https://pancakeswap.finance/swap?chain=bsc&amp;inputCurrency=BNB&amp;outputCurrency=0x6B7616c71ED6e5c48432E1693B3F47f910bB9325"
-     target="_blank"
-     rel="noopener noreferrer"
-     style="display: inline-block; background: linear-gradient(135deg, #f5d77a, #c99a32); color: #101827; padding: 15px 35px; border-radius: 10px; font-weight: bold; text-decoration: none; font-size: 17px; letter-spacing: 1px;">
-    BUY / SELL AURION
-  </a>
+
+<section id="about">
+<h2 data-i18n="aboutTitle">О проекте AURION</h2>
+<p data-i18n="about1">
+AURION (AUR) — развивающийся проект цифрового utility-токена на блокчейне BNB Smart Chain (BSC).
+</p>
+<p data-i18n="about2">
+Наша идея — создать открытую цифровую экосистему, объединяющую цифровые товары, услуги, технологии и сообщество.
+</p>
+<p data-i18n="about3">
+Проект находится на ранней стадии развития. Многие функции планируются и пока не запущены.
 </p>
 </section>
-<section>
-<h2>Contact</h2>
-<p>Email: <a href="mailto:Avanturk.ltd@gmail.com">Avanturk.ltd@gmail.com</a></p>
-<p>Telegram: <a href="https://t.me/AURION_AUR_BSC" target="_blank">AURION Official</a></p>
+
+<section id="principles">
+<h2 data-i18n="principlesTitle">Наши принципы</h2>
+<div class="grid">
+<div class="tile">
+<h3 data-i18n="principle1Title">Прозрачность</h3>
+<p data-i18n="principle1Text">Открытая информация о проекте, его возможностях и ходе развития.</p>
+</div>
+<div class="tile">
+<h3 data-i18n="principle2Title">Доступность</h3>
+<p data-i18n="principle2Text">Использование блокчейна BNB Smart Chain и доступных цифровых инструментов.</p>
+</div>
+<div class="tile">
+<h3 data-i18n="principle3Title">Практическая польза</h3>
+<p data-i18n="principle3Text">Развитие реальных сценариев применения цифрового токена.</p>
+</div>
+<div class="tile">
+<h3 data-i18n="principle4Title">Сообщество</h3>
+<p data-i18n="principle4Text">Открытое взаимодействие, обмен идеями и совместное развитие.</p>
+</div>
+</div>
 </section>
+
+<section id="directions">
+<h2 data-i18n="directionsTitle">Направления развития</h2>
+<p data-i18n="directionsIntro">
+AURION планирует развивать экосистему по шести основным направлениям:
+</p>
+
+<div class="grid">
+<div class="tile">
+<span class="number">01</span>
+<h3 data-i18n="dir1Title">Дизайн и графика</h3>
+<p data-i18n="dir1Text">Цифровой дизайн, иллюстрации, логотипы и графические материалы.</p>
+</div>
+
+<div class="tile">
+<span class="number">02</span>
+<h3 data-i18n="dir2Title">IT и разработка</h3>
+<p data-i18n="dir2Text">Программирование, сайты, приложения и цифровые решения.</p>
+</div>
+
+<div class="tile">
+<span class="number">03</span>
+<h3 data-i18n="dir3Title">Цифровые товары и файлы</h3>
+<p data-i18n="dir3Text">Шаблоны, электронные материалы, файлы и другие цифровые продукты.</p>
+</div>
+
+<div class="tile">
+<span class="number">04</span>
+<h3 data-i18n="dir4Title">Обучение и консультации</h3>
+<p data-i18n="dir4Text">Образовательные материалы, консультации и обмен знаниями.</p>
+</div>
+
+<div class="tile">
+<span class="number">05</span>
+<h3 data-i18n="dir5Title">Маркетинг и продвижение</h3>
+<p data-i18n="dir5Text">Цифровой маркетинг, контент и инструменты продвижения.</p>
+</div>
+
+<div class="tile">
+<span class="number">06</span>
+<h3 data-i18n="dir6Title">Другие цифровые услуги</h3>
+<p data-i18n="dir6Text">Дополнительные цифровые услуги и новые идеи сообщества.</p>
+</div>
+</div>
+</section>
+
+<section id="marketplace">
+<span class="status" data-i18n="development">В разработке</span>
+<h2 data-i18n="marketTitle">AURION Marketplace</h2>
+<p data-i18n="market1">
+Одно из ключевых направлений проекта — создание цифровой площадки, где продавцы смогут предлагать товары и услуги, а покупатели — находить нужные решения.
+</p>
+<p data-i18n="market2">
+В перспективе планируется использование AUR в качестве средства оплаты внутри площадки.
+</p>
+<p data-i18n="market3">
+Marketplace пока не запущен. Регистрация продавцов, размещение товаров и проведение заказов ещё находятся на стадии разработки.
+</p>
+</section>
+
+<section id="token">
+<h2 data-i18n="tokenTitle">Токен AURION</h2>
+
+<p><strong data-i18n="tokenName">Название токена:</strong> AURION</p>
+<p><strong data-i18n="tokenSymbol">Символ:</strong> AUR</p>
+<p><strong data-i18n="network">Сеть:</strong> BNB Smart Chain (BSC)</p>
+
+<p><strong data-i18n="contract">Адрес контракта:</strong></p>
+<p class="address">0x6B7616c71ED6e5c48432E1693B3F47f910bB9325</p>
+
+<p><strong data-i18n="utility">Статус полезности:</strong>
+<span data-i18n="utilityStatus">Функции экосистемы планируются и находятся в разработке.</span>
+</p>
+
+<p>
+<a href="https://bscscan.com/token/0x6B7616c71ED6e5c48432E1693B3F47f910bB9325"
+target="_blank" rel="noopener noreferrer"
+data-i18n="bscscan">Посмотреть токен на BscScan</a>
+</p>
+
+<div class="center" style="margin:28px 0 8px;">
+<a class="token-button"
+href="https://pancakeswap.finance/swap?chain=bsc&amp;inputCurrency=BNB&amp;outputCurrency=0x6B7616c71ED6e5c48432E1693B3F47f910bB9325"
+target="_blank" rel="noopener noreferrer">
+BUY / SELL AURION
+</a>
+</div>
+</section>
+
+<section id="roadmap">
+<h2 data-i18n="roadmapTitle">План развития — Roadmap</h2>
+
+<div class="tile">
+<span class="status" data-i18n="stage1Status">Базовый этап</span>
+<h3 data-i18n="stage1Title">Этап 1. Основа проекта</h3>
+<p data-i18n="stage1Text">Создание токена, публикация информации о проекте, запуск официального сайта и каналов коммуникации.</p>
+</div>
+
+<div class="tile" style="margin-top:15px;">
+<span class="status" data-i18n="stage2Status">Развитие</span>
+<h3 data-i18n="stage2Title">Этап 2. Развитие экосистемы</h3>
+<p data-i18n="stage2Text">Проработка направлений проекта, развитие сообщества и подготовка цифровых сервисов.</p>
+</div>
+
+<div class="tile" style="margin-top:15px;">
+<span class="status" data-i18n="stage3Status">Планируется</span>
+<h3 data-i18n="stage3Title">Этап 3. Marketplace</h3>
+<p data-i18n="stage3Text">Разработка площадки для цифровых товаров и услуг с возможностью использования AUR.</p>
+</div>
+
+<div class="tile" style="margin-top:15px;">
+<span class="status" data-i18n="stage4Status">Долгосрочная перспектива</span>
+<h3 data-i18n="stage4Title">Этап 4. Расширение</h3>
+<p data-i18n="stage4Text">Изучение новых сценариев применения токена и дальнейшее расширение экосистемы.</p>
+</div>
+
+<p data-i18n="roadmapNote">
+Этапы являются планом развития и не представляют собой обещание сроков или гарантированный результат.
+</p>
+</section>
+
+<section id="news">
+<h2 data-i18n="newsTitle">Новости и обновления</h2>
+<p data-i18n="newsText">
+Следите за новостями AURION, объявлениями и развитием проекта в официальном Telegram-канале.
+</p>
+<p class="center">
+<a href="https://t.me/AURION_AUR_BSC" target="_blank" rel="noopener noreferrer">
+AURION Official — Telegram
+</a>
+</p>
+</section>
+
+<section id="contacts">
+<h2 data-i18n="contactTitle">Контакты</h2>
+<p><strong>Email:</strong>
+<a href="mailto:Avanturk.ltd@gmail.com">Avanturk.ltd@gmail.com</a>
+</p>
+<p><strong>Telegram:</strong>
+<a href="https://t.me/AURION_AUR_BSC" target="_blank" rel="noopener noreferrer">
+AURION Official
+</a>
+</p>
+</section>
+
 </main>
+
 <footer>
-AURION (AUR) — Official Project Information
-<p>This website is for informational purposes only and does not constitute financial or investment advice. No returns are guaranteed.</p>
+<strong class="gold">AURION (AUR)</strong>
+<p data-i18n="footer1">Официальная информация о проекте.</p>
+<p data-i18n="footer2">
+Данный сайт носит исключительно информационный характер и не является финансовой или инвестиционной рекомендацией. Покупка цифровых активов связана с риском. Доходность не гарантируется.
+</p>
+<p>© 2026 AURION. All rights reserved.</p>
 </footer>
+
+<script>
+const translations = {
+ru: {
+subtitle: "Цифровая экосистема",
+tagline: "Цифровой проект на базе BNB Smart Chain, ориентированный на практическую полезность, развитие и сообщество.",
+navAbout: "О проекте",
+navPrinciples: "Принципы",
+navDirections: "Направления",
+navMarket: "Marketplace",
+navToken: "Токен AUR",
+navRoadmap: "Roadmap",
+navContacts: "Контакты",
+aboutTitle: "О проекте AURION",
+about1: "AURION (AUR) — развивающийся проект цифрового utility-токена на блокчейне BNB Smart Chain (BSC).",
+about2: "Наша идея — создать открытую цифровую экосистему, объединяющую цифровые товары, услуги, технологии и сообщество.",
+about3: "Проект находится на ранней стадии развития. Многие функции планируются и пока не запущены.",
+principlesTitle: "Наши принципы",
+principle1Title: "Прозрачность",
+principle1Text: "Открытая информация о проекте, его возможностях и ходе развития.",
+principle2Title: "Доступность",
+principle2Text: "Использование блокчейна BNB Smart Chain и доступных цифровых инструментов.",
+principle3Title: "Практическая польза",
+principle3Text: "Развитие реальных сценариев применения цифрового токена.",
+principle4Title: "Сообщество",
+principle4Text: "Открытое взаимодействие, обмен идеями и совместное развитие.",
+directionsTitle: "Направления развития",
+directionsIntro: "AURION планирует развивать экосистему по шести основным направлениям:",
+dir1Title: "Дизайн и графика",
+dir1Text: "Цифровой дизайн, иллюстрации, логотипы и графические материалы.",
+dir2Title: "IT и разработка",
+dir2Text: "Программирование, сайты, приложения и цифровые решения.",
+dir3Title: "Цифровые товары и файлы",
+dir3Text: "Шаблоны, электронные материалы, файлы и другие цифровые продукты.",
+dir4Title: "Обучение и консультации",
+dir4Text: "Образовательные материалы, консультации и обмен знаниями.",
+dir5Title: "Маркетинг и продвижение",
+dir5Text: "Цифровой маркетинг, контент и инструменты продвижения.",
+dir6Title: "Другие цифровые услуги",
+dir6Text: "Дополнительные цифровые услуги и новые идеи сообщества.",
+development: "В разработке",
+marketTitle: "AURION Marketplace",
+market1: "Одно из ключевых направлений проекта — создание цифровой площадки, где продавцы смогут предлагать товары и услуги, а покупатели — находить нужные решения.",
+market2: "В перспективе планируется использование AUR в качестве средства оплаты внутри площадки.",
+market3: "Marketplace пока не запущен. Регистрация продавцов, размещение товаров и проведение заказов ещё находятся на стадии разработки.",
+tokenTitle: "Токен AURION",
+tokenName: "Название токена:",
+tokenSymbol: "Символ:",
+network: "Сеть:",
+contract: "Адрес контракта:",
+utility: "Статус полезности:",
+utilityStatus: "Функции экосистемы планируются и находятся в разработке.",
+bscscan: "Посмотреть токен на BscScan",
+roadmapTitle: "План развития — Roadmap",
+stage1Status: "Базовый этап",
+stage1Title: "Этап 1. Основа проекта",
+stage1Text: "Создание токена, публикация информации о проекте, запуск официального сайта и каналов коммуникации.",
+stage2Status: "Развитие",
+stage2Title: "Этап 2. Развитие экосистемы",
+stage2Text: "Проработка направлений проекта, развитие сообщества и подготовка цифровых сервисов.",
+stage3Status: "Планируется",
+stage3Title: "Этап 3. Marketplace",
+stage3Text: "Разработка площадки для цифровых товаров и услуг с возможностью использования AUR.",
+stage4Status: "Долгосрочная перспектива",
+stage4Title: "Этап 4. Расширение",
+stage4Text: "Изучение новых сценариев применения токена и дальнейшее расширение экосистемы.",
+roadmapNote: "Этапы являются планом развития и не представляют собой обещание сроков или гарантированный результат.",
+newsTitle: "Новости и обновления",
+newsText: "Следите за новостями AURION, объявлениями и развитием проекта в официальном Telegram-канале.",
+contactTitle: "Контакты",
+footer1: "Официальная информация о проекте.",
+footer2: "Данный сайт носит исключительно информационный характер и не является финансовой или инвестиционной рекомендацией. Покупка цифровых активов связана с риском. Доходность не гарантируется."
+},
+
+en: {
+subtitle: "Digital Ecosystem",
+tagline: "A digital project on BNB Smart Chain focused on practical utility, development and community.",
+navAbout: "About",
+navPrinciples: "Principles",
+navDirections: "Directions",
+navMarket: "Marketplace",
+navToken: "AUR Token",
+navRoadmap: "Roadmap",
+navContacts: "Contacts",
+aboutTitle: "About AURION",
+about1: "AURION (AUR) is an emerging digital utility token project built on BNB Smart Chain (BSC).",
+about2: "Our idea is to build an open digital ecosystem connecting digital products, services, technology and community.",
+about3: "The project is at an early stage of development. Many features are planned and are not yet live.",
+principlesTitle: "Our Principles",
+principle1Title: "Transparency",
+principle1Text: "Clear and accessible information about the project, its capabilities and development.",
+principle2Title: "Accessibility",
+principle2Text: "Using BNB Smart Chain and accessible digital tools.",
+principle3Title: "Practical Utility",
+principle3Text: "Developing practical use cases for the digital token.",
+principle4Title: "Community",
+principle4Text: "Open communication, idea sharing and collaborative development.",
+directionsTitle: "Development Directions",
+directionsIntro: "AURION plans to develop its ecosystem across six main directions:",
+dir1Title: "Design and Graphics",
+dir1Text: "Digital design, illustrations, logos and graphic materials.",
+dir2Title: "IT and Development",
+dir2Text: "Programming, websites, applications and digital solutions.",
+dir3Title: "Digital Products and Files",
+dir3Text: "Templates, electronic materials, files and other digital products.",
+dir4Title: "Education and Consulting",
+dir4Text: "Educational materials, consultations and knowledge sharing.",
+dir5Title: "Marketing and Promotion",
+dir5Text: "Digital marketing, content and promotion tools.",
+dir6Title: "Other Digital Services",
+dir6Text: "Additional digital services and new community ideas.",
+development: "In Development",
+marketTitle: "AURION Marketplace",
+market1: "One of the project's key directions is a digital marketplace where sellers will be able to offer products and services and buyers will be able to find useful solutions.",
+market2: "AUR is planned to be used as a payment method within the marketplace in the future.",
+market3: "The Marketplace is not live yet. Seller registration, product listings and order processing are still under development.",
+tokenTitle: "AURION Token",
+tokenName: "Token Name:",
+tokenSymbol: "Symbol:",
+network: "Network:",
+contract: "Contract Address:",
+utility: "Utility Status:",
+utilityStatus: "Ecosystem features are planned and under development.",
+bscscan: "View AURION on BscScan",
+roadmapTitle: "Development Plan — Roadmap",
+stage1Status: "Foundation",
+stage1Title: "Stage 1. Project Foundation",
+stage1Text: "Token creation, project information, official website and communication channels.",
+stage2Status: "Development",
+stage2Title: "Stage 2. Ecosystem Development",
+stage2Text: "Developing project directions, growing the community and preparing digital services.",
+stage3Status: "Planned",
+stage3Title: "Stage 3. Marketplace",
+stage3Text: "Developing a marketplace for digital products and services with planned AUR utility.",
+stage4Status: "Long-term Vision",
+stage4Title: "Stage 4. Expansion",
+stage4Text: "Exploring new token use cases and further expanding the ecosystem.",
+roadmapNote: "These stages are a development plan, not a promise of timelines or guaranteed outcomes.",
+newsTitle: "News and Updates",
+newsText: "Follow AURION news, announcements and project updates on the official Telegram channel.",
+contactTitle: "Contacts",
+footer1: "Official project information.",
+footer2: "This website is for informational purposes only and does not constitute financial or investment advice. Digital assets involve risk. No returns are guaranteed."
+}
+};
+
+let currentLanguage = "ru";
+
+function toggleLanguage() {
+currentLanguage = currentLanguage === "ru" ? "en" : "ru";
+
+document.documentElement.lang = currentLanguage;
+
+document.querySelectorAll("[data-i18n]").forEach(element => {
+const key = element.getAttribute("data-i18n");
+if (translations[currentLanguage][key]) {
+element.textContent = translations[currentLanguage][key];
+}
+});
+
+document.getElementById("languageButton").textContent =
+currentLanguage === "ru" ? "EN" : "RU";
+}
+</script>
+
 </body>
 </html>
