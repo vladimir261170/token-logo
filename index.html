@@ -214,6 +214,7 @@ section { padding: 22px 18px; }
 .grid { grid-template-columns: 1fr; }
 .logo { width: 120px; height: 120px; }
 }
+
 /* AURION PREMIUM GOLD DESIGN */
 
 body {
@@ -333,13 +334,15 @@ color: #f0d995;
 
 button,
 .button,
-a.button {
+a.button,
+.token-button {
 transition: transform .25s ease, box-shadow .25s ease;
 }
 
 button:hover,
 .button:hover,
-a.button:hover {
+a.button:hover,
+.token-button:hover {
 transform: translateY(-2px);
 box-shadow: 0 8px 22px rgba(201,154,50,.2);
 }
@@ -363,14 +366,32 @@ margin-bottom: 18px;
 }
 }
 
+/* GOLD LOGO GLOW ANIMATION */
+
+.logo {
+animation: aurionGoldGlow 4s ease-in-out infinite;
+}
+
+@keyframes aurionGoldGlow {
+0%, 100% {
+filter: drop-shadow(0 0 12px rgba(228,196,119,.20));
+}
+
+50% {
+filter: drop-shadow(0 0 28px rgba(228,196,119,.65))
+drop-shadow(0 0 45px rgba(201,154,50,.25));
+}
+}
+
 @media (prefers-reduced-motion: reduce) {
 *,
 *::before,
 *::after {
 transition-duration: .01ms !important;
 animation-duration: .01ms !important;
+animation-iteration-count: 1 !important;
 }
-}  
+}
 </style>
 </head>
 
@@ -754,3 +775,4 @@ currentLanguage === "ru" ? "EN" : "RU";
 
 </body>
 </html>
+
