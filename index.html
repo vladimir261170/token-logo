@@ -1,177 +1,306 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta name="google-site-verification" content="RJ-u_lufdlMgI9HQVd4QmeeY5IWIaamaUFMWpwTYUtc" />
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>AURION — Digital Utility Ecosystem on BNB Smart Chain</title>
-<meta name="description" content="AURION is a community-oriented digital utility project on BNB Smart Chain. Explore its principles, development directions, token information and roadmap.">
-<meta name="theme-color" content="#0b1020">
+<meta name="google-site-verification" content="RJ-u_lufdlMgI9HQVd4QmeeY5IWIaamaUFMWpwTYUtc">
+
+<title>AURION — Digital Ecosystem on BNB Smart Chain</title>
+<meta name="description" content="AURION — цифровая экосистема на BNB Smart Chain. Дизайн, IT, цифровые товары, обучение, маркетинг и цифровые услуги.">
+<meta name="theme-color" content="#101827">
 
 <style>
 :root {
---bg: #080e1d;
---panel: #111b32;
---panel2: #16223d;
+--bg: #0b1220;
+--panel: #111d30;
+--panel-light: #17253b;
 --gold: #e4c477;
---gold2: #c99a32;
---text: #f4f5f8;
---muted: #aeb8ca;
---border: rgba(228,196,119,.18);
+--gold-bright: #ffe6a0;
+--gold-dark: #b8892e;
+--text: #f4f1e8;
+--muted: #b7bdc9;
+--border: rgba(228,196,119,.28);
 }
 
-* { box-sizing: border-box; }
+* {
+box-sizing: border-box;
+margin: 0;
+padding: 0;
+}
 
-html { scroll-behavior: smooth; }
+html {
+scroll-behavior: smooth;
+scroll-padding-top: 100px;
+}
 
 body {
-margin: 0;
-background: var(--bg);
+font-family: Arial, Helvetica, sans-serif;
 color: var(--text);
-font-family: Arial, sans-serif;
+background:
+radial-gradient(ellipse at 50% 0%, rgba(201,154,50,.12), transparent 42%),
+radial-gradient(ellipse at 0% 40%, rgba(33,64,105,.16), transparent 45%),
+var(--bg);
 line-height: 1.7;
+min-height: 100vh;
 }
 
-a { color: var(--gold); }
+a {
+color: var(--gold);
+text-decoration: none;
+}
+
+a:hover {
+color: var(--gold-bright);
+}
 
 header {
 text-align: center;
-padding: 65px 20px 55px;
-background:
-radial-gradient(ellipse at top, rgba(201,154,50,.14), transparent 65%),
-linear-gradient(180deg, #121e38, #080e1d);
+padding: 45px 20px 25px;
+position: relative;
+overflow: hidden;
+}
+
+header::before {
+content: "";
+position: absolute;
+width: 420px;
+height: 420px;
+border: 1px solid rgba(228,196,119,.09);
+border-radius: 50%;
+left: 50%;
+top: -260px;
+transform: translateX(-50%);
+pointer-events: none;
 }
 
 .logo {
 width: 145px;
 height: 145px;
 object-fit: contain;
-margin-bottom: 12px;
+display: block;
+margin: 0 auto 16px;
+animation: aurionGoldGlow 4s ease-in-out infinite;
+}
+
+@keyframes aurionGoldGlow {
+0%, 100% {
+filter: drop-shadow(0 0 12px rgba(228,196,119,.20));
+}
+50% {
+filter:
+drop-shadow(0 0 28px rgba(228,196,119,.65))
+drop-shadow(0 0 45px rgba(201,154,50,.25));
+}
 }
 
 h1 {
-margin: 5px 0;
-font-size: clamp(38px, 7vw, 58px);
-letter-spacing: 8px;
+font-size: clamp(34px, 6vw, 52px);
+letter-spacing: 5px;
+background: linear-gradient(120deg, #fff0bd, #d2a849, #fff0bd);
+-webkit-background-clip: text;
+background-clip: text;
+color: transparent;
+margin-bottom: 8px;
 }
-
-.gold { color: var(--gold); }
 
 .tagline {
-max-width: 650px;
-margin: 12px auto;
 color: var(--muted);
-font-size: 18px;
+font-size: 15px;
+letter-spacing: 1.5px;
 }
 
-header .subtitle {
-color: var(--gold);
-letter-spacing: 3px;
-text-transform: uppercase;
-font-size: 13px;
+.language-switch {
+display: flex;
+justify-content: center;
+gap: 8px;
+margin: 22px 0 5px;
+}
+
+.language-switch button {
+background: transparent;
+border: 1px solid var(--border);
+color: var(--muted);
+padding: 7px 17px;
+border-radius: 20px;
+cursor: pointer;
+font-weight: bold;
+transition: .3s;
+}
+
+.language-switch button.active,
+.language-switch button:hover {
+color: #101827;
+background: linear-gradient(135deg, #f5d77a, #c99a32);
+border-color: var(--gold);
+box-shadow: 0 0 15px rgba(228,196,119,.25);
 }
 
 nav {
+display: flex;
+justify-content: center;
+flex-wrap: wrap;
+gap: 12px 22px;
+padding: 17px 15px;
+margin-top: 20px;
 position: sticky;
 top: 0;
 z-index: 10;
-display: flex;
-justify-content: center;
-align-items: center;
-flex-wrap: wrap;
-gap: 8px 22px;
-padding: 14px 15px;
-background: rgba(8,14,29,.96);
-border-top: 1px solid var(--border);
-border-bottom: 1px solid var(--border);
-backdrop-filter: blur(10px);
+background: rgba(11,18,32,.92);
+backdrop-filter: blur(12px);
+border-top: 1px solid rgba(228,196,119,.12);
+border-bottom: 1px solid rgba(228,196,119,.18);
 }
 
 nav a {
 color: var(--text);
-text-decoration: none;
-font-size: 14px;
+font-size: 13px;
+letter-spacing: .4px;
+transition: .3s;
 }
 
-nav a:hover { color: var(--gold); }
-
-.language {
-border: 1px solid var(--gold2);
-border-radius: 7px;
-background: transparent;
-color: var(--gold);
-padding: 7px 12px;
-cursor: pointer;
-font-weight: bold;
+nav a:hover {
+color: var(--gold-bright);
+text-shadow: 0 0 12px rgba(228,196,119,.55);
 }
 
 main {
-max-width: 1050px;
-margin: auto;
-padding: 25px 20px 55px;
+width: min(1100px, 92%);
+margin: 35px auto 65px;
 }
 
 section {
-margin: 30px 0;
-padding: 30px;
-background: linear-gradient(145deg, var(--panel), #10192d);
+background: linear-gradient(145deg, rgba(23,37,59,.92), rgba(14,25,42,.94));
 border: 1px solid var(--border);
-border-radius: 15px;
-scroll-margin-top: 90px;
+border-radius: 17px;
+padding: 32px;
+margin: 25px 0;
+box-shadow: 0 12px 35px rgba(0,0,0,.18);
+position: relative;
+overflow: hidden;
+}
+
+section::before {
+content: "";
+position: absolute;
+top: 0;
+left: 8%;
+width: 84%;
+height: 1px;
+background: linear-gradient(90deg, transparent, rgba(255,225,150,.5), transparent);
 }
 
 h2 {
 color: var(--gold);
-font-size: 26px;
-margin-top: 0;
-margin-bottom: 18px;
+font-size: 25px;
+margin-bottom: 17px;
+letter-spacing: .5px;
 }
 
 h3 {
-color: var(--gold);
-margin-top: 0;
+color: var(--gold-bright);
+font-size: 18px;
+margin-bottom: 9px;
 }
 
-p { color: var(--muted); }
-
-strong { color: var(--text); }
+p {
+color: var(--muted);
+margin: 10px 0;
+}
 
 .grid {
 display: grid;
-grid-template-columns: repeat(2, minmax(0, 1fr));
-gap: 16px;
+grid-template-columns: repeat(3, 1fr);
+gap: 19px;
+margin-top: 22px;
 }
 
 .tile {
-background: var(--panel2);
-border: 1px solid var(--border);
-border-radius: 12px;
-padding: 22px;
+min-height: 175px;
+padding: 24px 20px;
+background: linear-gradient(145deg, rgba(25,42,66,.95), rgba(13,25,43,.98));
+border: 1px solid rgba(228,196,119,.25);
+border-radius: 14px;
+position: relative;
+overflow: hidden;
+transition:
+transform .35s ease,
+border-color .35s ease,
+box-shadow .35s ease,
+background .35s ease;
+animation: tileGlow 5s ease-in-out infinite;
 }
 
-.tile p { margin-bottom: 0; }
+.tile:nth-child(2) { animation-delay: .5s; }
+.tile:nth-child(3) { animation-delay: 1s; }
+.tile:nth-child(4) { animation-delay: 1.5s; }
+.tile:nth-child(5) { animation-delay: 2s; }
+.tile:nth-child(6) { animation-delay: 2.5s; }
 
-.number {
-color: var(--gold);
-font-size: 13px;
-letter-spacing: 2px;
-font-weight: bold;
+@keyframes tileGlow {
+0%, 100% {
+box-shadow: 0 0 0 rgba(228,196,119,0);
+}
+50% {
+box-shadow: 0 0 17px rgba(228,196,119,.07);
+}
+}
+
+.tile::after {
+content: "";
+position: absolute;
+width: 95px;
+height: 95px;
+border: 1px solid rgba(228,196,119,.16);
+border-radius: 50%;
+right: -35px;
+bottom: -43px;
+transition: .4s;
+pointer-events: none;
+}
+
+.tile:hover {
+transform: translateY(-7px);
+border-color: rgba(255,224,150,.8);
+background: linear-gradient(145deg, rgba(37,54,78,.98), rgba(18,31,51,.98));
+box-shadow:
+0 10px 30px rgba(0,0,0,.3),
+0 0 22px rgba(228,196,119,.2);
+}
+
+.tile:hover::after {
+width: 145px;
+height: 145px;
+border-color: rgba(228,196,119,.45);
+}
+
+.tile-icon {
+font-size: 27px;
+display: block;
+margin-bottom: 12px;
+filter: drop-shadow(0 0 7px rgba(228,196,119,.35));
+}
+
+.tile p {
+font-size: 14px;
+margin-bottom: 0;
 }
 
 .status {
 display: inline-block;
-padding: 5px 10px;
-border: 1px solid var(--border);
+padding: 5px 12px;
+border: 1px solid rgba(228,196,119,.45);
 border-radius: 20px;
-color: var(--gold);
+color: var(--gold-bright);
+background: rgba(201,154,50,.1);
 font-size: 12px;
-margin-bottom: 10px;
+letter-spacing: .5px;
+margin: 5px 0 12px;
 }
 
-.address {
+.token-info {
+line-height: 2;
 overflow-wrap: anywhere;
-color: var(--gold);
 }
 
 .token-button {
@@ -184,202 +313,118 @@ font-weight: bold;
 text-decoration: none;
 font-size: 16px;
 letter-spacing: 1px;
-transition: transform .2s, box-shadow .2s;
+box-shadow: 0 5px 18px rgba(201,154,50,.2);
+transition: .3s;
 }
 
 .token-button:hover {
-transform: translateY(-2px);
-box-shadow: 0 5px 22px rgba(228,196,119,.22);
+color: #101827;
+transform: translateY(-3px);
+box-shadow: 0 8px 25px rgba(228,196,119,.4);
 }
 
-.center { text-align: center; }
+.roadmap-item {
+border-left: 2px solid var(--gold-dark);
+padding: 2px 0 17px 20px;
+margin: 17px 0;
+position: relative;
+}
+
+.roadmap-item::before {
+content: "";
+position: absolute;
+left: -7px;
+top: 5px;
+width: 12px;
+height: 12px;
+background: var(--gold);
+border-radius: 50%;
+box-shadow: 0 0 12px rgba(228,196,119,.6);
+}
+
+.contact-links {
+display: flex;
+flex-wrap: wrap;
+gap: 14px;
+margin-top: 18px;
+}
+
+.contact-links a {
+display: inline-block;
+padding: 10px 17px;
+border: 1px solid var(--border);
+border-radius: 9px;
+transition: .3s;
+}
+
+.contact-links a:hover {
+background: rgba(228,196,119,.1);
+box-shadow: 0 0 15px rgba(228,196,119,.12);
+}
 
 footer {
 text-align: center;
-padding: 35px 20px;
-border-top: 1px solid var(--border);
-color: var(--muted);
-font-size: 13px;
+color: #8993a4;
+font-size: 12px;
+padding: 25px 18px 35px;
+border-top: 1px solid rgba(228,196,119,.13);
 }
 
 footer p {
-max-width: 700px;
-margin: 10px auto;
+font-size: 12px;
+margin: 5px 0;
 }
 
-@media (max-width: 650px) {
-nav { gap: 10px 14px; }
-nav a { font-size: 12px; }
-section { padding: 22px 18px; }
-.grid { grid-template-columns: 1fr; }
-.logo { width: 120px; height: 120px; }
+.reveal {
+opacity: 0;
+transform: translateY(24px);
+transition: opacity .7s ease, transform .7s ease;
 }
 
-/* AURION PREMIUM GOLD DESIGN */
-
-body {
-background:
-radial-gradient(ellipse at 50% 0%, rgba(201,154,50,.12), transparent 45%),
-#080e1d;
+.reveal.visible {
+opacity: 1;
+transform: translateY(0);
 }
 
-header {
-position: relative;
-padding-top: 45px;
-padding-bottom: 35px;
+@media (max-width: 800px) {
+.grid {
+grid-template-columns: repeat(2, 1fr);
 }
-
-header::before,
-header::after {
-content: "";
-position: absolute;
-border: 1px solid rgba(228,196,119,.12);
-border-radius: 50%;
-pointer-events: none;
-}
-
-header::before {
-width: 260px;
-height: 260px;
-top: -100px;
-left: -100px;
-}
-
-header::after {
-width: 220px;
-height: 220px;
-bottom: -100px;
-right: -80px;
-}
-
-.logo {
-filter: drop-shadow(0 0 18px rgba(228,196,119,.25));
-transition: transform .3s ease, filter .3s ease;
-}
-
-.logo:hover {
-transform: scale(1.04);
-filter: drop-shadow(0 0 25px rgba(228,196,119,.45));
-}
-
-h1 {
-background: linear-gradient(135deg, #fff2c6, #e4c477, #c99a32);
--webkit-background-clip: text;
-background-clip: text;
-color: transparent;
-letter-spacing: 2px;
-}
-
-nav {
-margin-top: 25px;
-}
-
-nav a {
-transition: color .25s ease, text-shadow .25s ease;
-}
-
-nav a:hover {
-color: #fff0bd;
-text-shadow: 0 0 12px rgba(228,196,119,.45);
-}
-
-section {
-border: 1px solid rgba(228,196,119,.22);
-box-shadow: 0 12px 35px rgba(0,0,0,.18);
-transition: border-color .3s ease, box-shadow .3s ease;
-}
-
-section:hover {
-border-color: rgba(228,196,119,.4);
-box-shadow: 0 14px 40px rgba(0,0,0,.28);
-}
-
-.tile {
-position: relative;
-overflow: hidden;
-border: 1px solid rgba(228,196,119,.22);
-background: linear-gradient(145deg, #16223d, #101a30);
-transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
-}
-
-.tile:hover {
-transform: translateY(-5px);
-border-color: rgba(228,196,119,.6);
-box-shadow: 0 12px 28px rgba(201,154,50,.12);
-}
-
-#directions .tile::after {
-position: absolute;
-right: 16px;
-bottom: 8px;
-color: rgba(228,196,119,.12);
-font-size: 42px;
-font-weight: bold;
-pointer-events: none;
-}
-
-#directions .tile:nth-child(1)::after { content: "✦"; }
-#directions .tile:nth-child(2)::after { content: "⌘"; }
-#directions .tile:nth-child(3)::after { content: "◇"; }
-#directions .tile:nth-child(4)::after { content: "✧"; }
-#directions .tile:nth-child(5)::after { content: "◎"; }
-#directions .tile:nth-child(6)::after { content: "✺"; }
-
-.status,
-.badge {
-border: 1px solid rgba(228,196,119,.35);
-background: rgba(201,154,50,.10);
-color: #f0d995;
-}
-
-button,
-.button,
-a.button,
-.token-button {
-transition: transform .25s ease, box-shadow .25s ease;
-}
-
-button:hover,
-.button:hover,
-a.button:hover,
-.token-button:hover {
-transform: translateY(-2px);
-box-shadow: 0 8px 22px rgba(201,154,50,.2);
-}
-
-footer {
-border-top: 1px solid rgba(228,196,119,.18);
 }
 
 @media (max-width: 650px) {
 header {
 padding-top: 30px;
-padding-bottom: 25px;
 }
 
-h1 {
-letter-spacing: 1px;
+.logo {
+width: 120px;
+height: 120px;
+}
+
+nav {
+gap: 10px 14px;
+padding: 13px 9px;
+}
+
+nav a {
+font-size: 12px;
 }
 
 section {
-margin-bottom: 18px;
-}
-}
-
-/* GOLD LOGO GLOW ANIMATION */
-
-.logo {
-animation: aurionGoldGlow 4s ease-in-out infinite;
+padding: 22px 18px;
 }
 
-@keyframes aurionGoldGlow {
-0%, 100% {
-filter: drop-shadow(0 0 12px rgba(228,196,119,.20));
+.grid {
+grid-template-columns: 1fr;
 }
 
-50% {
-filter: drop-shadow(0 0 28px rgba(228,196,119,.65))
-drop-shadow(0 0 45px rgba(201,154,50,.25));
+h2 {
+font-size: 22px;
+}
+
+.tile {
+min-height: 145px;
 }
 }
 
@@ -387,9 +432,14 @@ drop-shadow(0 0 45px rgba(201,154,50,.25));
 *,
 *::before,
 *::after {
-transition-duration: .01ms !important;
-animation-duration: .01ms !important;
-animation-iteration-count: 1 !important;
+scroll-behavior: auto !important;
+animation: none !important;
+transition: none !important;
+}
+
+.reveal {
+opacity: 1;
+transform: none;
 }
 }
 </style>
@@ -398,381 +448,302 @@ animation-iteration-count: 1 !important;
 <body>
 
 <header>
-<img class="logo" src="logotip.png" alt="AURION logo">
+<img src="logotip.png" alt="AURION Logo" class="logo">
 <h1>AURION</h1>
-<p class="subtitle" data-i18n="subtitle">Цифровая экосистема</p>
-<p class="tagline" data-i18n="tagline">
-Цифровой проект на базе BNB Smart Chain, ориентированный на практическую полезность, развитие и сообщество.
+<p class="tagline" data-ru="Цифровая экосистема на BNB Smart Chain"
+data-en="Digital Ecosystem on BNB Smart Chain">
+Цифровая экосистема на BNB Smart Chain
 </p>
+
+<div class="language-switch">
+<button id="ruButton" class="active" onclick="setLanguage('ru')">RU</button>
+<button id="enButton" onclick="setLanguage('en')">EN</button>
+</div>
 </header>
 
 <nav>
-<a href="#about" data-i18n="navAbout">О проекте</a>
-<a href="#principles" data-i18n="navPrinciples">Принципы</a>
-<a href="#directions" data-i18n="navDirections">Направления</a>
-<a href="#marketplace" data-i18n="navMarket">Marketplace</a>
-<a href="#token" data-i18n="navToken">Токен AUR</a>
-<a href="#roadmap" data-i18n="navRoadmap">Roadmap</a>
-<a href="#contacts" data-i18n="navContacts">Контакты</a>
-<button class="language" id="languageButton" type="button" onclick="toggleLanguage()">EN</button>
+<a href="#about" data-ru="О проекте" data-en="About">О проекте</a>
+<a href="#principles" data-ru="Принципы" data-en="Principles">Принципы</a>
+<a href="#directions" data-ru="Направления" data-en="Directions">Направления</a>
+<a href="#marketplace" data-ru="Маркетплейс" data-en="Marketplace">Маркетплейс</a>
+<a href="#token" data-ru="Токен AUR" data-en="AUR Token">Токен AUR</a>
+<a href="#roadmap" data-ru="План развития" data-en="Roadmap">План развития</a>
+<a href="#news" data-ru="Новости" data-en="News">Новости</a>
+<a href="#contacts" data-ru="Контакты" data-en="Contacts">Контакты</a>
 </nav>
 
 <main>
 
-<section id="about">
-<h2 data-i18n="aboutTitle">О проекте AURION</h2>
-<p data-i18n="about1">
-AURION (AUR) — развивающийся проект цифрового utility-токена на блокчейне BNB Smart Chain (BSC).
+<section id="about" class="reveal">
+<h2 data-ru="О проекте AURION" data-en="About AURION">О проекте AURION</h2>
+
+<p data-ru="AURION — развивающийся цифровой проект на блокчейне BNB Smart Chain. Его цель — создание экосистемы для цифровых товаров, услуг, знаний и взаимодействия между пользователями."
+data-en="AURION is an emerging digital project on BNB Smart Chain. Its goal is to build an ecosystem for digital products, services, knowledge and interaction between users.">
+AURION — развивающийся цифровой проект на блокчейне BNB Smart Chain. Его цель — создание экосистемы для цифровых товаров, услуг, знаний и взаимодействия между пользователями.
 </p>
-<p data-i18n="about2">
-Наша идея — создать открытую цифровую экосистему, объединяющую цифровые товары, услуги, технологии и сообщество.
-</p>
-<p data-i18n="about3">
-Проект находится на ранней стадии развития. Многие функции планируются и пока не запущены.
+
+<p data-ru="Проект развивается поэтапно. Мы стремимся создать понятную, открытую и удобную цифровую среду, в которой токен AUR сможет использоваться как один из инструментов взаимодействия."
+data-en="The project is being developed step by step. We aim to create a clear, open and convenient digital environment where the AUR token can serve as one of the tools for interaction.">
+Проект развивается поэтапно. Мы стремимся создать понятную, открытую и удобную цифровую среду, в которой токен AUR сможет использоваться как один из инструментов взаимодействия.
 </p>
 </section>
 
-<section id="principles">
-<h2 data-i18n="principlesTitle">Наши принципы</h2>
-<div class="grid">
-<div class="tile">
-<h3 data-i18n="principle1Title">Прозрачность</h3>
-<p data-i18n="principle1Text">Открытая информация о проекте, его возможностях и ходе развития.</p>
-</div>
-<div class="tile">
-<h3 data-i18n="principle2Title">Доступность</h3>
-<p data-i18n="principle2Text">Использование блокчейна BNB Smart Chain и доступных цифровых инструментов.</p>
-</div>
-<div class="tile">
-<h3 data-i18n="principle3Title">Практическая польза</h3>
-<p data-i18n="principle3Text">Развитие реальных сценариев применения цифрового токена.</p>
-</div>
-<div class="tile">
-<h3 data-i18n="principle4Title">Сообщество</h3>
-<p data-i18n="principle4Text">Открытое взаимодействие, обмен идеями и совместное развитие.</p>
-</div>
-</div>
-</section>
-
-<section id="directions">
-<h2 data-i18n="directionsTitle">Направления развития</h2>
-<p data-i18n="directionsIntro">
-AURION планирует развивать экосистему по шести основным направлениям:
-</p>
+<section id="principles" class="reveal">
+<h2 data-ru="Наши принципы" data-en="Our Principles">Наши принципы</h2>
 
 <div class="grid">
 <div class="tile">
-<span class="number">01</span>
-<h3 data-i18n="dir1Title">Дизайн и графика</h3>
-<p data-i18n="dir1Text">Цифровой дизайн, иллюстрации, логотипы и графические материалы.</p>
+<span class="tile-icon">◇</span>
+<h3 data-ru="Прозрачность" data-en="Transparency">Прозрачность</h3>
+<p data-ru="Открытая информация о проекте и его развитии."
+data-en="Open information about the project and its development.">
+Открытая информация о проекте и его развитии.
+</p>
 </div>
 
 <div class="tile">
-<span class="number">02</span>
-<h3 data-i18n="dir2Title">IT и разработка</h3>
-<p data-i18n="dir2Text">Программирование, сайты, приложения и цифровые решения.</p>
+<span class="tile-icon">✧</span>
+<h3 data-ru="Доступность" data-en="Accessibility">Доступность</h3>
+<p data-ru="Стремление сделать цифровые инструменты понятными и удобными."
+data-en="Making digital tools clear and convenient to use.">
+Стремление сделать цифровые инструменты понятными и удобными.
+</p>
 </div>
 
 <div class="tile">
-<span class="number">03</span>
-<h3 data-i18n="dir3Title">Цифровые товары и файлы</h3>
-<p data-i18n="dir3Text">Шаблоны, электронные материалы, файлы и другие цифровые продукты.</p>
-</div>
-
-<div class="tile">
-<span class="number">04</span>
-<h3 data-i18n="dir4Title">Обучение и консультации</h3>
-<p data-i18n="dir4Text">Образовательные материалы, консультации и обмен знаниями.</p>
-</div>
-
-<div class="tile">
-<span class="number">05</span>
-<h3 data-i18n="dir5Title">Маркетинг и продвижение</h3>
-<p data-i18n="dir5Text">Цифровой маркетинг, контент и инструменты продвижения.</p>
-</div>
-
-<div class="tile">
-<span class="number">06</span>
-<h3 data-i18n="dir6Title">Другие цифровые услуги</h3>
-<p data-i18n="dir6Text">Дополнительные цифровые услуги и новые идеи сообщества.</p>
+<span class="tile-icon">⬡</span>
+<h3 data-ru="Развитие" data-en="Development">Развитие</h3>
+<p data-ru="Постепенное создание новых возможностей экосистемы."
+data-en="Gradually building new ecosystem capabilities.">
+Постепенное создание новых возможностей экосистемы.
+</p>
 </div>
 </div>
 </section>
 
-<section id="marketplace">
-<span class="status" data-i18n="development">В разработке</span>
-<h2 data-i18n="marketTitle">AURION Marketplace</h2>
-<p data-i18n="market1">
-Одно из ключевых направлений проекта — создание цифровой площадки, где продавцы смогут предлагать товары и услуги, а покупатели — находить нужные решения.
+<section id="directions" class="reveal">
+<h2 data-ru="Направления развития AURION"
+data-en="AURION Development Directions">
+Направления развития AURION
+</h2>
+
+<p data-ru="Шесть основных направлений, вокруг которых планируется развивать цифровую экосистему AURION."
+data-en="Six main areas around which the AURION digital ecosystem is planned to develop.">
+Шесть основных направлений, вокруг которых планируется развивать цифровую экосистему AURION.
 </p>
-<p data-i18n="market2">
-В перспективе планируется использование AUR в качестве средства оплаты внутри площадки.
+
+<div class="grid">
+
+<div class="tile">
+<span class="tile-icon">✦</span>
+<h3 data-ru="Дизайн и графика" data-en="Design & Graphics">Дизайн и графика</h3>
+<p data-ru="Логотипы, иллюстрации, оформление, визуальные материалы и творческие работы."
+data-en="Logos, illustrations, visual identity, graphics and creative work.">
+Логотипы, иллюстрации, оформление, визуальные материалы и творческие работы.
 </p>
-<p data-i18n="market3">
-Marketplace пока не запущен. Регистрация продавцов, размещение товаров и проведение заказов ещё находятся на стадии разработки.
+</div>
+
+<div class="tile">
+<span class="tile-icon">⌘</span>
+<h3 data-ru="IT и разработка" data-en="IT & Development">IT и разработка</h3>
+<p data-ru="Сайты, приложения, программирование, технические решения и цифровые инструменты."
+data-en="Websites, apps, programming, technical solutions and digital tools.">
+Сайты, приложения, программирование, технические решения и цифровые инструменты.
+</p>
+</div>
+
+<div class="tile">
+<span class="tile-icon">▤</span>
+<h3 data-ru="Цифровые товары и файлы" data-en="Digital Products & Files">Цифровые товары и файлы</h3>
+<p data-ru="Шаблоны, электронные материалы, документы, графические наборы и другие файлы."
+data-en="Templates, digital materials, documents, graphic packs and other files.">
+Шаблоны, электронные материалы, документы, графические наборы и другие файлы.
+</p>
+</div>
+
+<div class="tile">
+<span class="tile-icon">◎</span>
+<h3 data-ru="Обучение и консультации" data-en="Education & Consulting">Обучение и консультации</h3>
+<p data-ru="Обучающие материалы, индивидуальные консультации, наставничество и обмен знаниями."
+data-en="Learning materials, personal consultations, mentoring and knowledge sharing.">
+Обучающие материалы, индивидуальные консультации, наставничество и обмен знаниями.
+</p>
+</div>
+
+<div class="tile">
+<span class="tile-icon">↗</span>
+<h3 data-ru="Маркетинг и продвижение" data-en="Marketing & Promotion">Маркетинг и продвижение</h3>
+<p data-ru="Создание контента, оформление публикаций, продвижение проектов и коммуникации."
+data-en="Content creation, publication design, project promotion and communications.">
+Создание контента, оформление публикаций, продвижение проектов и коммуникации.
+</p>
+</div>
+
+<div class="tile">
+<span class="tile-icon">✧</span>
+<h3 data-ru="Другие цифровые услуги" data-en="Other Digital Services">Другие цифровые услуги</h3>
+<p data-ru="Различные цифровые работы и услуги, которые дополняют экосистему AURION."
+data-en="Other digital work and services that complement the AURION ecosystem.">
+Различные цифровые работы и услуги, которые дополняют экосистему AURION.
+</p>
+</div>
+
+</div>
+</section>
+
+<section id="marketplace" class="reveal">
+<h2 data-ru="AURION Marketplace" data-en="AURION Marketplace">AURION Marketplace</h2>
+
+<span class="status" data-ru="В РАЗРАБОТКЕ" data-en="IN DEVELOPMENT">В РАЗРАБОТКЕ</span>
+
+<p data-ru="Планируемая площадка для размещения и приобретения цифровых товаров и услуг. Авторы смогут предлагать свои работы, а пользователи — находить нужные решения."
+data-en="A planned platform for listing and purchasing digital products and services. Creators will be able to offer their work, while users will be able to find useful solutions.">
+Планируемая площадка для размещения и приобретения цифровых товаров и услуг. Авторы смогут предлагать свои работы, а пользователи — находить нужные решения.
+</p>
+
+<p data-ru="Использование токена AUR в качестве одного из способов оплаты рассматривается как часть будущей модели маркетплейса. Площадка пока не запущена."
+data-en="Using AUR as one of the payment methods is being considered as part of the future marketplace model. The platform has not launched yet.">
+Использование токена AUR в качестве одного из способов оплаты рассматривается как часть будущей модели маркетплейса. Площадка пока не запущена.
 </p>
 </section>
 
-<section id="token">
-<h2 data-i18n="tokenTitle">Токен AURION</h2>
+<section id="token" class="reveal">
+<h2 data-ru="Токен AURION (AUR)" data-en="AURION Token (AUR)">Токен AURION (AUR)</h2>
 
-<p><strong data-i18n="tokenName">Название токена:</strong> AURION</p>
-<p><strong data-i18n="tokenSymbol">Символ:</strong> AUR</p>
-<p><strong data-i18n="network">Сеть:</strong> BNB Smart Chain (BSC)</p>
+<div class="token-info">
+<p><strong data-ru="Название:" data-en="Name:">Название:</strong> AURION</p>
+<p><strong data-ru="Символ:" data-en="Symbol:">Символ:</strong> AUR</p>
+<p><strong data-ru="Сеть:" data-en="Network:">Сеть:</strong> BNB Smart Chain (BEP-20)</p>
+<p><strong data-ru="Адрес контракта:" data-en="Contract address:">Адрес контракта:</strong><br>
+<a href="https://bscscan.com/token/0x6B7616c71ED6e5c48432E1693B3F47f910bB9325" target="_blank" rel="noopener noreferrer">
+0x6B7616c71ED6e5c48432E1693B3F47f910bB9325
+</a>
+</p>
+<p>
+<strong data-ru="Обозреватель блокчейна:" data-en="Blockchain explorer:">Обозреватель блокчейна:</strong>
+<a href="https://bscscan.com/token/0x6B7616c71ED6e5c48432E1693B3F47f910bB9325" target="_blank" rel="noopener noreferrer">BscScan</a>
+</p>
+</div>
 
-<p><strong data-i18n="contract">Адрес контракта:</strong></p>
-<p class="address">0x6B7616c71ED6e5c48432E1693B3F47f910bB9325</p>
+<p style="text-align:center; margin:28px 0;">
+<a class="token-button"
+href="https://pancakeswap.finance/swap?chain=bsc&amp;inputCurrency=BNB&amp;outputCurrency=0x6B7616c71ED6e5c48432E1693B3F47f910bB9325"
+target="_blank"
+rel="noopener noreferrer"
+data-ru="КУПИТЬ / ПРОДАТЬ AURION"
+data-en="BUY / SELL AURION">
+КУПИТЬ / ПРОДАТЬ AURION
+</a>
+</p>
 
-<p><strong data-i18n="utility">Статус полезности:</strong>
-<span data-i18n="utilityStatus">Функции экосистемы планируются и находятся в разработке.</span>
+<p data-ru="Токен доступен для просмотра в блокчейне. Перед обменом самостоятельно проверяйте адрес контракта и учитывайте риски, связанные с цифровыми активами."
+data-en="The token is visible on the blockchain. Before swapping, verify the contract address and consider the risks associated with digital assets.">
+Токен доступен для просмотра в блокчейне. Перед обменом самостоятельно проверяйте адрес контракта и учитывайте риски, связанные с цифровыми активами.
+</p>
+</section>
+
+<section id="roadmap" class="reveal">
+<h2 data-ru="План развития" data-en="Roadmap">План развития</h2>
+
+<div class="roadmap-item">
+<h3 data-ru="Этап 1 — Основа проекта" data-en="Stage 1 — Project Foundation">Этап 1 — Основа проекта</h3>
+<p data-ru="Создание токена AUR, сайта проекта, информационных ресурсов и базовой инфраструктуры."
+data-en="Creation of the AUR token, project website, information resources and basic infrastructure.">
+Создание токена AUR, сайта проекта, информационных ресурсов и базовой инфраструктуры.
+</p>
+</div>
+
+<div class="roadmap-item">
+<h3 data-ru="Этап 2 — Развитие экосистемы" data-en="Stage 2 — Ecosystem Development">Этап 2 — Развитие экосистемы</h3>
+<p data-ru="Развитие сообщества, изучение потребностей пользователей и подготовка цифровых направлений."
+data-en="Community development, understanding user needs and preparing digital service areas.">
+Развитие сообщества, изучение потребностей пользователей и подготовка цифровых направлений.
+</p>
+</div>
+
+<div class="roadmap-item">
+<h3 data-ru="Этап 3 — Marketplace" data-en="Stage 3 — Marketplace">Этап 3 — Marketplace</h3>
+<p data-ru="Разработка и тестирование площадки для цифровых товаров и услуг."
+data-en="Development and testing of a marketplace for digital products and services.">
+Разработка и тестирование площадки для цифровых товаров и услуг.
+</p>
+</div>
+
+<div class="roadmap-item">
+<h3 data-ru="Этап 4 — Расширение" data-en="Stage 4 — Expansion">Этап 4 — Расширение</h3>
+<p data-ru="Постепенное расширение функциональности и возможностей экосистемы на основе опыта пользователей."
+data-en="Gradual expansion of ecosystem features and capabilities based on user feedback.">
+Постепенное расширение функциональности и возможностей экосистемы на основе опыта пользователей.
+</p>
+</div>
+</section>
+
+<section id="news" class="reveal">
+<h2 data-ru="Новости AURION" data-en="AURION News">Новости AURION</h2>
+
+<p data-ru="Следите за обновлениями, объявлениями и новостями проекта в официальном Telegram-канале."
+data-en="Follow project updates, announcements and news in the official Telegram channel.">
+Следите за обновлениями, объявлениями и новостями проекта в официальном Telegram-канале.
 </p>
 
 <p>
-<a href="https://bscscan.com/token/0x6B7616c71ED6e5c48432E1693B3F47f910bB9325"
-target="_blank" rel="noopener noreferrer"
-data-i18n="bscscan">Посмотреть токен на BscScan</a>
-</p>
-
-<div class="center" style="margin:28px 0 8px;">
-<a class="token-button"
-href="https://pancakeswap.finance/swap?chain=bsc&amp;inputCurrency=BNB&amp;outputCurrency=0x6B7616c71ED6e5c48432E1693B3F47f910bB9325"
-target="_blank" rel="noopener noreferrer">
-BUY / SELL AURION
-</a>
-</div>
-</section>
-
-<section id="roadmap">
-<h2 data-i18n="roadmapTitle">План развития — Roadmap</h2>
-
-<div class="tile">
-<span class="status" data-i18n="stage1Status">Базовый этап</span>
-<h3 data-i18n="stage1Title">Этап 1. Основа проекта</h3>
-<p data-i18n="stage1Text">Создание токена, публикация информации о проекте, запуск официального сайта и каналов коммуникации.</p>
-</div>
-
-<div class="tile" style="margin-top:15px;">
-<span class="status" data-i18n="stage2Status">Развитие</span>
-<h3 data-i18n="stage2Title">Этап 2. Развитие экосистемы</h3>
-<p data-i18n="stage2Text">Проработка направлений проекта, развитие сообщества и подготовка цифровых сервисов.</p>
-</div>
-
-<div class="tile" style="margin-top:15px;">
-<span class="status" data-i18n="stage3Status">Планируется</span>
-<h3 data-i18n="stage3Title">Этап 3. Marketplace</h3>
-<p data-i18n="stage3Text">Разработка площадки для цифровых товаров и услуг с возможностью использования AUR.</p>
-</div>
-
-<div class="tile" style="margin-top:15px;">
-<span class="status" data-i18n="stage4Status">Долгосрочная перспектива</span>
-<h3 data-i18n="stage4Title">Этап 4. Расширение</h3>
-<p data-i18n="stage4Text">Изучение новых сценариев применения токена и дальнейшее расширение экосистемы.</p>
-</div>
-
-<p data-i18n="roadmapNote">
-Этапы являются планом развития и не представляют собой обещание сроков или гарантированный результат.
-</p>
-</section>
-
-<section id="news">
-<h2 data-i18n="newsTitle">Новости и обновления</h2>
-<p data-i18n="newsText">
-Следите за новостями AURION, объявлениями и развитием проекта в официальном Telegram-канале.
-</p>
-<p class="center">
 <a href="https://t.me/AURION_AUR_BSC" target="_blank" rel="noopener noreferrer">
 AURION Official — Telegram
 </a>
 </p>
 </section>
 
-<section id="contacts">
-<h2 data-i18n="contactTitle">Контакты</h2>
-<p><strong>Email:</strong>
-<a href="mailto:Avanturk.ltd@gmail.com">Avanturk.ltd@gmail.com</a>
+<section id="contacts" class="reveal">
+<h2 data-ru="Контакты" data-en="Contacts">Контакты</h2>
+
+<p data-ru="По вопросам и предложениям, связанным с проектом AURION, свяжитесь с нами:"
+data-en="For questions and suggestions regarding the AURION project, contact us:">
+По вопросам и предложениям, связанным с проектом AURION, свяжитесь с нами:
 </p>
-<p><strong>Telegram:</strong>
-<a href="https://t.me/AURION_AUR_BSC" target="_blank" rel="noopener noreferrer">
-AURION Official
-</a>
-</p>
+
+<div class="contact-links">
+<a href="mailto:Avanturk.ltd@gmail.com">Email</a>
+<a href="https://t.me/AURION_AUR_BSC" target="_blank" rel="noopener noreferrer">Telegram</a>
+</div>
 </section>
 
 </main>
 
 <footer>
-<strong class="gold">AURION (AUR)</strong>
-<p data-i18n="footer1">Официальная информация о проекте.</p>
-<p data-i18n="footer2">
-Данный сайт носит исключительно информационный характер и не является финансовой или инвестиционной рекомендацией. Покупка цифровых активов связана с риском. Доходность не гарантируется.
-</p>
 <p>© 2026 AURION. All rights reserved.</p>
+<p data-ru="Цифровые активы связаны с риском. Информация на сайте носит ознакомительный характер и не является финансовой рекомендацией. Доходность не гарантируется."
+data-en="Digital assets involve risk. Information on this website is for informational purposes only and is not financial advice. No returns are guaranteed.">
+Цифровые активы связаны с риском. Информация на сайте носит ознакомительный характер и не является финансовой рекомендацией. Доходность не гарантируется.
+</p>
 </footer>
 
 <script>
-const translations = {
-ru: {
-subtitle: "Цифровая экосистема",
-tagline: "Цифровой проект на базе BNB Smart Chain, ориентированный на практическую полезность, развитие и сообщество.",
-navAbout: "О проекте",
-navPrinciples: "Принципы",
-navDirections: "Направления",
-navMarket: "Marketplace",
-navToken: "Токен AUR",
-navRoadmap: "Roadmap",
-navContacts: "Контакты",
-aboutTitle: "О проекте AURION",
-about1: "AURION (AUR) — развивающийся проект цифрового utility-токена на блокчейне BNB Smart Chain (BSC).",
-about2: "Наша идея — создать открытую цифровую экосистему, объединяющую цифровые товары, услуги, технологии и сообщество.",
-about3: "Проект находится на ранней стадии развития. Многие функции планируются и пока не запущены.",
-principlesTitle: "Наши принципы",
-principle1Title: "Прозрачность",
-principle1Text: "Открытая информация о проекте, его возможностях и ходе развития.",
-principle2Title: "Доступность",
-principle2Text: "Использование блокчейна BNB Smart Chain и доступных цифровых инструментов.",
-principle3Title: "Практическая польза",
-principle3Text: "Развитие реальных сценариев применения цифрового токена.",
-principle4Title: "Сообщество",
-principle4Text: "Открытое взаимодействие, обмен идеями и совместное развитие.",
-directionsTitle: "Направления развития",
-directionsIntro: "AURION планирует развивать экосистему по шести основным направлениям:",
-dir1Title: "Дизайн и графика",
-dir1Text: "Цифровой дизайн, иллюстрации, логотипы и графические материалы.",
-dir2Title: "IT и разработка",
-dir2Text: "Программирование, сайты, приложения и цифровые решения.",
-dir3Title: "Цифровые товары и файлы",
-dir3Text: "Шаблоны, электронные материалы, файлы и другие цифровые продукты.",
-dir4Title: "Обучение и консультации",
-dir4Text: "Образовательные материалы, консультации и обмен знаниями.",
-dir5Title: "Маркетинг и продвижение",
-dir5Text: "Цифровой маркетинг, контент и инструменты продвижения.",
-dir6Title: "Другие цифровые услуги",
-dir6Text: "Дополнительные цифровые услуги и новые идеи сообщества.",
-development: "В разработке",
-marketTitle: "AURION Marketplace",
-market1: "Одно из ключевых направлений проекта — создание цифровой площадки, где продавцы смогут предлагать товары и услуги, а покупатели — находить нужные решения.",
-market2: "В перспективе планируется использование AUR в качестве средства оплаты внутри площадки.",
-market3: "Marketplace пока не запущен. Регистрация продавцов, размещение товаров и проведение заказов ещё находятся на стадии разработки.",
-tokenTitle: "Токен AURION",
-tokenName: "Название токена:",
-tokenSymbol: "Символ:",
-network: "Сеть:",
-contract: "Адрес контракта:",
-utility: "Статус полезности:",
-utilityStatus: "Функции экосистемы планируются и находятся в разработке.",
-bscscan: "Посмотреть токен на BscScan",
-roadmapTitle: "План развития — Roadmap",
-stage1Status: "Базовый этап",
-stage1Title: "Этап 1. Основа проекта",
-stage1Text: "Создание токена, публикация информации о проекте, запуск официального сайта и каналов коммуникации.",
-stage2Status: "Развитие",
-stage2Title: "Этап 2. Развитие экосистемы",
-stage2Text: "Проработка направлений проекта, развитие сообщества и подготовка цифровых сервисов.",
-stage3Status: "Планируется",
-stage3Title: "Этап 3. Marketplace",
-stage3Text: "Разработка площадки для цифровых товаров и услуг с возможностью использования AUR.",
-stage4Status: "Долгосрочная перспектива",
-stage4Title: "Этап 4. Расширение",
-stage4Text: "Изучение новых сценариев применения токена и дальнейшее расширение экосистемы.",
-roadmapNote: "Этапы являются планом развития и не представляют собой обещание сроков или гарантированный результат.",
-newsTitle: "Новости и обновления",
-newsText: "Следите за новостями AURION, объявлениями и развитием проекта в официальном Telegram-канале.",
-contactTitle: "Контакты",
-footer1: "Официальная информация о проекте.",
-footer2: "Данный сайт носит исключительно информационный характер и не является финансовой или инвестиционной рекомендацией. Покупка цифровых активов связана с риском. Доходность не гарантируется."
-},
+function setLanguage(language) {
+document.documentElement.lang = language;
 
-en: {
-subtitle: "Digital Ecosystem",
-tagline: "A digital project on BNB Smart Chain focused on practical utility, development and community.",
-navAbout: "About",
-navPrinciples: "Principles",
-navDirections: "Directions",
-navMarket: "Marketplace",
-navToken: "AUR Token",
-navRoadmap: "Roadmap",
-navContacts: "Contacts",
-aboutTitle: "About AURION",
-about1: "AURION (AUR) is an emerging digital utility token project built on BNB Smart Chain (BSC).",
-about2: "Our idea is to build an open digital ecosystem connecting digital products, services, technology and community.",
-about3: "The project is at an early stage of development. Many features are planned and are not yet live.",
-principlesTitle: "Our Principles",
-principle1Title: "Transparency",
-principle1Text: "Clear and accessible information about the project, its capabilities and development.",
-principle2Title: "Accessibility",
-principle2Text: "Using BNB Smart Chain and accessible digital tools.",
-principle3Title: "Practical Utility",
-principle3Text: "Developing practical use cases for the digital token.",
-principle4Title: "Community",
-principle4Text: "Open communication, idea sharing and collaborative development.",
-directionsTitle: "Development Directions",
-directionsIntro: "AURION plans to develop its ecosystem across six main directions:",
-dir1Title: "Design and Graphics",
-dir1Text: "Digital design, illustrations, logos and graphic materials.",
-dir2Title: "IT and Development",
-dir2Text: "Programming, websites, applications and digital solutions.",
-dir3Title: "Digital Products and Files",
-dir3Text: "Templates, electronic materials, files and other digital products.",
-dir4Title: "Education and Consulting",
-dir4Text: "Educational materials, consultations and knowledge sharing.",
-dir5Title: "Marketing and Promotion",
-dir5Text: "Digital marketing, content and promotion tools.",
-dir6Title: "Other Digital Services",
-dir6Text: "Additional digital services and new community ideas.",
-development: "In Development",
-marketTitle: "AURION Marketplace",
-market1: "One of the project's key directions is a digital marketplace where sellers will be able to offer products and services and buyers will be able to find useful solutions.",
-market2: "AUR is planned to be used as a payment method within the marketplace in the future.",
-market3: "The Marketplace is not live yet. Seller registration, product listings and order processing are still under development.",
-tokenTitle: "AURION Token",
-tokenName: "Token Name:",
-tokenSymbol: "Symbol:",
-network: "Network:",
-contract: "Contract Address:",
-utility: "Utility Status:",
-utilityStatus: "Ecosystem features are planned and under development.",
-bscscan: "View AURION on BscScan",
-roadmapTitle: "Development Plan — Roadmap",
-stage1Status: "Foundation",
-stage1Title: "Stage 1. Project Foundation",
-stage1Text: "Token creation, project information, official website and communication channels.",
-stage2Status: "Development",
-stage2Title: "Stage 2. Ecosystem Development",
-stage2Text: "Developing project directions, growing the community and preparing digital services.",
-stage3Status: "Planned",
-stage3Title: "Stage 3. Marketplace",
-stage3Text: "Developing a marketplace for digital products and services with planned AUR utility.",
-stage4Status: "Long-term Vision",
-stage4Title: "Stage 4. Expansion",
-stage4Text: "Exploring new token use cases and further expanding the ecosystem.",
-roadmapNote: "These stages are a development plan, not a promise of timelines or guaranteed outcomes.",
-newsTitle: "News and Updates",
-newsText: "Follow AURION news, announcements and project updates on the official Telegram channel.",
-contactTitle: "Contacts",
-footer1: "Official project information.",
-footer2: "This website is for informational purposes only and does not constitute financial or investment advice. Digital assets involve risk. No returns are guaranteed."
-}
-};
-
-let currentLanguage = "ru";
-
-function toggleLanguage() {
-currentLanguage = currentLanguage === "ru" ? "en" : "ru";
-
-document.documentElement.lang = currentLanguage;
-
-document.querySelectorAll("[data-i18n]").forEach(element => {
-const key = element.getAttribute("data-i18n");
-if (translations[currentLanguage][key]) {
-element.textContent = translations[currentLanguage][key];
-}
+document.querySelectorAll("[data-ru][data-en]").forEach(function(element) {
+element.textContent = element.getAttribute("data-" + language);
 });
 
-document.getElementById("languageButton").textContent =
-currentLanguage === "ru" ? "EN" : "RU";
+document.getElementById("ruButton").classList.toggle("active", language === "ru");
+document.getElementById("enButton").classList.toggle("active", language === "en");
 }
+
+const revealObserver = new IntersectionObserver(function(entries) {
+entries.forEach(function(entry) {
+if (entry.isIntersecting) {
+entry.target.classList.add("visible");
+revealObserver.unobserve(entry.target);
+}
+});
+}, {
+threshold: 0.12
+});
+
+document.querySelectorAll(".reveal").forEach(function(element) {
+revealObserver.observe(element);
+});
 </script>
 
 </body>
 </html>
-
