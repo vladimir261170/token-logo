@@ -7,14 +7,13 @@
 <meta name="google-site-verification" content="RJ-u_lufdlMgI9HQVd4QmeeY5IWIaamaUFMWpwTYUtc">
 
 <title>AURION — Digital Ecosystem on BNB Smart Chain</title>
-<meta name="description" content="AURION — цифровая экосистема на BNB Smart Chain. Дизайн, IT, цифровые товары, обучение, маркетинг и цифровые услуги.">
+<meta name="description" content="AURION — цифровая экосистема на BNB Smart Chain. Цифровые товары, услуги, дизайн, IT, обучение и маркетинг.">
 <meta name="theme-color" content="#101827">
 
 <style>
 :root {
 --bg: #0b1220;
 --panel: #111d30;
---panel-light: #17253b;
 --gold: #e4c477;
 --gold-bright: #ffe6a0;
 --gold-dark: #b8892e;
@@ -298,6 +297,91 @@ letter-spacing: .5px;
 margin: 5px 0 12px;
 }
 
+/* MARKETPLACE DESIGN */
+
+.marketplace-hero {
+text-align: center;
+padding: 28px 20px 32px;
+margin: 15px 0 25px;
+border: 1px solid rgba(228,196,119,.35);
+border-radius: 16px;
+background:
+radial-gradient(ellipse at center, rgba(201,154,50,.16), transparent 70%),
+linear-gradient(145deg, rgba(24,40,64,.95), rgba(11,20,35,.98));
+box-shadow: 0 0 30px rgba(201,154,50,.08);
+}
+
+.marketplace-symbol {
+font-size: 48px;
+color: var(--gold-bright);
+text-shadow: 0 0 25px rgba(228,196,119,.55);
+margin-bottom: 5px;
+}
+
+.marketplace-title {
+font-size: clamp(27px, 5vw, 39px);
+letter-spacing: 2px;
+background: linear-gradient(120deg, #fff0bd, #d2a849, #fff0bd);
+-webkit-background-clip: text;
+background-clip: text;
+color: transparent;
+margin-bottom: 10px;
+}
+
+.marketplace-subtitle {
+max-width: 650px;
+margin: 0 auto 17px;
+font-size: 15px;
+}
+
+.coming-soon {
+display: inline-block;
+padding: 9px 22px;
+border: 1px solid var(--gold);
+border-radius: 30px;
+color: var(--gold-bright);
+background: rgba(201,154,50,.13);
+font-weight: bold;
+font-size: 13px;
+letter-spacing: 2px;
+box-shadow: 0 0 20px rgba(228,196,119,.15);
+animation: comingGlow 3s ease-in-out infinite;
+}
+
+@keyframes comingGlow {
+0%, 100% { box-shadow: 0 0 8px rgba(228,196,119,.12); }
+50% { box-shadow: 0 0 23px rgba(228,196,119,.35); }
+}
+
+.marketplace-category {
+min-height: 160px;
+text-align: left;
+}
+
+.marketplace-category .tile-icon {
+font-size: 30px;
+}
+
+.marketplace-role {
+border: 1px solid rgba(228,196,119,.24);
+border-radius: 13px;
+background: rgba(12,23,40,.65);
+padding: 22px;
+height: 100%;
+}
+
+.marketplace-role h3 {
+margin-top: 5px;
+}
+
+.marketplace-note {
+text-align: center;
+border-top: 1px solid rgba(228,196,119,.18);
+margin-top: 25px;
+padding-top: 20px;
+font-size: 13px;
+}
+
 .token-info {
 line-height: 2;
 overflow-wrap: anywhere;
@@ -426,6 +510,10 @@ font-size: 22px;
 .tile {
 min-height: 145px;
 }
+
+.marketplace-hero {
+padding: 23px 13px;
+}
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -450,7 +538,9 @@ transform: none;
 <header>
 <img src="logotip.png" alt="AURION Logo" class="logo">
 <h1>AURION</h1>
-<p class="tagline" data-ru="Цифровая экосистема на BNB Smart Chain"
+
+<p class="tagline"
+data-ru="Цифровая экосистема на BNB Smart Chain"
 data-en="Digital Ecosystem on BNB Smart Chain">
 Цифровая экосистема на BNB Smart Chain
 </p>
@@ -591,20 +681,142 @@ data-en="Other digital work and services that complement the AURION ecosystem.">
 </div>
 </section>
 
+<!-- AURION MARKETPLACE -->
+
 <section id="marketplace" class="reveal">
-<h2 data-ru="AURION Marketplace" data-en="AURION Marketplace">AURION Marketplace</h2>
 
-<span class="status" data-ru="В РАЗРАБОТКЕ" data-en="IN DEVELOPMENT">В РАЗРАБОТКЕ</span>
+<div class="marketplace-hero">
+<div class="marketplace-symbol">◇</div>
 
-<p data-ru="Планируемая площадка для размещения и приобретения цифровых товаров и услуг. Авторы смогут предлагать свои работы, а пользователи — находить нужные решения."
-data-en="A planned platform for listing and purchasing digital products and services. Creators will be able to offer their work, while users will be able to find useful solutions.">
-Планируемая площадка для размещения и приобретения цифровых товаров и услуг. Авторы смогут предлагать свои работы, а пользователи — находить нужные решения.
+<h2 class="marketplace-title">AURION MARKETPLACE</h2>
+
+<p class="marketplace-subtitle"
+data-ru="Пространство цифровых товаров, услуг и возможностей. Единая площадка для авторов, специалистов и покупателей."
+data-en="A space for digital products, services and opportunities. One platform for creators, professionals and buyers.">
+Пространство цифровых товаров, услуг и возможностей. Единая площадка для авторов, специалистов и покупателей.
 </p>
 
-<p data-ru="Использование токена AUR в качестве одного из способов оплаты рассматривается как часть будущей модели маркетплейса. Площадка пока не запущена."
-data-en="Using AUR as one of the payment methods is being considered as part of the future marketplace model. The platform has not launched yet.">
-Использование токена AUR в качестве одного из способов оплаты рассматривается как часть будущей модели маркетплейса. Площадка пока не запущена.
+<span class="coming-soon"
+data-ru="СКОРО ОТКРЫТИЕ"
+data-en="COMING SOON">
+СКОРО ОТКРЫТИЕ
+</span>
+</div>
+
+<h2 data-ru="Что можно будет найти"
+data-en="What You Will Find">
+Что можно будет найти
+</h2>
+
+<p data-ru="Планируемые категории будущего маркетплейса:"
+data-en="Planned categories of the future marketplace:">
+Планируемые категории будущего маркетплейса:
 </p>
+
+<div class="grid">
+
+<div class="tile marketplace-category">
+<span class="tile-icon">✦</span>
+<h3 data-ru="Дизайн и графика" data-en="Design & Graphics">Дизайн и графика</h3>
+<p data-ru="Логотипы, баннеры, иллюстрации и оформление."
+data-en="Logos, banners, illustrations and visual design.">
+Логотипы, баннеры, иллюстрации и оформление.
+</p>
+</div>
+
+<div class="tile marketplace-category">
+<span class="tile-icon">⌘</span>
+<h3 data-ru="IT и разработка" data-en="IT & Development">IT и разработка</h3>
+<p data-ru="Создание сайтов, приложения и технические услуги."
+data-en="Website creation, applications and technical services.">
+Создание сайтов, приложения и технические услуги.
+</p>
+</div>
+
+<div class="tile marketplace-category">
+<span class="tile-icon">▤</span>
+<h3 data-ru="Цифровые товары" data-en="Digital Products">Цифровые товары</h3>
+<p data-ru="Файлы, шаблоны, электронные материалы и наборы."
+data-en="Files, templates, digital materials and collections.">
+Файлы, шаблоны, электронные материалы и наборы.
+</p>
+</div>
+
+<div class="tile marketplace-category">
+<span class="tile-icon">◎</span>
+<h3 data-ru="Обучение" data-en="Education">Обучение</h3>
+<p data-ru="Курсы, консультации, наставничество и знания."
+data-en="Courses, consultations, mentoring and knowledge.">
+Курсы, консультации, наставничество и знания.
+</p>
+</div>
+
+<div class="tile marketplace-category">
+<span class="tile-icon">↗</span>
+<h3 data-ru="Маркетинг" data-en="Marketing">Маркетинг</h3>
+<p data-ru="Контент, реклама, продвижение и коммуникации."
+data-en="Content, advertising, promotion and communications.">
+Контент, реклама, продвижение и коммуникации.
+</p>
+</div>
+
+<div class="tile marketplace-category">
+<span class="tile-icon">✧</span>
+<h3 data-ru="Другие услуги" data-en="Other Services">Другие услуги</h3>
+<p data-ru="Различные цифровые решения и предложения."
+data-en="Various digital solutions and services.">
+Различные цифровые решения и предложения.
+</p>
+</div>
+
+</div>
+
+<h2 style="margin-top:35px;"
+data-ru="Для участников площадки"
+data-en="For Marketplace Participants">
+Для участников площадки
+</h2>
+
+<div class="grid">
+
+<div class="marketplace-role">
+<span class="tile-icon">♙</span>
+<h3 data-ru="Продавцам и авторам"
+data-en="Sellers & Creators">
+Продавцам и авторам
+</h3>
+<p data-ru="Возможность представить свои цифровые товары и услуги, находить клиентов и развивать собственное направление."
+data-en="An opportunity to present digital products and services, find customers and grow your own business.">
+Возможность представить свои цифровые товары и услуги, находить клиентов и развивать собственное направление.
+</p>
+</div>
+
+<div class="marketplace-role">
+<span class="tile-icon">◇</span>
+<h3 data-ru="Покупателям"
+data-en="Buyers">
+Покупателям
+</h3>
+<p data-ru="Возможность находить цифровые продукты, специалистов и услуги в одном месте."
+data-en="An opportunity to discover digital products, professionals and services in one place.">
+Возможность находить цифровые продукты, специалистов и услуги в одном месте.
+</p>
+</div>
+
+</div>
+
+<div class="marketplace-note">
+<p data-ru="Маркетплейс находится на стадии планирования и разработки. Регистрация, размещение товаров и проведение платежей пока недоступны."
+data-en="The marketplace is currently in the planning and development stage. Registration, product listings and payments are not available yet.">
+Маркетплейс находится на стадии планирования и разработки. Регистрация, размещение товаров и проведение платежей пока недоступны.
+</p>
+
+<p data-ru="В будущей модели проекта планируется поддержка токена AUR."
+data-en="Support for the AUR token is planned in the future project model.">
+В будущей модели проекта планируется поддержка токена AUR.
+</p>
+</div>
+
 </section>
 
 <section id="token" class="reveal">
@@ -614,14 +826,19 @@ data-en="Using AUR as one of the payment methods is being considered as part of 
 <p><strong data-ru="Название:" data-en="Name:">Название:</strong> AURION</p>
 <p><strong data-ru="Символ:" data-en="Symbol:">Символ:</strong> AUR</p>
 <p><strong data-ru="Сеть:" data-en="Network:">Сеть:</strong> BNB Smart Chain (BEP-20)</p>
-<p><strong data-ru="Адрес контракта:" data-en="Contract address:">Адрес контракта:</strong><br>
-<a href="https://bscscan.com/token/0x6B7616c71ED6e5c48432E1693B3F47f910bB9325" target="_blank" rel="noopener noreferrer">
+
+<p>
+<strong data-ru="Адрес контракта:" data-en="Contract address:">Адрес контракта:</strong><br>
+<a href="https://bscscan.com/token/0x6B7616c71ED6e5c48432E1693B3F47f910bB9325"
+target="_blank" rel="noopener noreferrer">
 0x6B7616c71ED6e5c48432E1693B3F47f910bB9325
 </a>
 </p>
+
 <p>
 <strong data-ru="Обозреватель блокчейна:" data-en="Blockchain explorer:">Обозреватель блокчейна:</strong>
-<a href="https://bscscan.com/token/0x6B7616c71ED6e5c48432E1693B3F47f910bB9325" target="_blank" rel="noopener noreferrer">BscScan</a>
+<a href="https://bscscan.com/token/0x6B7616c71ED6e5c48432E1693B3F47f910bB9325"
+target="_blank" rel="noopener noreferrer">BscScan</a>
 </p>
 </div>
 
@@ -687,7 +904,8 @@ data-en="Follow project updates, announcements and news in the official Telegram
 </p>
 
 <p>
-<a href="https://t.me/AURION_AUR_BSC" target="_blank" rel="noopener noreferrer">
+<a href="https://t.me/AURION_AUR_BSC"
+target="_blank" rel="noopener noreferrer">
 AURION Official — Telegram
 </a>
 </p>
@@ -703,7 +921,8 @@ data-en="For questions and suggestions regarding the AURION project, contact us:
 
 <div class="contact-links">
 <a href="mailto:Avanturk.ltd@gmail.com">Email</a>
-<a href="https://t.me/AURION_AUR_BSC" target="_blank" rel="noopener noreferrer">Telegram</a>
+<a href="https://t.me/AURION_AUR_BSC"
+target="_blank" rel="noopener noreferrer">Telegram</a>
 </div>
 </section>
 
@@ -711,6 +930,7 @@ data-en="For questions and suggestions regarding the AURION project, contact us:
 
 <footer>
 <p>© 2026 AURION. All rights reserved.</p>
+
 <p data-ru="Цифровые активы связаны с риском. Информация на сайте носит ознакомительный характер и не является финансовой рекомендацией. Доходность не гарантируется."
 data-en="Digital assets involve risk. Information on this website is for informational purposes only and is not financial advice. No returns are guaranteed.">
 Цифровые активы связаны с риском. Информация на сайте носит ознакомительный характер и не является финансовой рекомендацией. Доходность не гарантируется.
