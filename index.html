@@ -214,6 +214,163 @@ section { padding: 22px 18px; }
 .grid { grid-template-columns: 1fr; }
 .logo { width: 120px; height: 120px; }
 }
+/* AURION PREMIUM GOLD DESIGN */
+
+body {
+background:
+radial-gradient(ellipse at 50% 0%, rgba(201,154,50,.12), transparent 45%),
+#080e1d;
+}
+
+header {
+position: relative;
+padding-top: 45px;
+padding-bottom: 35px;
+}
+
+header::before,
+header::after {
+content: "";
+position: absolute;
+border: 1px solid rgba(228,196,119,.12);
+border-radius: 50%;
+pointer-events: none;
+}
+
+header::before {
+width: 260px;
+height: 260px;
+top: -100px;
+left: -100px;
+}
+
+header::after {
+width: 220px;
+height: 220px;
+bottom: -100px;
+right: -80px;
+}
+
+.logo {
+filter: drop-shadow(0 0 18px rgba(228,196,119,.25));
+transition: transform .3s ease, filter .3s ease;
+}
+
+.logo:hover {
+transform: scale(1.04);
+filter: drop-shadow(0 0 25px rgba(228,196,119,.45));
+}
+
+h1 {
+background: linear-gradient(135deg, #fff2c6, #e4c477, #c99a32);
+-webkit-background-clip: text;
+background-clip: text;
+color: transparent;
+letter-spacing: 2px;
+}
+
+nav {
+margin-top: 25px;
+}
+
+nav a {
+transition: color .25s ease, text-shadow .25s ease;
+}
+
+nav a:hover {
+color: #fff0bd;
+text-shadow: 0 0 12px rgba(228,196,119,.45);
+}
+
+section {
+border: 1px solid rgba(228,196,119,.22);
+box-shadow: 0 12px 35px rgba(0,0,0,.18);
+transition: border-color .3s ease, box-shadow .3s ease;
+}
+
+section:hover {
+border-color: rgba(228,196,119,.4);
+box-shadow: 0 14px 40px rgba(0,0,0,.28);
+}
+
+.tile {
+position: relative;
+overflow: hidden;
+border: 1px solid rgba(228,196,119,.22);
+background: linear-gradient(145deg, #16223d, #101a30);
+transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+}
+
+.tile:hover {
+transform: translateY(-5px);
+border-color: rgba(228,196,119,.6);
+box-shadow: 0 12px 28px rgba(201,154,50,.12);
+}
+
+#directions .tile::after {
+position: absolute;
+right: 16px;
+bottom: 8px;
+color: rgba(228,196,119,.12);
+font-size: 42px;
+font-weight: bold;
+pointer-events: none;
+}
+
+#directions .tile:nth-child(1)::after { content: "✦"; }
+#directions .tile:nth-child(2)::after { content: "⌘"; }
+#directions .tile:nth-child(3)::after { content: "◇"; }
+#directions .tile:nth-child(4)::after { content: "✧"; }
+#directions .tile:nth-child(5)::after { content: "◎"; }
+#directions .tile:nth-child(6)::after { content: "✺"; }
+
+.status,
+.badge {
+border: 1px solid rgba(228,196,119,.35);
+background: rgba(201,154,50,.10);
+color: #f0d995;
+}
+
+button,
+.button,
+a.button {
+transition: transform .25s ease, box-shadow .25s ease;
+}
+
+button:hover,
+.button:hover,
+a.button:hover {
+transform: translateY(-2px);
+box-shadow: 0 8px 22px rgba(201,154,50,.2);
+}
+
+footer {
+border-top: 1px solid rgba(228,196,119,.18);
+}
+
+@media (max-width: 650px) {
+header {
+padding-top: 30px;
+padding-bottom: 25px;
+}
+
+h1 {
+letter-spacing: 1px;
+}
+
+section {
+margin-bottom: 18px;
+}
+}
+
+@media (prefers-reduced-motion: reduce) {
+*,
+*::before,
+*::after {
+transition-duration: .01ms !important;
+animation-duration: .01ms !important;
+}
+}  
 </style>
 </head>
 
