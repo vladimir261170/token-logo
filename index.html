@@ -3,554 +3,95 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <meta name="google-site-verification" content="RJ-u_lufdlMgI9HQVd4QmeeY5IWIaamaUFMWpwTYUtc">
-
 <title>AURION — Digital Ecosystem on BNB Smart Chain</title>
 <meta name="description" content="AURION — цифровая экосистема на BNB Smart Chain. Цифровые товары, услуги, дизайн, IT, обучение и маркетинг.">
 <meta name="theme-color" content="#101827">
-
 <style>
-:root {
---bg: #0b1220;
---panel: #111d30;
---gold: #e4c477;
---gold-bright: #ffe6a0;
---gold-dark: #b8892e;
---text: #f4f1e8;
---muted: #b7bdc9;
---border: rgba(228,196,119,.28);
-}
-
-* {
-box-sizing: border-box;
-margin: 0;
-padding: 0;
-}
-
-html {
-scroll-behavior: smooth;
-scroll-padding-top: 100px;
-}
-
-body {
-font-family: Arial, Helvetica, sans-serif;
-color: var(--text);
-background:
-radial-gradient(ellipse at 50% 0%, rgba(201,154,50,.12), transparent 42%),
-radial-gradient(ellipse at 0% 40%, rgba(33,64,105,.16), transparent 45%),
-var(--bg);
-line-height: 1.7;
-min-height: 100vh;
-}
-
-a {
-color: var(--gold);
-text-decoration: none;
-}
-
-a:hover {
-color: var(--gold-bright);
-}
-
-header {
-text-align: center;
-padding: 45px 20px 25px;
-position: relative;
-overflow: hidden;
-}
-
-header::before {
-content: "";
-position: absolute;
-width: 420px;
-height: 420px;
-border: 1px solid rgba(228,196,119,.09);
-border-radius: 50%;
-left: 50%;
-top: -260px;
-transform: translateX(-50%);
-pointer-events: none;
-}
-
-.logo {
-width: 145px;
-height: 145px;
-object-fit: contain;
-display: block;
-margin: 0 auto 16px;
-animation: aurionGoldGlow 4s ease-in-out infinite;
-}
-
-@keyframes aurionGoldGlow {
-0%, 100% {
-filter: drop-shadow(0 0 12px rgba(228,196,119,.20));
-}
-50% {
-filter:
-drop-shadow(0 0 28px rgba(228,196,119,.65))
-drop-shadow(0 0 45px rgba(201,154,50,.25));
-}
-}
-
-h1 {
-font-size: clamp(34px, 6vw, 52px);
-letter-spacing: 5px;
-background: linear-gradient(120deg, #fff0bd, #d2a849, #fff0bd);
--webkit-background-clip: text;
-background-clip: text;
-color: transparent;
-margin-bottom: 8px;
-}
-
-.tagline {
-color: var(--muted);
-font-size: 15px;
-letter-spacing: 1.5px;
-}
-
-.language-switch {
-display: flex;
-justify-content: center;
-gap: 8px;
-margin: 22px 0 5px;
-}
-
-.language-switch button {
-background: transparent;
-border: 1px solid var(--border);
-color: var(--muted);
-padding: 7px 17px;
-border-radius: 20px;
-cursor: pointer;
-font-weight: bold;
-transition: .3s;
-}
-
-.language-switch button.active,
-.language-switch button:hover {
-color: #101827;
-background: linear-gradient(135deg, #f5d77a, #c99a32);
-border-color: var(--gold);
-box-shadow: 0 0 15px rgba(228,196,119,.25);
-}
-
-nav {
-display: flex;
-justify-content: center;
-flex-wrap: wrap;
-gap: 12px 22px;
-padding: 17px 15px;
-margin-top: 20px;
-position: sticky;
-top: 0;
-z-index: 10;
-background: rgba(11,18,32,.92);
-backdrop-filter: blur(12px);
-border-top: 1px solid rgba(228,196,119,.12);
-border-bottom: 1px solid rgba(228,196,119,.18);
-}
-
-nav a {
-color: var(--text);
-font-size: 13px;
-letter-spacing: .4px;
-transition: .3s;
-}
-
-nav a:hover {
-color: var(--gold-bright);
-text-shadow: 0 0 12px rgba(228,196,119,.55);
-}
-
-main {
-width: min(1100px, 92%);
-margin: 35px auto 65px;
-}
-
-section {
-background: linear-gradient(145deg, rgba(23,37,59,.92), rgba(14,25,42,.94));
-border: 1px solid var(--border);
-border-radius: 17px;
-padding: 32px;
-margin: 25px 0;
-box-shadow: 0 12px 35px rgba(0,0,0,.18);
-position: relative;
-overflow: hidden;
-}
-
-section::before {
-content: "";
-position: absolute;
-top: 0;
-left: 8%;
-width: 84%;
-height: 1px;
-background: linear-gradient(90deg, transparent, rgba(255,225,150,.5), transparent);
-}
-
-h2 {
-color: var(--gold);
-font-size: 25px;
-margin-bottom: 17px;
-letter-spacing: .5px;
-}
-
-h3 {
-color: var(--gold-bright);
-font-size: 18px;
-margin-bottom: 9px;
-}
-
-p {
-color: var(--muted);
-margin: 10px 0;
-}
-
-.grid {
-display: grid;
-grid-template-columns: repeat(3, 1fr);
-gap: 19px;
-margin-top: 22px;
-}
-
-.tile {
-min-height: 175px;
-padding: 24px 20px;
-background: linear-gradient(145deg, rgba(25,42,66,.95), rgba(13,25,43,.98));
-border: 1px solid rgba(228,196,119,.25);
-border-radius: 14px;
-position: relative;
-overflow: hidden;
-transition:
-transform .35s ease,
-border-color .35s ease,
-box-shadow .35s ease,
-background .35s ease;
-animation: tileGlow 5s ease-in-out infinite;
-}
-
-.tile:nth-child(2) { animation-delay: .5s; }
-.tile:nth-child(3) { animation-delay: 1s; }
-.tile:nth-child(4) { animation-delay: 1.5s; }
-.tile:nth-child(5) { animation-delay: 2s; }
-.tile:nth-child(6) { animation-delay: 2.5s; }
-
-@keyframes tileGlow {
-0%, 100% {
-box-shadow: 0 0 0 rgba(228,196,119,0);
-}
-50% {
-box-shadow: 0 0 17px rgba(228,196,119,.07);
-}
-}
-
-.tile::after {
-content: "";
-position: absolute;
-width: 95px;
-height: 95px;
-border: 1px solid rgba(228,196,119,.16);
-border-radius: 50%;
-right: -35px;
-bottom: -43px;
-transition: .4s;
-pointer-events: none;
-}
-
-.tile:hover {
-transform: translateY(-7px);
-border-color: rgba(255,224,150,.8);
-background: linear-gradient(145deg, rgba(37,54,78,.98), rgba(18,31,51,.98));
-box-shadow:
-0 10px 30px rgba(0,0,0,.3),
-0 0 22px rgba(228,196,119,.2);
-}
-
-.tile:hover::after {
-width: 145px;
-height: 145px;
-border-color: rgba(228,196,119,.45);
-}
-
-.tile-icon {
-font-size: 27px;
-display: block;
-margin-bottom: 12px;
-filter: drop-shadow(0 0 7px rgba(228,196,119,.35));
-}
-
-.tile p {
-font-size: 14px;
-margin-bottom: 0;
-}
-
-.status {
-display: inline-block;
-padding: 5px 12px;
-border: 1px solid rgba(228,196,119,.45);
-border-radius: 20px;
-color: var(--gold-bright);
-background: rgba(201,154,50,.1);
-font-size: 12px;
-letter-spacing: .5px;
-margin: 5px 0 12px;
-}
-
-/* MARKETPLACE DESIGN */
-
-.marketplace-hero {
-text-align: center;
-padding: 28px 20px 32px;
-margin: 15px 0 25px;
-border: 1px solid rgba(228,196,119,.35);
-border-radius: 16px;
-background:
-radial-gradient(ellipse at center, rgba(201,154,50,.16), transparent 70%),
-linear-gradient(145deg, rgba(24,40,64,.95), rgba(11,20,35,.98));
-box-shadow: 0 0 30px rgba(201,154,50,.08);
-}
-
-.marketplace-symbol {
-font-size: 48px;
-color: var(--gold-bright);
-text-shadow: 0 0 25px rgba(228,196,119,.55);
-margin-bottom: 5px;
-}
-
-.marketplace-title {
-font-size: clamp(27px, 5vw, 39px);
-letter-spacing: 2px;
-background: linear-gradient(120deg, #fff0bd, #d2a849, #fff0bd);
--webkit-background-clip: text;
-background-clip: text;
-color: transparent;
-margin-bottom: 10px;
-}
-
-.marketplace-subtitle {
-max-width: 650px;
-margin: 0 auto 17px;
-font-size: 15px;
-}
-
-.coming-soon {
-display: inline-block;
-padding: 9px 22px;
-border: 1px solid var(--gold);
-border-radius: 30px;
-color: var(--gold-bright);
-background: rgba(201,154,50,.13);
-font-weight: bold;
-font-size: 13px;
-letter-spacing: 2px;
-box-shadow: 0 0 20px rgba(228,196,119,.15);
-animation: comingGlow 3s ease-in-out infinite;
-}
-
-@keyframes comingGlow {
-0%, 100% { box-shadow: 0 0 8px rgba(228,196,119,.12); }
-50% { box-shadow: 0 0 23px rgba(228,196,119,.35); }
-}
-
-.marketplace-category {
-min-height: 160px;
-text-align: left;
-}
-
-.marketplace-category .tile-icon {
-font-size: 30px;
-}
-
-.marketplace-role {
-border: 1px solid rgba(228,196,119,.24);
-border-radius: 13px;
-background: rgba(12,23,40,.65);
-padding: 22px;
-height: 100%;
-}
-
-.marketplace-role h3 {
-margin-top: 5px;
-}
-
-.marketplace-note {
-text-align: center;
-border-top: 1px solid rgba(228,196,119,.18);
-margin-top: 25px;
-padding-top: 20px;
-font-size: 13px;
-}
-
-.token-info {
-line-height: 2;
-overflow-wrap: anywhere;
-}
-
-.token-button {
-display: inline-block;
-background: linear-gradient(135deg, #f5d77a, #c99a32);
-color: #101827;
-padding: 15px 35px;
-border-radius: 10px;
-font-weight: bold;
-text-decoration: none;
-font-size: 16px;
-letter-spacing: 1px;
-box-shadow: 0 5px 18px rgba(201,154,50,.2);
-transition: .3s;
-}
-
-.token-button:hover {
-color: #101827;
-transform: translateY(-3px);
-box-shadow: 0 8px 25px rgba(228,196,119,.4);
-}
-
-.roadmap-item {
-border-left: 2px solid var(--gold-dark);
-padding: 2px 0 17px 20px;
-margin: 17px 0;
-position: relative;
-}
-
-.roadmap-item::before {
-content: "";
-position: absolute;
-left: -7px;
-top: 5px;
-width: 12px;
-height: 12px;
-background: var(--gold);
-border-radius: 50%;
-box-shadow: 0 0 12px rgba(228,196,119,.6);
-}
-
-.contact-links {
-display: flex;
-flex-wrap: wrap;
-gap: 14px;
-margin-top: 18px;
-}
-
-.contact-links a {
-display: inline-block;
-padding: 10px 17px;
-border: 1px solid var(--border);
-border-radius: 9px;
-transition: .3s;
-}
-
-.contact-links a:hover {
-background: rgba(228,196,119,.1);
-box-shadow: 0 0 15px rgba(228,196,119,.12);
-}
-
-footer {
-text-align: center;
-color: #8993a4;
-font-size: 12px;
-padding: 25px 18px 35px;
-border-top: 1px solid rgba(228,196,119,.13);
-}
-
-footer p {
-font-size: 12px;
-margin: 5px 0;
-}
-
-.reveal {
-opacity: 0;
-transform: translateY(24px);
-transition: opacity .7s ease, transform .7s ease;
-}
-
-.reveal.visible {
-opacity: 1;
-transform: translateY(0);
-}
-
-@media (max-width: 800px) {
-.grid {
-grid-template-columns: repeat(2, 1fr);
-}
-}
-
-@media (max-width: 650px) {
-header {
-padding-top: 30px;
-}
-
-.logo {
-width: 120px;
-height: 120px;
-}
-
-nav {
-gap: 10px 14px;
-padding: 13px 9px;
-}
-
-nav a {
-font-size: 12px;
-}
-
-section {
-padding: 22px 18px;
-}
-
-.grid {
-grid-template-columns: 1fr;
-}
-
-h2 {
-font-size: 22px;
-}
-
-.tile {
-min-height: 145px;
-}
-
-.marketplace-hero {
-padding: 23px 13px;
-}
-}
-
-@media (prefers-reduced-motion: reduce) {
-*,
-*::before,
-*::after {
-scroll-behavior: auto !important;
-animation: none !important;
-transition: none !important;
-}
-
-.reveal {
-opacity: 1;
-transform: none;
-}
-}
+:root{--bg:#0b1220;--panel:#111d30;--gold:#e4c477;--gold-bright:#ffe6a0;--gold-dark:#b8892e;--text:#f4f1e8;--muted:#b7bdc9;--border:rgba(228,196,119,.28)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:100px}
+body{font-family:Arial,Helvetica,sans-serif;color:var(--text);background:radial-gradient(ellipse at 50% 0%,rgba(201,154,50,.12),transparent 42%),radial-gradient(ellipse at 0% 40%,rgba(33,64,105,.16),transparent 45%),var(--bg);line-height:1.7;min-height:100vh}
+a{color:var(--gold);text-decoration:none}a:hover{color:var(--gold-bright)}
+header{text-align:center;padding:45px 20px 25px;position:relative;overflow:hidden}
+header:before{content:"";position:absolute;width:420px;height:420px;border:1px solid rgba(228,196,119,.09);border-radius:50%;left:50%;top:-260px;transform:translateX(-50%);pointer-events:none}
+.logo{width:145px;height:145px;object-fit:contain;display:block;margin:0 auto 16px;animation:aurionGoldGlow 4s ease-in-out infinite}
+@keyframes aurionGoldGlow{0%,100%{filter:drop-shadow(0 0 12px rgba(228,196,119,.2))}50%{filter:drop-shadow(0 0 28px rgba(228,196,119,.65)) drop-shadow(0 0 45px rgba(201,154,50,.25))}}
+h1{font-size:clamp(34px,6vw,52px);letter-spacing:5px;background:linear-gradient(120deg,#fff0bd,#d2a849,#fff0bd);-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:8px}
+.tagline{color:var(--muted);font-size:15px;letter-spacing:1.5px}
+.language-switch{display:flex;justify-content:center;gap:8px;margin:22px 0 5px}
+.language-switch button,.auth-button{background:transparent;border:1px solid var(--border);color:var(--muted);padding:8px 17px;border-radius:20px;cursor:pointer;font-weight:bold;transition:.3s}
+.language-switch button.active,.language-switch button:hover,.auth-button.primary{color:#101827;background:linear-gradient(135deg,#f5d77a,#c99a32);border-color:var(--gold);box-shadow:0 0 15px rgba(228,196,119,.25)}
+nav{display:flex;justify-content:center;flex-wrap:wrap;gap:12px 22px;padding:17px 15px;margin-top:20px;position:sticky;top:0;z-index:10;background:rgba(11,18,32,.92);backdrop-filter:blur(12px);border-top:1px solid rgba(228,196,119,.12);border-bottom:1px solid rgba(228,196,119,.18)}
+nav a{color:var(--text);font-size:13px;letter-spacing:.4px;transition:.3s}nav a:hover{color:var(--gold-bright);text-shadow:0 0 12px rgba(228,196,119,.55)}
+main{width:min(1100px,92%);margin:35px auto 65px}
+section{background:linear-gradient(145deg,rgba(23,37,59,.92),rgba(14,25,42,.94));border:1px solid var(--border);border-radius:17px;padding:32px;margin:25px 0;box-shadow:0 12px 35px rgba(0,0,0,.18);position:relative;overflow:hidden}
+section:before{content:"";position:absolute;top:0;left:8%;width:84%;height:1px;background:linear-gradient(90deg,transparent,rgba(255,225,150,.5),transparent)}
+h2{color:var(--gold);font-size:25px;margin-bottom:17px;letter-spacing:.5px}h3{color:var(--gold-bright);font-size:18px;margin-bottom:9px}
+p{color:var(--muted);margin:10px 0}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:19px;margin-top:22px}
+.tile{min-height:175px;padding:24px 20px;background:linear-gradient(145deg,rgba(25,42,66,.95),rgba(13,25,43,.98));border:1px solid rgba(228,196,119,.25);border-radius:14px;position:relative;overflow:hidden;transition:transform .35s,border-color .35s,box-shadow .35s,background .35s;animation:tileGlow 5s ease-in-out infinite}
+.tile:nth-child(2){animation-delay:.5s}.tile:nth-child(3){animation-delay:1s}.tile:nth-child(4){animation-delay:1.5s}.tile:nth-child(5){animation-delay:2s}.tile:nth-child(6){animation-delay:2.5s}
+@keyframes tileGlow{0%,100%{box-shadow:0 0 0 rgba(228,196,119,0)}50%{box-shadow:0 0 17px rgba(228,196,119,.07)}}
+.tile:after{content:"";position:absolute;width:95px;height:95px;border:1px solid rgba(228,196,119,.16);border-radius:50%;right:-35px;bottom:-43px;transition:.4s;pointer-events:none}
+.tile:hover{transform:translateY(-7px);border-color:rgba(255,224,150,.8);background:linear-gradient(145deg,rgba(37,54,78,.98),rgba(18,31,51,.98));box-shadow:0 10px 30px rgba(0,0,0,.3),0 0 22px rgba(228,196,119,.2)}
+.tile:hover:after{width:145px;height:145px;border-color:rgba(228,196,119,.45)}
+.tile-icon{font-size:27px;display:block;margin-bottom:12px;filter:drop-shadow(0 0 7px rgba(228,196,119,.35))}
+.tile p{font-size:14px;margin-bottom:0}
+.status{display:inline-block;padding:5px 12px;border:1px solid rgba(228,196,119,.45);border-radius:20px;color:var(--gold-bright);background:rgba(201,154,50,.1);font-size:12px;letter-spacing:.5px;margin:5px 0 12px}
+.marketplace-hero{text-align:center;padding:28px 20px 32px;margin:15px 0 25px;border:1px solid rgba(228,196,119,.35);border-radius:16px;background:radial-gradient(ellipse at center,rgba(201,154,50,.16),transparent 70%),linear-gradient(145deg,rgba(24,40,64,.95),rgba(11,20,35,.98));box-shadow:0 0 30px rgba(201,154,50,.08)}
+.marketplace-symbol{font-size:48px;color:var(--gold-bright);text-shadow:0 0 25px rgba(228,196,119,.55);margin-bottom:5px}
+.marketplace-title{font-size:clamp(27px,5vw,39px);letter-spacing:2px;background:linear-gradient(120deg,#fff0bd,#d2a849,#fff0bd);-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:10px}
+.marketplace-subtitle{max-width:650px;margin:0 auto 17px;font-size:15px}
+.coming-soon{display:inline-block;padding:9px 22px;border:1px solid var(--gold);border-radius:30px;color:var(--gold-bright);background:rgba(201,154,50,.13);font-weight:bold;font-size:13px;letter-spacing:2px;box-shadow:0 0 20px rgba(228,196,119,.15);animation:comingGlow 3s ease-in-out infinite}
+@keyframes comingGlow{0%,100%{box-shadow:0 0 8px rgba(228,196,119,.12)}50%{box-shadow:0 0 23px rgba(228,196,119,.35)}}
+.marketplace-category{min-height:160px;text-align:left}.marketplace-category .tile-icon{font-size:30px}
+.marketplace-role{border:1px solid rgba(228,196,119,.24);border-radius:13px;background:rgba(12,23,40,.65);padding:22px;height:100%}
+.marketplace-role h3{margin-top:5px}
+.marketplace-note{text-align:center;border-top:1px solid rgba(228,196,119,.18);margin-top:25px;padding-top:20px;font-size:13px}
+.token-info{line-height:2;overflow-wrap:anywhere}
+.token-button{display:inline-block;background:linear-gradient(135deg,#f5d77a,#c99a32);color:#101827;padding:15px 35px;border-radius:10px;font-weight:bold;text-decoration:none;font-size:16px;letter-spacing:1px;box-shadow:0 5px 18px rgba(201,154,50,.2);transition:.3s}
+.token-button:hover{color:#101827;transform:translateY(-3px);box-shadow:0 8px 25px rgba(228,196,119,.4)}
+.roadmap-item{border-left:2px solid var(--gold-dark);padding:2px 0 17px 20px;margin:17px 0;position:relative}
+.roadmap-item:before{content:"";position:absolute;left:-7px;top:5px;width:12px;height:12px;background:var(--gold);border-radius:50%;box-shadow:0 0 12px rgba(228,196,119,.6)}
+.contact-links{display:flex;flex-wrap:wrap;gap:14px;margin-top:18px}
+.contact-links a{display:inline-block;padding:10px 17px;border:1px solid var(--border);border-radius:9px;transition:.3s}
+.contact-links a:hover{background:rgba(228,196,119,.1);box-shadow:0 0 15px rgba(228,196,119,.12)}
+footer{text-align:center;color:#8993a4;font-size:12px;padding:25px 18px 35px;border-top:1px solid rgba(228,196,119,.13)}
+footer p{font-size:12px;margin:5px 0}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s,transform .7s}.reveal.visible{opacity:1;transform:translateY(0)}
+/* Registration and login */
+.auth-panel{max-width:620px;margin:30px auto 10px;padding:24px;border:1px solid rgba(228,196,119,.35);border-radius:14px;background:rgba(9,18,32,.72)}
+.auth-panel h3{text-align:center;font-size:21px}
+.auth-intro{text-align:center;font-size:14px}
+.auth-form{display:grid;gap:12px;margin-top:18px}
+.auth-form label{color:var(--gold-bright);font-size:13px}
+.auth-form input{width:100%;padding:13px 14px;border-radius:9px;border:1px solid rgba(228,196,119,.35);background:#0b1526;color:var(--text);font-size:15px;outline:none}
+.auth-form input:focus{border-color:var(--gold);box-shadow:0 0 0 2px rgba(228,196,119,.12)}
+.auth-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:5px}
+.auth-button{border-radius:9px;padding:11px 18px}
+.auth-button:disabled{opacity:.6;cursor:wait}
+.auth-message{min-height:25px;margin:12px 0 0;text-align:center;font-size:14px;overflow-wrap:anywhere}
+.auth-message.error{color:#ffaaa3}.auth-message.success{color:#bde8c6}
+.account-panel{display:none;margin-top:18px;padding:18px;border:1px solid rgba(228,196,119,.25);border-radius:12px;background:rgba(17,29,48,.8)}
+.account-panel p{overflow-wrap:anywhere}
+.account-email{color:var(--gold-bright);font-weight:bold}
+.auth-small{font-size:12px;text-align:center;margin-top:14px}
+@media(max-width:800px){.grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:650px){header{padding-top:30px}.logo{width:120px;height:120px}nav{gap:10px 14px;padding:13px 9px}nav a{font-size:12px}section{padding:22px 18px}.grid{grid-template-columns:1fr}h2{font-size:22px}.tile{min-height:145px}.marketplace-hero{padding:23px 13px}.auth-panel{padding:18px}.auth-actions{flex-direction:column}.auth-button{width:100%}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
 </style>
 </head>
-
 <body>
-
 <header>
 <img src="logotip.png" alt="AURION Logo" class="logo">
 <h1>AURION</h1>
-
-<p class="tagline"
-data-ru="Цифровая экосистема на BNB Smart Chain"
-data-en="Digital Ecosystem on BNB Smart Chain">
-Цифровая экосистема на BNB Smart Chain
-</p>
-
+<p class="tagline" data-ru="Цифровая экосистема на BNB Smart Chain" data-en="Digital Ecosystem on BNB Smart Chain">Цифровая экосистема на BNB Smart Chain</p>
 <div class="language-switch">
 <button id="ruButton" class="active" onclick="setLanguage('ru')">RU</button>
 <button id="enButton" onclick="setLanguage('en')">EN</button>
 </div>
 </header>
-
 <nav>
 <a href="#about" data-ru="О проекте" data-en="About">О проекте</a>
 <a href="#principles" data-ru="Принципы" data-en="Principles">Принципы</a>
@@ -561,409 +102,294 @@ data-en="Digital Ecosystem on BNB Smart Chain">
 <a href="#news" data-ru="Новости" data-en="News">Новости</a>
 <a href="#contacts" data-ru="Контакты" data-en="Contacts">Контакты</a>
 </nav>
-
 <main>
-
 <section id="about" class="reveal">
 <h2 data-ru="О проекте AURION" data-en="About AURION">О проекте AURION</h2>
-
-<p data-ru="AURION — развивающийся цифровой проект на блокчейне BNB Smart Chain. Его цель — создание экосистемы для цифровых товаров, услуг, знаний и взаимодействия между пользователями."
-data-en="AURION is an emerging digital project on BNB Smart Chain. Its goal is to build an ecosystem for digital products, services, knowledge and interaction between users.">
-AURION — развивающийся цифровой проект на блокчейне BNB Smart Chain. Его цель — создание экосистемы для цифровых товаров, услуг, знаний и взаимодействия между пользователями.
-</p>
-
-<p data-ru="Проект развивается поэтапно. Мы стремимся создать понятную, открытую и удобную цифровую среду, в которой токен AUR сможет использоваться как один из инструментов взаимодействия."
-data-en="The project is being developed step by step. We aim to create a clear, open and convenient digital environment where the AUR token can serve as one of the tools for interaction.">
-Проект развивается поэтапно. Мы стремимся создать понятную, открытую и удобную цифровую среду, в которой токен AUR сможет использоваться как один из инструментов взаимодействия.
-</p>
+<p data-ru="AURION — развивающийся цифровой проект на блокчейне BNB Smart Chain. Его цель — создание экосистемы для цифровых товаров, услуг, знаний и взаимодействия между пользователями." data-en="AURION is an emerging digital project on BNB Smart Chain. Its goal is to build an ecosystem for digital products, services, knowledge and interaction between users.">AURION — развивающийся цифровой проект на блокчейне BNB Smart Chain. Его цель — создание экосистемы для цифровых товаров, услуг, знаний и взаимодействия между пользователями.</p>
+<p data-ru="Проект развивается поэтапно. Мы стремимся создать понятную, открытую и удобную цифровую среду, в которой токен AUR сможет использоваться как один из инструментов взаимодействия." data-en="The project is being developed step by step. We aim to create a clear, open and convenient digital environment where the AUR token can serve as one of the tools for interaction.">Проект развивается поэтапно. Мы стремимся создать понятную, открытую и удобную цифровую среду, в которой токен AUR сможет использоваться как один из инструментов взаимодействия.</p>
 </section>
-
 <section id="principles" class="reveal">
 <h2 data-ru="Наши принципы" data-en="Our Principles">Наши принципы</h2>
-
 <div class="grid">
-<div class="tile">
-<span class="tile-icon">◇</span>
-<h3 data-ru="Прозрачность" data-en="Transparency">Прозрачность</h3>
-<p data-ru="Открытая информация о проекте и его развитии."
-data-en="Open information about the project and its development.">
-Открытая информация о проекте и его развитии.
-</p>
-</div>
-
-<div class="tile">
-<span class="tile-icon">✧</span>
-<h3 data-ru="Доступность" data-en="Accessibility">Доступность</h3>
-<p data-ru="Стремление сделать цифровые инструменты понятными и удобными."
-data-en="Making digital tools clear and convenient to use.">
-Стремление сделать цифровые инструменты понятными и удобными.
-</p>
-</div>
-
-<div class="tile">
-<span class="tile-icon">⬡</span>
-<h3 data-ru="Развитие" data-en="Development">Развитие</h3>
-<p data-ru="Постепенное создание новых возможностей экосистемы."
-data-en="Gradually building new ecosystem capabilities.">
-Постепенное создание новых возможностей экосистемы.
-</p>
-</div>
+<div class="tile"><span class="tile-icon">◇</span><h3 data-ru="Прозрачность" data-en="Transparency">Прозрачность</h3><p data-ru="Открытая информация о проекте и его развитии." data-en="Open information about the project and its development.">Открытая информация о проекте и его развитии.</p></div>
+<div class="tile"><span class="tile-icon">✧</span><h3 data-ru="Доступность" data-en="Accessibility">Доступность</h3><p data-ru="Стремление сделать цифровые инструменты понятными и удобными." data-en="Making digital tools clear and convenient to use.">Стремление сделать цифровые инструменты понятными и удобными.</p></div>
+<div class="tile"><span class="tile-icon">⬡</span><h3 data-ru="Развитие" data-en="Development">Развитие</h3><p data-ru="Постепенное создание новых возможностей экосистемы." data-en="Gradually building new ecosystem capabilities.">Постепенное создание новых возможностей экосистемы.</p></div>
 </div>
 </section>
-
 <section id="directions" class="reveal">
-<h2 data-ru="Направления развития AURION"
-data-en="AURION Development Directions">
-Направления развития AURION
-</h2>
-
-<p data-ru="Шесть основных направлений, вокруг которых планируется развивать цифровую экосистему AURION."
-data-en="Six main areas around which the AURION digital ecosystem is planned to develop.">
-Шесть основных направлений, вокруг которых планируется развивать цифровую экосистему AURION.
-</p>
-
+<h2 data-ru="Направления развития AURION" data-en="AURION Development Directions">Направления развития AURION</h2>
+<p data-ru="Шесть основных направлений, вокруг которых планируется развивать цифровую экосистему AURION." data-en="Six main areas around which the AURION digital ecosystem is planned to develop.">Шесть основных направлений, вокруг которых планируется развивать цифровую экосистему AURION.</p>
 <div class="grid">
-
-<div class="tile">
-<span class="tile-icon">✦</span>
-<h3 data-ru="Дизайн и графика" data-en="Design & Graphics">Дизайн и графика</h3>
-<p data-ru="Логотипы, иллюстрации, оформление, визуальные материалы и творческие работы."
-data-en="Logos, illustrations, visual identity, graphics and creative work.">
-Логотипы, иллюстрации, оформление, визуальные материалы и творческие работы.
-</p>
-</div>
-
-<div class="tile">
-<span class="tile-icon">⌘</span>
-<h3 data-ru="IT и разработка" data-en="IT & Development">IT и разработка</h3>
-<p data-ru="Сайты, приложения, программирование, технические решения и цифровые инструменты."
-data-en="Websites, apps, programming, technical solutions and digital tools.">
-Сайты, приложения, программирование, технические решения и цифровые инструменты.
-</p>
-</div>
-
-<div class="tile">
-<span class="tile-icon">▤</span>
-<h3 data-ru="Цифровые товары и файлы" data-en="Digital Products & Files">Цифровые товары и файлы</h3>
-<p data-ru="Шаблоны, электронные материалы, документы, графические наборы и другие файлы."
-data-en="Templates, digital materials, documents, graphic packs and other files.">
-Шаблоны, электронные материалы, документы, графические наборы и другие файлы.
-</p>
-</div>
-
-<div class="tile">
-<span class="tile-icon">◎</span>
-<h3 data-ru="Обучение и консультации" data-en="Education & Consulting">Обучение и консультации</h3>
-<p data-ru="Обучающие материалы, индивидуальные консультации, наставничество и обмен знаниями."
-data-en="Learning materials, personal consultations, mentoring and knowledge sharing.">
-Обучающие материалы, индивидуальные консультации, наставничество и обмен знаниями.
-</p>
-</div>
-
-<div class="tile">
-<span class="tile-icon">↗</span>
-<h3 data-ru="Маркетинг и продвижение" data-en="Marketing & Promotion">Маркетинг и продвижение</h3>
-<p data-ru="Создание контента, оформление публикаций, продвижение проектов и коммуникации."
-data-en="Content creation, publication design, project promotion and communications.">
-Создание контента, оформление публикаций, продвижение проектов и коммуникации.
-</p>
-</div>
-
-<div class="tile">
-<span class="tile-icon">✧</span>
-<h3 data-ru="Другие цифровые услуги" data-en="Other Digital Services">Другие цифровые услуги</h3>
-<p data-ru="Различные цифровые работы и услуги, которые дополняют экосистему AURION."
-data-en="Other digital work and services that complement the AURION ecosystem.">
-Различные цифровые работы и услуги, которые дополняют экосистему AURION.
-</p>
-</div>
-
+<div class="tile"><span class="tile-icon">✦</span><h3 data-ru="Дизайн и графика" data-en="Design & Graphics">Дизайн и графика</h3><p data-ru="Логотипы, иллюстрации, оформление, визуальные материалы и творческие работы." data-en="Logos, illustrations, visual identity, graphics and creative work.">Логотипы, иллюстрации, оформление, визуальные материалы и творческие работы.</p></div>
+<div class="tile"><span class="tile-icon">⌘</span><h3 data-ru="IT и разработка" data-en="IT & Development">IT и разработка</h3><p data-ru="Сайты, приложения, программирование, технические решения и цифровые инструменты." data-en="Websites, apps, programming, technical solutions and digital tools.">Сайты, приложения, программирование, технические решения и цифровые инструменты.</p></div>
+<div class="tile"><span class="tile-icon">▤</span><h3 data-ru="Цифровые товары и файлы" data-en="Digital Products & Files">Цифровые товары и файлы</h3><p data-ru="Шаблоны, электронные материалы, документы, графические наборы и другие файлы." data-en="Templates, digital materials, documents, graphic packs and other files.">Шаблоны, электронные материалы, документы, графические наборы и другие файлы.</p></div>
+<div class="tile"><span class="tile-icon">◎</span><h3 data-ru="Обучение и консультации" data-en="Education & Consulting">Обучение и консультации</h3><p data-ru="Обучающие материалы, индивидуальные консультации, наставничество и обмен знаниями." data-en="Learning materials, personal consultations, mentoring and knowledge sharing.">Обучающие материалы, индивидуальные консультации, наставничество и обмен знаниями.</p></div>
+<div class="tile"><span class="tile-icon">↗</span><h3 data-ru="Маркетинг и продвижение" data-en="Marketing & Promotion">Маркетинг и продвижение</h3><p data-ru="Создание контента, оформление публикаций, продвижение проектов и коммуникации." data-en="Content creation, publication design, project promotion and communications.">Создание контента, оформление публикаций, продвижение проектов и коммуникации.</p></div>
+<div class="tile"><span class="tile-icon">✧</span><h3 data-ru="Другие цифровые услуги" data-en="Other Digital Services">Другие цифровые услуги</h3><p data-ru="Различные цифровые работы и услуги, которые дополняют экосистему AURION." data-en="Other digital work and services that complement the AURION ecosystem.">Различные цифровые работы и услуги, которые дополняют экосистему AURION.</p></div>
 </div>
 </section>
-
-<!-- AURION MARKETPLACE -->
 
 <section id="marketplace" class="reveal">
-
 <div class="marketplace-hero">
 <div class="marketplace-symbol">◇</div>
-
 <h2 class="marketplace-title">AURION MARKETPLACE</h2>
-
-<p class="marketplace-subtitle"
-data-ru="Пространство цифровых товаров, услуг и возможностей. Единая площадка для авторов, специалистов и покупателей."
-data-en="A space for digital products, services and opportunities. One platform for creators, professionals and buyers.">
-Пространство цифровых товаров, услуг и возможностей. Единая площадка для авторов, специалистов и покупателей.
-</p>
-
-<span class="coming-soon"
-data-ru="СКОРО ОТКРЫТИЕ"
-data-en="COMING SOON">
-СКОРО ОТКРЫТИЕ
-</span>
+<p class="marketplace-subtitle" data-ru="Пространство цифровых товаров, услуг и возможностей. Единая площадка для авторов, специалистов и покупателей." data-en="A space for digital products, services and opportunities. One platform for creators, professionals and buyers.">Пространство цифровых товаров, услуг и возможностей. Единая площадка для авторов, специалистов и покупателей.</p>
+<span class="coming-soon" data-ru="ПЕРВЫЙ ЭТАП — РЕГИСТРАЦИЯ" data-en="PHASE ONE — ACCOUNT ACCESS">ПЕРВЫЙ ЭТАП — РЕГИСТРАЦИЯ</span>
 </div>
-
-<h2 data-ru="Что можно будет найти"
-data-en="What You Will Find">
-Что можно будет найти
-</h2>
-
-<p data-ru="Планируемые категории будущего маркетплейса:"
-data-en="Planned categories of the future marketplace:">
-Планируемые категории будущего маркетплейса:
-</p>
-
+<h2 data-ru="Что можно будет найти" data-en="What You Will Find">Что можно будет найти</h2>
+<p data-ru="Планируемые категории будущего маркетплейса:" data-en="Planned categories of the future marketplace:">Планируемые категории будущего маркетплейса:</p>
 <div class="grid">
-
-<div class="tile marketplace-category">
-<span class="tile-icon">✦</span>
-<h3 data-ru="Дизайн и графика" data-en="Design & Graphics">Дизайн и графика</h3>
-<p data-ru="Логотипы, баннеры, иллюстрации и оформление."
-data-en="Logos, banners, illustrations and visual design.">
-Логотипы, баннеры, иллюстрации и оформление.
-</p>
+<div class="tile marketplace-category"><span class="tile-icon">✦</span><h3 data-ru="Дизайн и графика" data-en="Design & Graphics">Дизайн и графика</h3><p data-ru="Логотипы, баннеры, иллюстрации и оформление." data-en="Logos, banners, illustrations and visual design.">Логотипы, баннеры, иллюстрации и оформление.</p></div>
+<div class="tile marketplace-category"><span class="tile-icon">⌘</span><h3 data-ru="IT и разработка" data-en="IT & Development">IT и разработка</h3><p data-ru="Создание сайтов, приложения и технические услуги." data-en="Website creation, applications and technical services.">Создание сайтов, приложения и технические услуги.</p></div>
+<div class="tile marketplace-category"><span class="tile-icon">▤</span><h3 data-ru="Цифровые товары" data-en="Digital Products">Цифровые товары</h3><p data-ru="Файлы, шаблоны, электронные материалы и наборы." data-en="Files, templates, digital materials and collections.">Файлы, шаблоны, электронные материалы и наборы.</p></div>
+<div class="tile marketplace-category"><span class="tile-icon">◎</span><h3 data-ru="Обучение" data-en="Education">Обучение</h3><p data-ru="Курсы, консультации, наставничество и знания." data-en="Courses, consultations, mentoring and knowledge.">Курсы, консультации, наставничество и знания.</p></div>
+<div class="tile marketplace-category"><span class="tile-icon">↗</span><h3 data-ru="Маркетинг" data-en="Marketing">Маркетинг</h3><p data-ru="Контент, реклама, продвижение и коммуникации." data-en="Content, advertising, promotion and communications.">Контент, реклама, продвижение и коммуникации.</p></div>
+<div class="tile marketplace-category"><span class="tile-icon">✧</span><h3 data-ru="Другие услуги" data-en="Other Services">Другие услуги</h3><p data-ru="Различные цифровые решения и предложения." data-en="Various digital solutions and services.">Различные цифровые решения и предложения.</p></div>
 </div>
-
-<div class="tile marketplace-category">
-<span class="tile-icon">⌘</span>
-<h3 data-ru="IT и разработка" data-en="IT & Development">IT и разработка</h3>
-<p data-ru="Создание сайтов, приложения и технические услуги."
-data-en="Website creation, applications and technical services.">
-Создание сайтов, приложения и технические услуги.
-</p>
-</div>
-
-<div class="tile marketplace-category">
-<span class="tile-icon">▤</span>
-<h3 data-ru="Цифровые товары" data-en="Digital Products">Цифровые товары</h3>
-<p data-ru="Файлы, шаблоны, электронные материалы и наборы."
-data-en="Files, templates, digital materials and collections.">
-Файлы, шаблоны, электронные материалы и наборы.
-</p>
-</div>
-
-<div class="tile marketplace-category">
-<span class="tile-icon">◎</span>
-<h3 data-ru="Обучение" data-en="Education">Обучение</h3>
-<p data-ru="Курсы, консультации, наставничество и знания."
-data-en="Courses, consultations, mentoring and knowledge.">
-Курсы, консультации, наставничество и знания.
-</p>
-</div>
-
-<div class="tile marketplace-category">
-<span class="tile-icon">↗</span>
-<h3 data-ru="Маркетинг" data-en="Marketing">Маркетинг</h3>
-<p data-ru="Контент, реклама, продвижение и коммуникации."
-data-en="Content, advertising, promotion and communications.">
-Контент, реклама, продвижение и коммуникации.
-</p>
-</div>
-
-<div class="tile marketplace-category">
-<span class="tile-icon">✧</span>
-<h3 data-ru="Другие услуги" data-en="Other Services">Другие услуги</h3>
-<p data-ru="Различные цифровые решения и предложения."
-data-en="Various digital solutions and services.">
-Различные цифровые решения и предложения.
-</p>
-</div>
-
-</div>
-
-<h2 style="margin-top:35px;"
-data-ru="Для участников площадки"
-data-en="For Marketplace Participants">
-Для участников площадки
-</h2>
-
+<h2 style="margin-top:35px" data-ru="Для участников площадки" data-en="For Marketplace Participants">Для участников площадки</h2>
 <div class="grid">
-
-<div class="marketplace-role">
-<span class="tile-icon">♙</span>
-<h3 data-ru="Продавцам и авторам"
-data-en="Sellers & Creators">
-Продавцам и авторам
-</h3>
-<p data-ru="Возможность представить свои цифровые товары и услуги, находить клиентов и развивать собственное направление."
-data-en="An opportunity to present digital products and services, find customers and grow your own business.">
-Возможность представить свои цифровые товары и услуги, находить клиентов и развивать собственное направление.
-</p>
+<div class="marketplace-role"><span class="tile-icon">♙</span><h3 data-ru="Продавцам и авторам" data-en="Sellers & Creators">Продавцам и авторам</h3><p data-ru="Возможность представить свои цифровые товары и услуги, находить клиентов и развивать собственное направление." data-en="An opportunity to present digital products and services, find customers and grow your own business.">Возможность представить свои цифровые товары и услуги, находить клиентов и развивать собственное направление.</p></div>
+<div class="marketplace-role"><span class="tile-icon">◇</span><h3 data-ru="Покупателям" data-en="Buyers">Покупателям</h3><p data-ru="Возможность находить цифровые продукты, специалистов и услуги в одном месте." data-en="An opportunity to discover digital products, professionals and services in one place.">Возможность находить цифровые продукты, специалистов и услуги в одном месте.</p></div>
 </div>
 
-<div class="marketplace-role">
-<span class="tile-icon">◇</span>
-<h3 data-ru="Покупателям"
-data-en="Buyers">
-Покупателям
-</h3>
-<p data-ru="Возможность находить цифровые продукты, специалистов и услуги в одном месте."
-data-en="An opportunity to discover digital products, professionals and services in one place.">
-Возможность находить цифровые продукты, специалистов и услуги в одном месте.
-</p>
+<!-- Supabase account panel: one account can later buy and sell -->
+<div class="auth-panel" id="authPanel">
+<h3 data-ru="Аккаунт AURION" data-en="AURION Account">Аккаунт AURION</h3>
+<p class="auth-intro" data-ru="Создайте один аккаунт для будущих покупок и продаж. Сейчас доступны регистрация и вход; каталог и сделки находятся в разработке." data-en="Create one account for future buying and selling. Registration and sign-in are available now; the catalog and transactions are still in development.">Создайте один аккаунт для будущих покупок и продаж. Сейчас доступны регистрация и вход; каталог и сделки находятся в разработке.</p>
+<div id="authForms">
+<form class="auth-form" id="authForm">
+<div><label for="authEmail" data-ru="Электронная почта" data-en="Email address">Электронная почта</label><input id="authEmail" type="email" autocomplete="email" required maxlength="254" placeholder="name@example.com"></div>
+<div><label for="authPassword" data-ru="Пароль (не менее 8 символов)" data-en="Password (at least 8 characters)">Пароль (не менее 8 символов)</label><input id="authPassword" type="password" autocomplete="current-password" minlength="8" required placeholder="••••••••"></div>
+<div class="auth-actions">
+<button class="auth-button primary" id="signInButton" type="button" data-ru="Войти" data-en="Sign in">Войти</button>
+<button class="auth-button" id="signUpButton" type="button" data-ru="Создать аккаунт" data-en="Create account">Создать аккаунт</button>
 </div>
-
+</form>
+<p class="auth-small" data-ru="Нажимая «Создать аккаунт», вы регистрируетесь как участник AURION. В дальнейшем сможете и покупать, и продавать с этой же учётной записью." data-en="By selecting Create account, you register as an AURION member. You will be able to both buy and sell using this same account.">Нажимая «Создать аккаунт», вы регистрируетесь как участник AURION. В дальнейшем сможете и покупать, и продавать с этой же учётной записью.</p>
+</div>
+<div class="account-panel" id="accountPanel">
+<p data-ru="Вы вошли в AURION Marketplace." data-en="You are signed in to AURION Marketplace.">Вы вошли в AURION Marketplace.</p>
+<p><span data-ru="Аккаунт:" data-en="Account:">Аккаунт:</span> <span class="account-email" id="accountEmail"></span></p>
+<p data-ru="Одна учётная запись предназначена и для покупок, и для продаж. Размещение товаров и оформление заказов будут добавлены на следующих этапах." data-en="One account is intended for both buying and selling. Product listings and orders will be added in later stages.">Одна учётная запись предназначена и для покупок, и для продаж. Размещение товаров и оформление заказов будут добавлены на следующих этапах.</p>
+<button class="auth-button" id="signOutButton" type="button" data-ru="Выйти" data-en="Sign out">Выйти</button>
+</div>
+<p class="auth-message" id="authMessage" role="status" aria-live="polite"></p>
 </div>
 
 <div class="marketplace-note">
-<p data-ru="Маркетплейс находится на стадии планирования и разработки. Регистрация, размещение товаров и проведение платежей пока недоступны."
-data-en="The marketplace is currently in the planning and development stage. Registration, product listings and payments are not available yet.">
-Маркетплейс находится на стадии планирования и разработки. Регистрация, размещение товаров и проведение платежей пока недоступны.
-</p>
-
-<p data-ru="В будущей модели проекта планируется поддержка токена AUR."
-data-en="Support for the AUR token is planned in the future project model.">
-В будущей модели проекта планируется поддержка токена AUR.
-</p>
+<p data-ru="Регистрация и вход доступны. Каталог, размещение товаров и услуг, заказы и платежи пока находятся в разработке." data-en="Registration and sign-in are available. The catalog, listings, orders and payments are still under development.">Регистрация и вход доступны. Каталог, размещение товаров и услуг, заказы и платежи пока находятся в разработке.</p>
+<p data-ru="В будущей модели проекта планируется поддержка токена AUR." data-en="Support for the AUR token is planned in the future project model.">В будущей модели проекта планируется поддержка токена AUR.</p>
 </div>
-
 </section>
 
 <section id="token" class="reveal">
 <h2 data-ru="Токен AURION (AUR)" data-en="AURION Token (AUR)">Токен AURION (AUR)</h2>
-
 <div class="token-info">
 <p><strong data-ru="Название:" data-en="Name:">Название:</strong> AURION</p>
 <p><strong data-ru="Символ:" data-en="Symbol:">Символ:</strong> AUR</p>
 <p><strong data-ru="Сеть:" data-en="Network:">Сеть:</strong> BNB Smart Chain (BEP-20)</p>
-
-<p>
-<strong data-ru="Адрес контракта:" data-en="Contract address:">Адрес контракта:</strong><br>
-<a href="https://bscscan.com/token/0x6B7616c71ED6e5c48432E1693B3F47f910bB9325"
-target="_blank" rel="noopener noreferrer">
-0x6B7616c71ED6e5c48432E1693B3F47f910bB9325
-</a>
-</p>
-
-<p>
-<strong data-ru="Обозреватель блокчейна:" data-en="Blockchain explorer:">Обозреватель блокчейна:</strong>
-<a href="https://bscscan.com/token/0x6B7616c71ED6e5c48432E1693B3F47f910bB9325"
-target="_blank" rel="noopener noreferrer">BscScan</a>
-</p>
+<p><strong data-ru="Адрес контракта:" data-en="Contract address:">Адрес контракта:</strong><br><a href="https://bscscan.com/token/0x6B7616c71ED6e5c48432E1693B3F47f910bB9325" target="_blank" rel="noopener noreferrer">0x6B7616c71ED6e5c48432E1693B3F47f910bB9325</a></p>
+<p><strong data-ru="Обозреватель блокчейна:" data-en="Blockchain explorer:">Обозреватель блокчейна:</strong> <a href="https://bscscan.com/token/0x6B7616c71ED6e5c48432E1693B3F47f910bB9325" target="_blank" rel="noopener noreferrer">BscScan</a></p>
 </div>
-
-<p style="text-align:center; margin:28px 0;">
-<a class="token-button"
-href="https://pancakeswap.finance/swap?chain=bsc&amp;inputCurrency=BNB&amp;outputCurrency=0x6B7616c71ED6e5c48432E1693B3F47f910bB9325"
-target="_blank"
-rel="noopener noreferrer"
-data-ru="КУПИТЬ / ПРОДАТЬ AURION"
-data-en="BUY / SELL AURION">
-КУПИТЬ / ПРОДАТЬ AURION
-</a>
-</p>
-
-<p data-ru="Токен доступен для просмотра в блокчейне. Перед обменом самостоятельно проверяйте адрес контракта и учитывайте риски, связанные с цифровыми активами."
-data-en="The token is visible on the blockchain. Before swapping, verify the contract address and consider the risks associated with digital assets.">
-Токен доступен для просмотра в блокчейне. Перед обменом самостоятельно проверяйте адрес контракта и учитывайте риски, связанные с цифровыми активами.
-</p>
+<p style="text-align:center;margin:28px 0"><a class="token-button" href="https://pancakeswap.finance/swap?chain=bsc&amp;inputCurrency=BNB&amp;outputCurrency=0x6B7616c71ED6e5c48432E1693B3F47f910bB9325" target="_blank" rel="noopener noreferrer" data-ru="КУПИТЬ / ПРОДАТЬ AURION" data-en="BUY / SELL AURION">КУПИТЬ / ПРОДАТЬ AURION</a></p>
+<p data-ru="Токен доступен для просмотра в блокчейне. Перед обменом самостоятельно проверяйте адрес контракта и учитывайте риски, связанные с цифровыми активами." data-en="The token is visible on the blockchain. Before swapping, verify the contract address and consider the risks associated with digital assets.">Токен доступен для просмотра в блокчейне. Перед обменом самостоятельно проверяйте адрес контракта и учитывайте риски, связанные с цифровыми активами.</p>
 </section>
 
 <section id="roadmap" class="reveal">
 <h2 data-ru="План развития" data-en="Roadmap">План развития</h2>
-
-<div class="roadmap-item">
-<h3 data-ru="Этап 1 — Основа проекта" data-en="Stage 1 — Project Foundation">Этап 1 — Основа проекта</h3>
-<p data-ru="Создание токена AUR, сайта проекта, информационных ресурсов и базовой инфраструктуры."
-data-en="Creation of the AUR token, project website, information resources and basic infrastructure.">
-Создание токена AUR, сайта проекта, информационных ресурсов и базовой инфраструктуры.
-</p>
-</div>
-
-<div class="roadmap-item">
-<h3 data-ru="Этап 2 — Развитие экосистемы" data-en="Stage 2 — Ecosystem Development">Этап 2 — Развитие экосистемы</h3>
-<p data-ru="Развитие сообщества, изучение потребностей пользователей и подготовка цифровых направлений."
-data-en="Community development, understanding user needs and preparing digital service areas.">
-Развитие сообщества, изучение потребностей пользователей и подготовка цифровых направлений.
-</p>
-</div>
-
-<div class="roadmap-item">
-<h3 data-ru="Этап 3 — Marketplace" data-en="Stage 3 — Marketplace">Этап 3 — Marketplace</h3>
-<p data-ru="Разработка и тестирование площадки для цифровых товаров и услуг."
-data-en="Development and testing of a marketplace for digital products and services.">
-Разработка и тестирование площадки для цифровых товаров и услуг.
-</p>
-</div>
-
-<div class="roadmap-item">
-<h3 data-ru="Этап 4 — Расширение" data-en="Stage 4 — Expansion">Этап 4 — Расширение</h3>
-<p data-ru="Постепенное расширение функциональности и возможностей экосистемы на основе опыта пользователей."
-data-en="Gradual expansion of ecosystem features and capabilities based on user feedback.">
-Постепенное расширение функциональности и возможностей экосистемы на основе опыта пользователей.
-</p>
-</div>
+<div class="roadmap-item"><h3 data-ru="Этап 1 — Основа проекта" data-en="Stage 1 — Project Foundation">Этап 1 — Основа проекта</h3><p data-ru="Создание токена AUR, сайта проекта, информационных ресурсов и базовой инфраструктуры." data-en="Creation of the AUR token, project website, information resources and basic infrastructure.">Создание токена AUR, сайта проекта, информационных ресурсов и базовой инфраструктуры.</p></div>
+<div class="roadmap-item"><h3 data-ru="Этап 2 — Развитие экосистемы" data-en="Stage 2 — Ecosystem Development">Этап 2 — Развитие экосистемы</h3><p data-ru="Развитие сообщества, изучение потребностей пользователей и подготовка цифровых направлений." data-en="Community development, understanding user needs and preparing digital service areas.">Развитие сообщества, изучение потребностей пользователей и подготовка цифровых направлений.</p></div>
+<div class="roadmap-item"><h3 data-ru="Этап 3 — Marketplace" data-en="Stage 3 — Marketplace">Этап 3 — Marketplace</h3><p data-ru="Разработка и тестирование площадки для цифровых товаров и услуг." data-en="Development and testing of a marketplace for digital products and services.">Разработка и тестирование площадки для цифровых товаров и услуг.</p></div>
+<div class="roadmap-item"><h3 data-ru="Этап 4 — Расширение" data-en="Stage 4 — Expansion">Этап 4 — Расширение</h3><p data-ru="Постепенное расширение функциональности и возможностей экосистемы на основе опыта пользователей." data-en="Gradual expansion of ecosystem features and capabilities based on user feedback.">Постепенное расширение функциональности и возможностей экосистемы на основе опыта пользователей.</p></div>
 </section>
-
 <section id="news" class="reveal">
 <h2 data-ru="Новости AURION" data-en="AURION News">Новости AURION</h2>
-
-<p data-ru="Следите за обновлениями, объявлениями и новостями проекта в официальном Telegram-канале."
-data-en="Follow project updates, announcements and news in the official Telegram channel.">
-Следите за обновлениями, объявлениями и новостями проекта в официальном Telegram-канале.
-</p>
-
-<p>
-<a href="https://t.me/AURION_AUR_BSC"
-target="_blank" rel="noopener noreferrer">
-AURION Official — Telegram
-</a>
-</p>
+<p data-ru="Следите за обновлениями, объявлениями и новостями проекта в официальном Telegram-канале." data-en="Follow project updates, announcements and news in the official Telegram channel.">Следите за обновлениями, объявлениями и новостями проекта в официальном Telegram-канале.</p>
+<p><a href="https://t.me/AURION_AUR_BSC" target="_blank" rel="noopener noreferrer">AURION Official — Telegram</a></p>
 </section>
-
 <section id="contacts" class="reveal">
 <h2 data-ru="Контакты" data-en="Contacts">Контакты</h2>
-
-<p data-ru="По вопросам и предложениям, связанным с проектом AURION, свяжитесь с нами:"
-data-en="For questions and suggestions regarding the AURION project, contact us:">
-По вопросам и предложениям, связанным с проектом AURION, свяжитесь с нами:
-</p>
-
-<div class="contact-links">
-<a href="mailto:Avanturk.ltd@gmail.com">Email</a>
-<a href="https://t.me/AURION_AUR_BSC"
-target="_blank" rel="noopener noreferrer">Telegram</a>
-</div>
+<p data-ru="По вопросам и предложениям, связанным с проектом AURION, свяжитесь с нами:" data-en="For questions and suggestions regarding the AURION project, contact us:">По вопросам и предложениям, связанным с проектом AURION, свяжитесь с нами:</p>
+<div class="contact-links"><a href="mailto:Avanturk.ltd@gmail.com">Email</a><a href="https://t.me/AURION_AUR_BSC" target="_blank" rel="noopener noreferrer">Telegram</a></div>
 </section>
-
 </main>
-
 <footer>
 <p>© 2026 AURION. All rights reserved.</p>
-
-<p data-ru="Цифровые активы связаны с риском. Информация на сайте носит ознакомительный характер и не является финансовой рекомендацией. Доходность не гарантируется."
-data-en="Digital assets involve risk. Information on this website is for informational purposes only and is not financial advice. No returns are guaranteed.">
-Цифровые активы связаны с риском. Информация на сайте носит ознакомительный характер и не является финансовой рекомендацией. Доходность не гарантируется.
-</p>
+<p data-ru="Цифровые активы связаны с риском. Информация на сайте носит ознакомительный характер и не является финансовой рекомендацией. Доходность не гарантируется." data-en="Digital assets involve risk. Information on this website is for informational purposes only and is not financial advice. No returns are guaranteed.">Цифровые активы связаны с риском. Информация на сайте носит ознакомительный характер и не является финансовой рекомендацией. Доходность не гарантируется.</p>
 </footer>
 
 <script>
 function setLanguage(language) {
-document.documentElement.lang = language;
-
-document.querySelectorAll("[data-ru][data-en]").forEach(function(element) {
-element.textContent = element.getAttribute("data-" + language);
-});
-
-document.getElementById("ruButton").classList.toggle("active", language === "ru");
-document.getElementById("enButton").classList.toggle("active", language === "en");
+  document.documentElement.lang = language;
+  document.querySelectorAll("[data-ru][data-en]").forEach(function(element) {
+    element.textContent = element.getAttribute("data-" + language);
+  });
+  document.querySelectorAll("[data-placeholder-ru][data-placeholder-en]").forEach(function(element) {
+    element.placeholder = element.getAttribute("data-placeholder-" + language);
+  });
+  document.getElementById("ruButton").classList.toggle("active", language === "ru");
+  document.getElementById("enButton").classList.toggle("active", language === "en");
+  window.currentAURIONLanguage = language;
 }
+window.currentAURIONLanguage = "ru";
 
 const revealObserver = new IntersectionObserver(function(entries) {
-entries.forEach(function(entry) {
-if (entry.isIntersecting) {
-entry.target.classList.add("visible");
-revealObserver.unobserve(entry.target);
-}
-});
-}, {
-threshold: 0.12
-});
-
+  entries.forEach(function(entry) {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("visible");
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, {threshold: 0.12});
 document.querySelectorAll(".reveal").forEach(function(element) {
-revealObserver.observe(element);
+  revealObserver.observe(element);
 });
 </script>
 
+<!-- Supabase browser client: publishable key is intended for public website use. -->
+<script type="module">
+import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
+
+const SUPABASE_URL = "https://hagaevohnfqapbdlnyqc.supabase.co";
+const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_xnzX-_410hVX7Yy-INynTA_DOUUM_s7";
+const supabase = createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
+
+const form = document.getElementById("authForm");
+const emailInput = document.getElementById("authEmail");
+const passwordInput = document.getElementById("authPassword");
+const signInButton = document.getElementById("signInButton");
+const signUpButton = document.getElementById("signUpButton");
+const signOutButton = document.getElementById("signOutButton");
+const authMessage = document.getElementById("authMessage");
+const authForms = document.getElementById("authForms");
+const accountPanel = document.getElementById("accountPanel");
+const accountEmail = document.getElementById("accountEmail");
+
+function language() {
+  return window.currentAURIONLanguage || "ru";
+}
+function message(ru, en, kind) {
+  authMessage.textContent = language() === "ru" ? ru : en;
+  authMessage.className = "auth-message" + (kind ? " " + kind : "");
+}
+function setBusy(busy) {
+  signInButton.disabled = busy;
+  signUpButton.disabled = busy;
+  signOutButton.disabled = busy;
+}
+function showAccount(user) {
+  if (user) {
+    authForms.style.display = "none";
+    accountPanel.style.display = "block";
+    accountEmail.textContent = user.email || "";
+  } else {
+    authForms.style.display = "block";
+    accountPanel.style.display = "none";
+    accountEmail.textContent = "";
+  }
+}
+function readableError(error) {
+  const raw = (error && error.message) ? error.message : "";
+  const lower = raw.toLowerCase();
+  if (lower.includes("invalid login credentials")) {
+    return language() === "ru" ? "Неверная почта или пароль." : "Incorrect email or password.";
+  }
+  if (lower.includes("email not confirmed")) {
+    return language() === "ru" ? "Сначала подтвердите электронную почту по ссылке из письма." : "Please confirm your email using the link we sent you.";
+  }
+  if (lower.includes("password")) {
+    return language() === "ru" ? "Проверьте пароль. Он должен содержать не менее 8 символов." : "Check your password. It must contain at least 8 characters.";
+  }
+  return raw || (language() === "ru" ? "Не удалось выполнить запрос. Попробуйте ещё раз." : "The request failed. Please try again.");
+}
+
+form.addEventListener("submit", function(event) {
+  event.preventDefault();
+  signInButton.click();
+});
+
+signInButton.addEventListener("click", async function() {
+  if (!form.reportValidity()) return;
+  const email = emailInput.value.trim();
+  const password = passwordInput.value;
+  setBusy(true);
+  message(language() === "ru" ? "Выполняется вход…" : "Signing in…");
+  try {
+    const { data, error } = await supabase.auth.signInWithPassword({email, password});
+    if (error) throw error;
+    showAccount(data.user);
+    passwordInput.value = "";
+    message(language() === "ru" ? "Вход выполнен." : "You are signed in.", "You are signed in.", "success");
+  } catch (error) {
+    message(readableError(error), readableError(error), "error");
+  } finally {
+    setBusy(false);
+  }
+});
+
+signUpButton.addEventListener("click", async function() {
+  if (!form.reportValidity()) return;
+  const email = emailInput.value.trim();
+  const password = passwordInput.value;
+  setBusy(true);
+  message(language() === "ru" ? "Создаём аккаунт…" : "Creating your account…");
+  try {
+    const { data, error } = await supabase.auth.signUp({
+      email,
+      password,
+      options: { emailRedirectTo: window.location.origin + "/" }
+    });
+    if (error) throw error;
+    passwordInput.value = "";
+    if (data.session && data.user) {
+      showAccount(data.user);
+      message(
+        "Аккаунт создан, вход выполнен.",
+        "Account created and signed in.",
+        "success"
+      );
+    } else {
+      message(
+        "Аккаунт создан. Откройте письмо от Supabase и нажмите ссылку подтверждения. Проверьте также папку «Спам». После подтверждения вернитесь на сайт и войдите.",
+        "Account created. Open the email from Supabase and click the confirmation link. Also check your spam folder. After confirming, return to the website and sign in.",
+        "success"
+      );
+    }
+  } catch (error) {
+    const text = readableError(error);
+    message(text, text, "error");
+  } finally {
+    setBusy(false);
+  }
+});
+
+signOutButton.addEventListener("click", async function() {
+  setBusy(true);
+  try {
+    const { error } = await supabase.auth.signOut();
+    if (error) throw error;
+    showAccount(null);
+    message(language() === "ru" ? "Вы вышли из аккаунта." : "You have signed out.", "You have signed out.", "success");
+  } catch (error) {
+    const text = readableError(error);
+    message(text, text, "error");
+  } finally {
+    setBusy(false);
+  }
+});
+
+supabase.auth.onAuthStateChange(function(event, session) {
+  showAccount(session ? session.user : null);
+});
+
+// Restore an existing session after the page is reopened.
+supabase.auth.getSession().then(function({data, error}) {
+  if (error) {
+    message(readableError(error), readableError(error), "error");
+    return;
+  }
+  showAccount(data.session ? data.session.user : null);
+});
+</script>
 </body>
 </html>
