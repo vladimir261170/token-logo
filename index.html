@@ -20,8 +20,8 @@ header:before{content:"";position:absolute;width:420px;height:420px;border:1px s
 h1{font-size:clamp(34px,6vw,52px);letter-spacing:5px;background:linear-gradient(120deg,#fff0bd,#d2a849,#fff0bd);-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:8px}
 .tagline{color:var(--muted);font-size:15px;letter-spacing:1.5px}
 .language-switch{display:flex;justify-content:center;gap:8px;margin:22px 0 5px}
-.language-switch button,.auth-button{background:transparent;border:1px solid var(--border);color:var(--muted);padding:8px 17px;border-radius:20px;cursor:pointer;font-weight:bold;transition:.3s}
-.language-switch button.active,.language-switch button:hover,.auth-button.primary{color:#101827;background:linear-gradient(135deg,#f5d77a,#c99a32);border-color:var(--gold);box-shadow:0 0 15px rgba(228,196,119,.25)}
+.language-switch button,.auth-button,.market-button{background:transparent;border:1px solid var(--border);color:var(--muted);padding:8px 17px;border-radius:20px;cursor:pointer;font-weight:bold;transition:.3s}
+.language-switch button.active,.language-switch button:hover,.auth-button.primary,.market-button.primary{color:#101827;background:linear-gradient(135deg,#f5d77a,#c99a32);border-color:var(--gold);box-shadow:0 0 15px rgba(228,196,119,.25)}
 nav{display:flex;justify-content:center;flex-wrap:wrap;gap:12px 22px;padding:17px 15px;margin-top:20px;position:sticky;top:0;z-index:10;background:rgba(11,18,32,.92);backdrop-filter:blur(12px);border-top:1px solid rgba(228,196,119,.12);border-bottom:1px solid rgba(228,196,119,.18)}
 nav a{color:var(--text);font-size:13px;letter-spacing:.4px;transition:.3s}nav a:hover{color:var(--gold-bright);text-shadow:0 0 12px rgba(228,196,119,.55)}
 main{width:min(1100px,92%);margin:35px auto 65px}
@@ -30,55 +30,66 @@ section:before{content:"";position:absolute;top:0;left:8%;width:84%;height:1px;b
 h2{color:var(--gold);font-size:25px;margin-bottom:17px;letter-spacing:.5px}h3{color:var(--gold-bright);font-size:18px;margin-bottom:9px}
 p{color:var(--muted);margin:10px 0}
 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:19px;margin-top:22px}
-.tile{min-height:175px;padding:24px 20px;background:linear-gradient(145deg,rgba(25,42,66,.95),rgba(13,25,43,.98));border:1px solid rgba(228,196,119,.25);border-radius:14px;position:relative;overflow:hidden;transition:transform .35s,border-color .35s,box-shadow .35s,background .35s;animation:tileGlow 5s ease-in-out infinite}
-.tile:nth-child(2){animation-delay:.5s}.tile:nth-child(3){animation-delay:1s}.tile:nth-child(4){animation-delay:1.5s}.tile:nth-child(5){animation-delay:2s}.tile:nth-child(6){animation-delay:2.5s}
-@keyframes tileGlow{0%,100%{box-shadow:0 0 0 rgba(228,196,119,0)}50%{box-shadow:0 0 17px rgba(228,196,119,.07)}}
-.tile:after{content:"";position:absolute;width:95px;height:95px;border:1px solid rgba(228,196,119,.16);border-radius:50%;right:-35px;bottom:-43px;transition:.4s;pointer-events:none}
-.tile:hover{transform:translateY(-7px);border-color:rgba(255,224,150,.8);background:linear-gradient(145deg,rgba(37,54,78,.98),rgba(18,31,51,.98));box-shadow:0 10px 30px rgba(0,0,0,.3),0 0 22px rgba(228,196,119,.2)}
-.tile:hover:after{width:145px;height:145px;border-color:rgba(228,196,119,.45)}
+.tile{min-height:150px;padding:24px 20px;background:linear-gradient(145deg,rgba(25,42,66,.95),rgba(13,25,43,.98));border:1px solid rgba(228,196,119,.25);border-radius:14px;position:relative;overflow:hidden;transition:.3s}
+.tile:hover{transform:translateY(-4px);border-color:rgba(255,224,150,.8);box-shadow:0 10px 25px rgba(0,0,0,.25),0 0 18px rgba(228,196,119,.12)}
 .tile-icon{font-size:27px;display:block;margin-bottom:12px;filter:drop-shadow(0 0 7px rgba(228,196,119,.35))}
 .tile p{font-size:14px;margin-bottom:0}
-.status{display:inline-block;padding:5px 12px;border:1px solid rgba(228,196,119,.45);border-radius:20px;color:var(--gold-bright);background:rgba(201,154,50,.1);font-size:12px;letter-spacing:.5px;margin:5px 0 12px}
-.marketplace-hero{text-align:center;padding:28px 20px 32px;margin:15px 0 25px;border:1px solid rgba(228,196,119,.35);border-radius:16px;background:radial-gradient(ellipse at center,rgba(201,154,50,.16),transparent 70%),linear-gradient(145deg,rgba(24,40,64,.95),rgba(11,20,35,.98));box-shadow:0 0 30px rgba(201,154,50,.08)}
-.marketplace-symbol{font-size:48px;color:var(--gold-bright);text-shadow:0 0 25px rgba(228,196,119,.55);margin-bottom:5px}
+.marketplace-hero{text-align:center;padding:28px 20px 32px;margin:15px 0 25px;border:1px solid rgba(228,196,119,.35);border-radius:16px;background:radial-gradient(ellipse at center,rgba(201,154,50,.16),transparent 70%),linear-gradient(145deg,rgba(24,40,64,.95),rgba(11,20,35,.98))}
+.marketplace-symbol{font-size:48px;color:var(--gold-bright);text-shadow:0 0 25px rgba(228,196,119,.55)}
 .marketplace-title{font-size:clamp(27px,5vw,39px);letter-spacing:2px;background:linear-gradient(120deg,#fff0bd,#d2a849,#fff0bd);-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:10px}
 .marketplace-subtitle{max-width:650px;margin:0 auto 17px;font-size:15px}
-.coming-soon{display:inline-block;padding:9px 22px;border:1px solid var(--gold);border-radius:30px;color:var(--gold-bright);background:rgba(201,154,50,.13);font-weight:bold;font-size:13px;letter-spacing:2px;box-shadow:0 0 20px rgba(228,196,119,.15);animation:comingGlow 3s ease-in-out infinite}
-@keyframes comingGlow{0%,100%{box-shadow:0 0 8px rgba(228,196,119,.12)}50%{box-shadow:0 0 23px rgba(228,196,119,.35)}}
-.marketplace-category{min-height:160px;text-align:left}.marketplace-category .tile-icon{font-size:30px}
-.marketplace-role{border:1px solid rgba(228,196,119,.24);border-radius:13px;background:rgba(12,23,40,.65);padding:22px;height:100%}
-.marketplace-role h3{margin-top:5px}
+.coming-soon{display:inline-block;padding:9px 22px;border:1px solid var(--gold);border-radius:30px;color:var(--gold-bright);background:rgba(201,154,50,.13);font-weight:bold;font-size:13px;letter-spacing:2px}
+.marketplace-role{border:1px solid rgba(228,196,119,.24);border-radius:13px;background:rgba(12,23,40,.65);padding:22px}
 .marketplace-note{text-align:center;border-top:1px solid rgba(228,196,119,.18);margin-top:25px;padding-top:20px;font-size:13px}
 .token-info{line-height:2;overflow-wrap:anywhere}
-.token-button{display:inline-block;background:linear-gradient(135deg,#f5d77a,#c99a32);color:#101827;padding:15px 35px;border-radius:10px;font-weight:bold;text-decoration:none;font-size:16px;letter-spacing:1px;box-shadow:0 5px 18px rgba(201,154,50,.2);transition:.3s}
-.token-button:hover{color:#101827;transform:translateY(-3px);box-shadow:0 8px 25px rgba(228,196,119,.4)}
+.token-button{display:inline-block;background:linear-gradient(135deg,#f5d77a,#c99a32);color:#101827;padding:15px 35px;border-radius:10px;font-weight:bold;font-size:16px;letter-spacing:1px}
 .roadmap-item{border-left:2px solid var(--gold-dark);padding:2px 0 17px 20px;margin:17px 0;position:relative}
-.roadmap-item:before{content:"";position:absolute;left:-7px;top:5px;width:12px;height:12px;background:var(--gold);border-radius:50%;box-shadow:0 0 12px rgba(228,196,119,.6)}
+.roadmap-item:before{content:"";position:absolute;left:-7px;top:5px;width:12px;height:12px;background:var(--gold);border-radius:50%}
 .contact-links{display:flex;flex-wrap:wrap;gap:14px;margin-top:18px}
-.contact-links a{display:inline-block;padding:10px 17px;border:1px solid var(--border);border-radius:9px;transition:.3s}
-.contact-links a:hover{background:rgba(228,196,119,.1);box-shadow:0 0 15px rgba(228,196,119,.12)}
+.contact-links a{display:inline-block;padding:10px 17px;border:1px solid var(--border);border-radius:9px}
 footer{text-align:center;color:#8993a4;font-size:12px;padding:25px 18px 35px;border-top:1px solid rgba(228,196,119,.13)}
 footer p{font-size:12px;margin:5px 0}
 .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s,transform .7s}.reveal.visible{opacity:1;transform:translateY(0)}
-/* Registration and login */
-.auth-panel{max-width:620px;margin:30px auto 10px;padding:24px;border:1px solid rgba(228,196,119,.35);border-radius:14px;background:rgba(9,18,32,.72)}
-.auth-panel h3{text-align:center;font-size:21px}
+.auth-panel,.seller-panel{max-width:760px;margin:30px auto 10px;padding:24px;border:1px solid rgba(228,196,119,.35);border-radius:14px;background:rgba(9,18,32,.72)}
+.auth-panel h3,.seller-panel h3{text-align:center;font-size:21px}
 .auth-intro{text-align:center;font-size:14px}
-.auth-form{display:grid;gap:12px;margin-top:18px}
-.auth-form label{color:var(--gold-bright);font-size:13px}
-.auth-form input{width:100%;padding:13px 14px;border-radius:9px;border:1px solid rgba(228,196,119,.35);background:#0b1526;color:var(--text);font-size:15px;outline:none}
-.auth-form input:focus{border-color:var(--gold);box-shadow:0 0 0 2px rgba(228,196,119,.12)}
-.auth-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:5px}
-.auth-button{border-radius:9px;padding:11px 18px}
-.auth-button:disabled{opacity:.6;cursor:wait}
+.auth-form,.product-form{display:grid;gap:12px;margin-top:18px}
+.auth-form label,.product-form label{display:block;color:var(--gold-bright);font-size:13px;margin-bottom:5px}
+.auth-form input,.product-form input,.product-form textarea,.product-form select,.catalog-controls input,.catalog-controls select{width:100%;padding:12px 14px;border-radius:9px;border:1px solid rgba(228,196,119,.35);background:#0b1526;color:var(--text);font-size:15px;outline:none}
+.product-form textarea{min-height:110px;resize:vertical}
+.auth-form input:focus,.product-form input:focus,.product-form textarea:focus,.product-form select:focus,.catalog-controls input:focus,.catalog-controls select:focus{border-color:var(--gold);box-shadow:0 0 0 2px rgba(228,196,119,.12)}
+.auth-actions,.product-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:5px}
+.auth-button,.market-button{border-radius:9px;padding:11px 18px}
+.auth-button:disabled,.market-button:disabled{opacity:.6;cursor:wait}
 .auth-message{min-height:25px;margin:12px 0 0;text-align:center;font-size:14px;overflow-wrap:anywhere}
 .auth-message.error{color:#ffaaa3}.auth-message.success{color:#bde8c6}
 .account-panel{display:none;margin-top:18px;padding:18px;border:1px solid rgba(228,196,119,.25);border-radius:12px;background:rgba(17,29,48,.8)}
 .account-panel p{overflow-wrap:anywhere}
 .account-email{color:var(--gold-bright);font-weight:bold}
 .auth-small{font-size:12px;text-align:center;margin-top:14px}
-@media(max-width:800px){.grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:650px){header{padding-top:30px}.logo{width:120px;height:120px}nav{gap:10px 14px;padding:13px 9px}nav a{font-size:12px}section{padding:22px 18px}.grid{grid-template-columns:1fr}h2{font-size:22px}.tile{min-height:145px}.marketplace-hero{padding:23px 13px}.auth-panel{padding:18px}.auth-actions{flex-direction:column}.auth-button{width:100%}}
+.catalog-heading{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-top:30px}
+.catalog-controls{display:grid;grid-template-columns:2fr 1fr;gap:12px;margin:18px 0}
+.product-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:18px}
+.product-card{border:1px solid rgba(228,196,119,.28);border-radius:13px;background:rgba(9,18,32,.72);overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.product-image{width:100%;height:175px;object-fit:cover;background:#101c2e}
+.product-image-placeholder{height:175px;display:grid;place-items:center;background:linear-gradient(145deg,#172943,#0b1526);font-size:42px;color:var(--gold)}
+.product-card-body{padding:16px;display:flex;flex-direction:column;gap:8px;flex:1}
+.product-card-body h3{overflow-wrap:anywhere;margin:0}
+.product-description{font-size:13px;white-space:pre-wrap;overflow-wrap:anywhere}
+.product-meta{font-size:12px;color:var(--muted)}
+.product-price{font-size:19px;font-weight:bold;color:var(--gold-bright);margin-top:auto}
+.product-card-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.product-card-actions button{font-size:12px;padding:7px 10px}
+.empty-state,.loading-state{padding:25px;text-align:center;color:var(--muted);border:1px dashed rgba(228,196,119,.25);border-radius:12px;margin-top:16px}
+.seller-panel{max-width:none;margin-top:25px}
+.seller-panel[hidden]{display:none}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.form-grid .full{grid-column:1/-1}
+.form-hint{font-size:12px}
+.market-status{font-size:13px;color:var(--muted);min-height:22px;margin-top:10px}
+.market-status.error{color:#ffaaa3}.market-status.success{color:#bde8c6}
+@media(max-width:800px){.grid,.product-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:650px){header{padding-top:30px}.logo{width:120px;height:120px}nav{gap:10px 14px;padding:13px 9px}nav a{font-size:12px}section{padding:22px 18px}.grid,.product-grid,.catalog-controls,.form-grid{grid-template-columns:1fr}h2{font-size:22px}.auth-panel,.seller-panel{padding:18px}.auth-actions,.product-actions{flex-direction:column}.auth-button,.market-button{width:100%}.form-grid .full{grid-column:auto}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
 </style>
 </head>
@@ -87,20 +98,10 @@ footer p{font-size:12px;margin:5px 0}
 <img src="logotip.png" alt="AURION Logo" class="logo">
 <h1>AURION</h1>
 <p class="tagline" data-ru="Цифровая экосистема на BNB Smart Chain" data-en="Digital Ecosystem on BNB Smart Chain">Цифровая экосистема на BNB Smart Chain</p>
-<div class="language-switch">
-<button id="ruButton" class="active" onclick="setLanguage('ru')">RU</button>
-<button id="enButton" onclick="setLanguage('en')">EN</button>
-</div>
+<div class="language-switch"><button id="ruButton" class="active" onclick="setLanguage('ru')">RU</button><button id="enButton" onclick="setLanguage('en')">EN</button></div>
 </header>
 <nav>
-<a href="#about" data-ru="О проекте" data-en="About">О проекте</a>
-<a href="#principles" data-ru="Принципы" data-en="Principles">Принципы</a>
-<a href="#directions" data-ru="Направления" data-en="Directions">Направления</a>
-<a href="#marketplace" data-ru="Маркетплейс" data-en="Marketplace">Маркетплейс</a>
-<a href="#token" data-ru="Токен AUR" data-en="AUR Token">Токен AUR</a>
-<a href="#roadmap" data-ru="План развития" data-en="Roadmap">План развития</a>
-<a href="#news" data-ru="Новости" data-en="News">Новости</a>
-<a href="#contacts" data-ru="Контакты" data-en="Contacts">Контакты</a>
+<a href="#about" data-ru="О проекте" data-en="About">О проекте</a><a href="#principles" data-ru="Принципы" data-en="Principles">Принципы</a><a href="#directions" data-ru="Направления" data-en="Directions">Направления</a><a href="#marketplace" data-ru="Маркетплейс" data-en="Marketplace">Маркетплейс</a><a href="#token" data-ru="Токен AUR" data-en="AUR Token">Токен AUR</a><a href="#roadmap" data-ru="План развития" data-en="Roadmap">План развития</a><a href="#news" data-ru="Новости" data-en="News">Новости</a><a href="#contacts" data-ru="Контакты" data-en="Contacts">Контакты</a>
 </nav>
 <main>
 <section id="about" class="reveal">
@@ -128,73 +129,79 @@ footer p{font-size:12px;margin:5px 0}
 <div class="tile"><span class="tile-icon">✧</span><h3 data-ru="Другие цифровые услуги" data-en="Other Digital Services">Другие цифровые услуги</h3><p data-ru="Различные цифровые работы и услуги, которые дополняют экосистему AURION." data-en="Other digital work and services that complement the AURION ecosystem.">Различные цифровые работы и услуги, которые дополняют экосистему AURION.</p></div>
 </div>
 </section>
-
 <section id="marketplace" class="reveal">
-<div class="marketplace-hero">
-<div class="marketplace-symbol">◇</div>
-<h2 class="marketplace-title">AURION MARKETPLACE</h2>
-<p class="marketplace-subtitle" data-ru="Пространство цифровых товаров, услуг и возможностей. Единая площадка для авторов, специалистов и покупателей." data-en="A space for digital products, services and opportunities. One platform for creators, professionals and buyers.">Пространство цифровых товаров, услуг и возможностей. Единая площадка для авторов, специалистов и покупателей.</p>
-<span class="coming-soon" data-ru="ПЕРВЫЙ ЭТАП — РЕГИСТРАЦИЯ" data-en="PHASE ONE — ACCOUNT ACCESS">ПЕРВЫЙ ЭТАП — РЕГИСТРАЦИЯ</span>
-</div>
-<h2 data-ru="Что можно будет найти" data-en="What You Will Find">Что можно будет найти</h2>
-<p data-ru="Планируемые категории будущего маркетплейса:" data-en="Planned categories of the future marketplace:">Планируемые категории будущего маркетплейса:</p>
+<div class="marketplace-hero"><div class="marketplace-symbol">◇</div><h2 class="marketplace-title">AURION MARKETPLACE</h2><p class="marketplace-subtitle" data-ru="Пространство цифровых товаров, услуг и возможностей. Единая площадка для авторов, специалистов и покупателей." data-en="A space for digital products, services and opportunities. One platform for creators, professionals and buyers.">Пространство цифровых товаров, услуг и возможностей. Единая площадка для авторов, специалистов и покупателей.</p><span class="coming-soon" data-ru="КАТАЛОГ — ПЕРВЫЙ РАБОЧИЙ ЭТАП" data-en="CATALOG — FIRST WORKING PHASE">КАТАЛОГ — ПЕРВЫЙ РАБОЧИЙ ЭТАП</span></div>
+<h2 data-ru="Категории маркетплейса" data-en="Marketplace Categories">Категории маркетплейса</h2>
 <div class="grid">
-<div class="tile marketplace-category"><span class="tile-icon">✦</span><h3 data-ru="Дизайн и графика" data-en="Design & Graphics">Дизайн и графика</h3><p data-ru="Логотипы, баннеры, иллюстрации и оформление." data-en="Logos, banners, illustrations and visual design.">Логотипы, баннеры, иллюстрации и оформление.</p></div>
-<div class="tile marketplace-category"><span class="tile-icon">⌘</span><h3 data-ru="IT и разработка" data-en="IT & Development">IT и разработка</h3><p data-ru="Создание сайтов, приложения и технические услуги." data-en="Website creation, applications and technical services.">Создание сайтов, приложения и технические услуги.</p></div>
-<div class="tile marketplace-category"><span class="tile-icon">▤</span><h3 data-ru="Цифровые товары" data-en="Digital Products">Цифровые товары</h3><p data-ru="Файлы, шаблоны, электронные материалы и наборы." data-en="Files, templates, digital materials and collections.">Файлы, шаблоны, электронные материалы и наборы.</p></div>
-<div class="tile marketplace-category"><span class="tile-icon">◎</span><h3 data-ru="Обучение" data-en="Education">Обучение</h3><p data-ru="Курсы, консультации, наставничество и знания." data-en="Courses, consultations, mentoring and knowledge.">Курсы, консультации, наставничество и знания.</p></div>
-<div class="tile marketplace-category"><span class="tile-icon">↗</span><h3 data-ru="Маркетинг" data-en="Marketing">Маркетинг</h3><p data-ru="Контент, реклама, продвижение и коммуникации." data-en="Content, advertising, promotion and communications.">Контент, реклама, продвижение и коммуникации.</p></div>
-<div class="tile marketplace-category"><span class="tile-icon">✧</span><h3 data-ru="Другие услуги" data-en="Other Services">Другие услуги</h3><p data-ru="Различные цифровые решения и предложения." data-en="Various digital solutions and services.">Различные цифровые решения и предложения.</p></div>
+<div class="tile"><span class="tile-icon">✦</span><h3 data-ru="Дизайн и графика" data-en="Design & Graphics">Дизайн и графика</h3><p data-ru="Логотипы, баннеры, иллюстрации и оформление." data-en="Logos, banners, illustrations and visual design.">Логотипы, баннеры, иллюстрации и оформление.</p></div>
+<div class="tile"><span class="tile-icon">⌘</span><h3 data-ru="IT и разработка" data-en="IT & Development">IT и разработка</h3><p data-ru="Создание сайтов, приложения и технические услуги." data-en="Website creation, applications and technical services.">Создание сайтов, приложения и технические услуги.</p></div>
+<div class="tile"><span class="tile-icon">▤</span><h3 data-ru="Цифровые товары" data-en="Digital Products">Цифровые товары</h3><p data-ru="Файлы, шаблоны, электронные материалы и наборы." data-en="Files, templates, digital materials and collections.">Файлы, шаблоны, электронные материалы и наборы.</p></div>
+<div class="tile"><span class="tile-icon">◎</span><h3 data-ru="Обучение" data-en="Education">Обучение</h3><p data-ru="Курсы, консультации, наставничество и знания." data-en="Courses, consultations, mentoring and knowledge.">Курсы, консультации, наставничество и знания.</p></div>
+<div class="tile"><span class="tile-icon">↗</span><h3 data-ru="Маркетинг" data-en="Marketing">Маркетинг</h3><p data-ru="Контент, реклама, продвижение и коммуникации." data-en="Content, advertising, promotion and communications.">Контент, реклама, продвижение и коммуникации.</p></div>
+<div class="tile"><span class="tile-icon">✧</span><h3 data-ru="Другие услуги" data-en="Other Services">Другие услуги</h3><p data-ru="Различные цифровые решения и предложения." data-en="Various digital solutions and services.">Различные цифровые решения и предложения.</p></div>
 </div>
-<h2 style="margin-top:35px" data-ru="Для участников площадки" data-en="For Marketplace Participants">Для участников площадки</h2>
-<div class="grid">
-<div class="marketplace-role"><span class="tile-icon">♙</span><h3 data-ru="Продавцам и авторам" data-en="Sellers & Creators">Продавцам и авторам</h3><p data-ru="Возможность представить свои цифровые товары и услуги, находить клиентов и развивать собственное направление." data-en="An opportunity to present digital products and services, find customers and grow your own business.">Возможность представить свои цифровые товары и услуги, находить клиентов и развивать собственное направление.</p></div>
-<div class="marketplace-role"><span class="tile-icon">◇</span><h3 data-ru="Покупателям" data-en="Buyers">Покупателям</h3><p data-ru="Возможность находить цифровые продукты, специалистов и услуги в одном месте." data-en="An opportunity to discover digital products, professionals and services in one place.">Возможность находить цифровые продукты, специалистов и услуги в одном месте.</p></div>
-</div>
-
-<!-- Supabase account panel: one account can later buy and sell -->
 <div class="auth-panel" id="authPanel">
 <h3 data-ru="Аккаунт AURION" data-en="AURION Account">Аккаунт AURION</h3>
-<p class="auth-intro" data-ru="Создайте один аккаунт для будущих покупок и продаж. Сейчас доступны регистрация и вход; каталог и сделки находятся в разработке." data-en="Create one account for future buying and selling. Registration and sign-in are available now; the catalog and transactions are still in development.">Создайте один аккаунт для будущих покупок и продаж. Сейчас доступны регистрация и вход; каталог и сделки находятся в разработке.</p>
+<p class="auth-intro" data-ru="Создайте один аккаунт для будущих покупок и продаж. Просматривать каталог можно без регистрации; для размещения товара нужно войти." data-en="Create one account for future buying and selling. Browse the catalog without an account; sign in to list a product.">Создайте один аккаунт для будущих покупок и продаж. Просматривать каталог можно без регистрации; для размещения товара нужно войти.</p>
 <div id="authForms">
 <form class="auth-form" id="authForm">
 <div><label for="authEmail" data-ru="Электронная почта" data-en="Email address">Электронная почта</label><input id="authEmail" type="email" autocomplete="email" required maxlength="254" placeholder="name@example.com"></div>
 <div><label for="authPassword" data-ru="Пароль (не менее 8 символов)" data-en="Password (at least 8 characters)">Пароль (не менее 8 символов)</label><input id="authPassword" type="password" autocomplete="current-password" minlength="8" required placeholder="••••••••"></div>
-<div class="auth-actions">
-<button class="auth-button primary" id="signInButton" type="button" data-ru="Войти" data-en="Sign in">Войти</button>
-<button class="auth-button" id="signUpButton" type="button" data-ru="Создать аккаунт" data-en="Create account">Создать аккаунт</button>
-</div>
+<div class="auth-actions"><button class="auth-button primary" id="signInButton" type="button" data-ru="Войти" data-en="Sign in">Войти</button><button class="auth-button" id="signUpButton" type="button" data-ru="Создать аккаунт" data-en="Create account">Создать аккаунт</button></div>
 </form>
-<p class="auth-small" data-ru="Нажимая «Создать аккаунт», вы регистрируетесь как участник AURION. В дальнейшем сможете и покупать, и продавать с этой же учётной записью." data-en="By selecting Create account, you register as an AURION member. You will be able to both buy and sell using this same account.">Нажимая «Создать аккаунт», вы регистрируетесь как участник AURION. В дальнейшем сможете и покупать, и продавать с этой же учётной записью.</p>
+<p class="auth-small" data-ru="Одна учётная запись подходит и для покупок, и для продаж." data-en="One account can be used for both buying and selling.">Одна учётная запись подходит и для покупок, и для продаж.</p>
 </div>
 <div class="account-panel" id="accountPanel">
 <p data-ru="Вы вошли в AURION Marketplace." data-en="You are signed in to AURION Marketplace.">Вы вошли в AURION Marketplace.</p>
 <p><span data-ru="Аккаунт:" data-en="Account:">Аккаунт:</span> <span class="account-email" id="accountEmail"></span></p>
-<p data-ru="Одна учётная запись предназначена и для покупок, и для продаж. Размещение товаров и оформление заказов будут добавлены на следующих этапах." data-en="One account is intended for both buying and selling. Product listings and orders will be added in later stages.">Одна учётная запись предназначена и для покупок, и для продаж. Размещение товаров и оформление заказов будут добавлены на следующих этапах.</p>
+<p data-ru="Одна учётная запись предназначена и для покупок, и для продаж." data-en="One account is intended for both buying and selling.">Одна учётная запись предназначена и для покупок, и для продаж.</p>
 <button class="auth-button" id="signOutButton" type="button" data-ru="Выйти" data-en="Sign out">Выйти</button>
 </div>
 <p class="auth-message" id="authMessage" role="status" aria-live="polite"></p>
 </div>
 
+<div class="catalog-heading"><h2 data-ru="Каталог товаров и услуг" data-en="Products & Services Catalog">Каталог товаров и услуг</h2><span class="coming-soon" id="catalogCount">...</span></div>
+<p data-ru="Каталог открыт для всех посетителей. Для размещения предложения войдите в аккаунт." data-en="The catalog is public. Sign in to publish your offer.">Каталог открыт для всех посетителей. Для размещения предложения войдите в аккаунт.</p>
+<div class="catalog-controls">
+<input id="catalogSearch" type="search" placeholder="Поиск по названию и описанию" data-placeholder-ru="Поиск по названию и описанию" data-placeholder-en="Search titles and descriptions" aria-label="Search">
+<select id="categoryFilter" aria-label="Category"><option value="" data-ru="Все категории" data-en="All categories">Все категории</option><option value="design" data-ru="Дизайн и графика" data-en="Design & Graphics">Дизайн и графика</option><option value="it" data-ru="IT и разработка" data-en="IT & Development">IT и разработка</option><option value="digital" data-ru="Цифровые товары" data-en="Digital Products">Цифровые товары</option><option value="education" data-ru="Обучение" data-en="Education">Обучение</option><option value="marketing" data-ru="Маркетинг" data-en="Marketing">Маркетинг</option><option value="other" data-ru="Другие услуги" data-en="Other Services">Другие услуги</option></select>
+</div>
+<div id="catalogStatus" class="loading-state" data-ru="Загружаем каталог…" data-en="Loading catalog…">Загружаем каталог…</div>
+<div id="productGrid" class="product-grid"></div>
+
+<div class="seller-panel" id="sellerPanel" hidden>
+<h3 data-ru="Кабинет продавца" data-en="Seller Dashboard">Кабинет продавца</h3>
+<p class="auth-intro" data-ru="Добавьте предложение в каталог. Указывайте только те товары и услуги, которые вы действительно можете предоставить." data-en="Add an offer to the catalog. Only list products and services you can actually provide.">Добавьте предложение в каталог. Указывайте только те товары и услуги, которые вы действительно можете предоставить.</p>
+<form id="productForm" class="product-form">
+<input type="hidden" id="editingProductId">
+<div class="form-grid">
+<div class="full"><label for="productTitle" data-ru="Название товара или услуги" data-en="Product or service title">Название товара или услуги</label><input id="productTitle" maxlength="120" required></div>
+<div><label for="productCategory" data-ru="Категория" data-en="Category">Категория</label><select id="productCategory" required><option value="design" data-ru="Дизайн и графика" data-en="Design & Graphics">Дизайн и графика</option><option value="it" data-ru="IT и разработка" data-en="IT & Development">IT и разработка</option><option value="digital" data-ru="Цифровые товары" data-en="Digital Products">Цифровые товары</option><option value="education" data-ru="Обучение" data-en="Education">Обучение</option><option value="marketing" data-ru="Маркетинг" data-en="Marketing">Маркетинг</option><option value="other" data-ru="Другие услуги" data-en="Other Services">Другие услуги</option></select></div>
+<div><label for="productType" data-ru="Тип предложения" data-en="Offer type">Тип предложения</label><select id="productType" required><option value="digital" data-ru="Цифровой товар" data-en="Digital product">Цифровой товар</option><option value="service" data-ru="Услуга" data-en="Service">Услуга</option></select></div>
+<div><label for="productPrice" data-ru="Цена в AUR" data-en="Price in AUR">Цена в AUR</label><input id="productPrice" type="number" min="0.00000001" step="0.00000001" required placeholder="Например, 25"></div>
+<div><label for="productImage" data-ru="Ссылка на изображение (необязательно)" data-en="Image URL (optional)">Ссылка на изображение (необязательно)</label><input id="productImage" type="url" maxlength="1000" placeholder="https://..."></div>
+<div class="full"><label for="productDescription" data-ru="Описание" data-en="Description">Описание</label><textarea id="productDescription" maxlength="5000" required></textarea></div>
+</div>
+<p class="form-hint" data-ru="Пока принимаются только ссылки на изображения. Загрузка файлов будет добавлена отдельно." data-en="For now, only image links are supported. File uploads will be added separately.">Пока принимаются только ссылки на изображения. Загрузка файлов будет добавлена отдельно.</p>
+<div class="product-actions"><button class="market-button primary" type="submit" id="saveProductButton" data-ru="Опубликовать товар" data-en="Publish listing">Опубликовать товар</button><button class="market-button" type="button" id="cancelEditButton" hidden data-ru="Отменить редактирование" data-en="Cancel editing">Отменить редактирование</button></div>
+<p id="sellerStatus" class="market-status" role="status" aria-live="polite"></p>
+</form>
+</div>
 <div class="marketplace-note">
-<p data-ru="Регистрация и вход доступны. Каталог, размещение товаров и услуг, заказы и платежи пока находятся в разработке." data-en="Registration and sign-in are available. The catalog, listings, orders and payments are still under development.">Регистрация и вход доступны. Каталог, размещение товаров и услуг, заказы и платежи пока находятся в разработке.</p>
-<p data-ru="В будущей модели проекта планируется поддержка токена AUR." data-en="Support for the AUR token is planned in the future project model.">В будущей модели проекта планируется поддержка токена AUR.</p>
+<p data-ru="Каталог и размещение предложений доступны в тестовом режиме. Заказы, платежи и автоматическая доставка пока не реализованы." data-en="The catalog and listings are available in a test phase. Orders, payments and automatic delivery are not implemented yet.">Каталог и размещение предложений доступны в тестовом режиме. Заказы, платежи и автоматическая доставка пока не реализованы.</p>
+<p data-ru="Не отправляйте токены AUR продавцам через этот сайт: оплата ещё не подключена." data-en="Do not send AUR tokens to sellers through this website: payments are not enabled yet.">Не отправляйте токены AUR продавцам через этот сайт: оплата ещё не подключена.</p>
 </div>
 </section>
-
 <section id="token" class="reveal">
 <h2 data-ru="Токен AURION (AUR)" data-en="AURION Token (AUR)">Токен AURION (AUR)</h2>
 <div class="token-info">
-<p><strong data-ru="Название:" data-en="Name:">Название:</strong> AURION</p>
-<p><strong data-ru="Символ:" data-en="Symbol:">Символ:</strong> AUR</p>
-<p><strong data-ru="Сеть:" data-en="Network:">Сеть:</strong> BNB Smart Chain (BEP-20)</p>
+<p><strong data-ru="Название:" data-en="Name:">Название:</strong> AURION</p><p><strong data-ru="Символ:" data-en="Symbol:">Символ:</strong> AUR</p><p><strong data-ru="Сеть:" data-en="Network:">Сеть:</strong> BNB Smart Chain (BEP-20)</p>
 <p><strong data-ru="Адрес контракта:" data-en="Contract address:">Адрес контракта:</strong><br><a href="https://bscscan.com/token/0x6B7616c71ED6e5c48432E1693B3F47f910bB9325" target="_blank" rel="noopener noreferrer">0x6B7616c71ED6e5c48432E1693B3F47f910bB9325</a></p>
 <p><strong data-ru="Обозреватель блокчейна:" data-en="Blockchain explorer:">Обозреватель блокчейна:</strong> <a href="https://bscscan.com/token/0x6B7616c71ED6e5c48432E1693B3F47f910bB9325" target="_blank" rel="noopener noreferrer">BscScan</a></p>
 </div>
 <p style="text-align:center;margin:28px 0"><a class="token-button" href="https://pancakeswap.finance/swap?chain=bsc&amp;inputCurrency=BNB&amp;outputCurrency=0x6B7616c71ED6e5c48432E1693B3F47f910bB9325" target="_blank" rel="noopener noreferrer" data-ru="КУПИТЬ / ПРОДАТЬ AURION" data-en="BUY / SELL AURION">КУПИТЬ / ПРОДАТЬ AURION</a></p>
 <p data-ru="Токен доступен для просмотра в блокчейне. Перед обменом самостоятельно проверяйте адрес контракта и учитывайте риски, связанные с цифровыми активами." data-en="The token is visible on the blockchain. Before swapping, verify the contract address and consider the risks associated with digital assets.">Токен доступен для просмотра в блокчейне. Перед обменом самостоятельно проверяйте адрес контракта и учитывайте риски, связанные с цифровыми активами.</p>
 </section>
-
 <section id="roadmap" class="reveal">
 <h2 data-ru="План развития" data-en="Roadmap">План развития</h2>
 <div class="roadmap-item"><h3 data-ru="Этап 1 — Основа проекта" data-en="Stage 1 — Project Foundation">Этап 1 — Основа проекта</h3><p data-ru="Создание токена AUR, сайта проекта, информационных ресурсов и базовой инфраструктуры." data-en="Creation of the AUR token, project website, information resources and basic infrastructure.">Создание токена AUR, сайта проекта, информационных ресурсов и базовой инфраструктуры.</p></div>
@@ -202,194 +209,172 @@ footer p{font-size:12px;margin:5px 0}
 <div class="roadmap-item"><h3 data-ru="Этап 3 — Marketplace" data-en="Stage 3 — Marketplace">Этап 3 — Marketplace</h3><p data-ru="Разработка и тестирование площадки для цифровых товаров и услуг." data-en="Development and testing of a marketplace for digital products and services.">Разработка и тестирование площадки для цифровых товаров и услуг.</p></div>
 <div class="roadmap-item"><h3 data-ru="Этап 4 — Расширение" data-en="Stage 4 — Expansion">Этап 4 — Расширение</h3><p data-ru="Постепенное расширение функциональности и возможностей экосистемы на основе опыта пользователей." data-en="Gradual expansion of ecosystem features and capabilities based on user feedback.">Постепенное расширение функциональности и возможностей экосистемы на основе опыта пользователей.</p></div>
 </section>
-<section id="news" class="reveal">
-<h2 data-ru="Новости AURION" data-en="AURION News">Новости AURION</h2>
-<p data-ru="Следите за обновлениями, объявлениями и новостями проекта в официальном Telegram-канале." data-en="Follow project updates, announcements and news in the official Telegram channel.">Следите за обновлениями, объявлениями и новостями проекта в официальном Telegram-канале.</p>
-<p><a href="https://t.me/AURION_AUR_BSC" target="_blank" rel="noopener noreferrer">AURION Official — Telegram</a></p>
-</section>
-<section id="contacts" class="reveal">
-<h2 data-ru="Контакты" data-en="Contacts">Контакты</h2>
-<p data-ru="По вопросам и предложениям, связанным с проектом AURION, свяжитесь с нами:" data-en="For questions and suggestions regarding the AURION project, contact us:">По вопросам и предложениям, связанным с проектом AURION, свяжитесь с нами:</p>
-<div class="contact-links"><a href="mailto:Avanturk.ltd@gmail.com">Email</a><a href="https://t.me/AURION_AUR_BSC" target="_blank" rel="noopener noreferrer">Telegram</a></div>
-</section>
+<section id="news" class="reveal"><h2 data-ru="Новости AURION" data-en="AURION News">Новости AURION</h2><p data-ru="Следите за обновлениями, объявлениями и новостями проекта в официальном Telegram-канале." data-en="Follow project updates, announcements and news in the official Telegram channel.">Следите за обновлениями, объявлениями и новостями проекта в официальном Telegram-канале.</p><p><a href="https://t.me/AURION_AUR_BSC" target="_blank" rel="noopener noreferrer">AURION Official — Telegram</a></p></section>
+<section id="contacts" class="reveal"><h2 data-ru="Контакты" data-en="Contacts">Контакты</h2><p data-ru="По вопросам и предложениям, связанным с проектом AURION, свяжитесь с нами:" data-en="For questions and suggestions regarding the AURION project, contact us:">По вопросам и предложениям, связанным с проектом AURION, свяжитесь с нами:</p><div class="contact-links"><a href="mailto:Avanturk.ltd@gmail.com">Email</a><a href="https://t.me/AURION_AUR_BSC" target="_blank" rel="noopener noreferrer">Telegram</a></div></section>
 </main>
-<footer>
-<p>© 2026 AURION. All rights reserved.</p>
-<p data-ru="Цифровые активы связаны с риском. Информация на сайте носит ознакомительный характер и не является финансовой рекомендацией. Доходность не гарантируется." data-en="Digital assets involve risk. Information on this website is for informational purposes only and is not financial advice. No returns are guaranteed.">Цифровые активы связаны с риском. Информация на сайте носит ознакомительный характер и не является финансовой рекомендацией. Доходность не гарантируется.</p>
-</footer>
-
+<footer><p>© 2026 AURION. All rights reserved.</p><p data-ru="Цифровые активы связаны с риском. Информация на сайте носит ознакомительный характер и не является финансовой рекомендацией. Доходность не гарантируется." data-en="Digital assets involve risk. Information on this website is for informational purposes only and is not financial advice. No returns are guaranteed.">Цифровые активы связаны с риском. Информация на сайте носит ознакомительный характер и не является финансовой рекомендацией. Доходность не гарантируется.</p></footer>
 <script>
 function setLanguage(language) {
   document.documentElement.lang = language;
-  document.querySelectorAll("[data-ru][data-en]").forEach(function(element) {
-    element.textContent = element.getAttribute("data-" + language);
-  });
-  document.querySelectorAll("[data-placeholder-ru][data-placeholder-en]").forEach(function(element) {
-    element.placeholder = element.getAttribute("data-placeholder-" + language);
-  });
+  document.querySelectorAll("[data-ru][data-en]").forEach(function(el) { el.textContent = el.getAttribute("data-" + language); });
+  document.querySelectorAll("[data-placeholder-ru][data-placeholder-en]").forEach(function(el) { el.placeholder = el.getAttribute("data-placeholder-" + language); });
   document.getElementById("ruButton").classList.toggle("active", language === "ru");
   document.getElementById("enButton").classList.toggle("active", language === "en");
   window.currentAURIONLanguage = language;
 }
 window.currentAURIONLanguage = "ru";
-
-const revealObserver = new IntersectionObserver(function(entries) {
-  entries.forEach(function(entry) {
-    if (entry.isIntersecting) {
-      entry.target.classList.add("visible");
-      revealObserver.unobserve(entry.target);
-    }
-  });
-}, {threshold: 0.12});
-document.querySelectorAll(".reveal").forEach(function(element) {
-  revealObserver.observe(element);
-});
+const revealObserver = new IntersectionObserver(function(entries) { entries.forEach(function(entry) { if(entry.isIntersecting){entry.target.classList.add("visible");revealObserver.unobserve(entry.target);} }); }, {threshold:0.12});
+document.querySelectorAll(".reveal").forEach(function(el){revealObserver.observe(el);});
 </script>
-
-<!-- Supabase browser client: publishable key is intended for public website use. -->
 <script type="module">
 import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
-
 const SUPABASE_URL = "https://hagaevohnfqapbdlnyqc.supabase.co";
 const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_xnzX-_410hVX7Yy-INynTA_DOUUM_s7";
 const supabase = createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
+const $ = id => document.getElementById(id);
+const form = $("authForm"), emailInput = $("authEmail"), passwordInput = $("authPassword");
+const authMessage = $("authMessage"), authForms = $("authForms"), accountPanel = $("accountPanel");
+const sellerPanel = $("sellerPanel"), productForm = $("productForm");
+let currentUser = null, products = [], editingId = null;
 
-const form = document.getElementById("authForm");
-const emailInput = document.getElementById("authEmail");
-const passwordInput = document.getElementById("authPassword");
-const signInButton = document.getElementById("signInButton");
-const signUpButton = document.getElementById("signUpButton");
-const signOutButton = document.getElementById("signOutButton");
-const authMessage = document.getElementById("authMessage");
-const authForms = document.getElementById("authForms");
-const accountPanel = document.getElementById("accountPanel");
-const accountEmail = document.getElementById("accountEmail");
-
-function language() {
-  return window.currentAURIONLanguage || "ru";
+function lang(){return window.currentAURIONLanguage || "ru";}
+function say(ru,en,kind){authMessage.textContent=lang()==="ru"?ru:en;authMessage.className="auth-message"+(kind?" "+kind:"");}
+function sellerSay(ru,en,kind){$("sellerStatus").textContent=lang()==="ru"?ru:en;$("sellerStatus").className="market-status"+(kind?" "+kind:"");}
+function showAccount(user){
+  currentUser=user||null;
+  authForms.style.display=user?"none":"block";
+  accountPanel.style.display=user?"block":"none";
+  sellerPanel.hidden=!user;
+  $("accountEmail").textContent=user?.email||"";
+  if(user) loadProducts();
 }
-function message(ru, en, kind) {
-  authMessage.textContent = language() === "ru" ? ru : en;
-  authMessage.className = "auth-message" + (kind ? " " + kind : "");
+function safeImageUrl(value){
+  if(!value)return "";
+  try{const u=new URL(value);return (u.protocol==="https:"||u.protocol==="http:")?u.href:"";}catch{return "";}
 }
-function setBusy(busy) {
-  signInButton.disabled = busy;
-  signUpButton.disabled = busy;
-  signOutButton.disabled = busy;
+function categoryName(key){
+  const map={design:["Дизайн и графика","Design & Graphics"],it:["IT и разработка","IT & Development"],digital:["Цифровые товары","Digital Products"],education:["Обучение","Education"],marketing:["Маркетинг","Marketing"],other:["Другие услуги","Other Services"]};
+  return (map[key]||map.other)[lang()==="ru"?0:1];
 }
-function showAccount(user) {
-  if (user) {
-    authForms.style.display = "none";
-    accountPanel.style.display = "block";
-    accountEmail.textContent = user.email || "";
-  } else {
-    authForms.style.display = "block";
-    accountPanel.style.display = "none";
-    accountEmail.textContent = "";
-  }
+function typeName(key){return key==="service"?(lang()==="ru"?"Услуга":"Service"):(lang()==="ru"?"Цифровой товар":"Digital product");}
+function showCatalogStatus(ru,en,error=false){
+  $("catalogStatus").textContent=lang()==="ru"?ru:en;
+  $("catalogStatus").className=error?"empty-state":"loading-state";
 }
-function readableError(error) {
-  const raw = (error && error.message) ? error.message : "";
-  const lower = raw.toLowerCase();
-  if (lower.includes("invalid login credentials")) {
-    return language() === "ru" ? "Неверная почта или пароль." : "Incorrect email or password.";
-  }
-  if (lower.includes("email not confirmed")) {
-    return language() === "ru" ? "Сначала подтвердите электронную почту по ссылке из письма." : "Please confirm your email using the link we sent you.";
-  }
-  if (lower.includes("password")) {
-    return language() === "ru" ? "Проверьте пароль. Он должен содержать не менее 8 символов." : "Check your password. It must contain at least 8 characters.";
-  }
-  return raw || (language() === "ru" ? "Не удалось выполнить запрос. Попробуйте ещё раз." : "The request failed. Please try again.");
-}
-
-form.addEventListener("submit", function(event) {
-  event.preventDefault();
-  signInButton.click();
-});
-
-signInButton.addEventListener("click", async function() {
-  if (!form.reportValidity()) return;
-  const email = emailInput.value.trim();
-  const password = passwordInput.value;
-  setBusy(true);
-  message(language() === "ru" ? "Выполняется вход…" : "Signing in…");
-  try {
-    const { data, error } = await supabase.auth.signInWithPassword({email, password});
-    if (error) throw error;
-    showAccount(data.user);
-    passwordInput.value = "";
-    message(language() === "ru" ? "Вход выполнен." : "You are signed in.", "You are signed in.", "success");
-  } catch (error) {
-    message(readableError(error), readableError(error), "error");
-  } finally {
-    setBusy(false);
-  }
-});
-
-signUpButton.addEventListener("click", async function() {
-  if (!form.reportValidity()) return;
-  const email = emailInput.value.trim();
-  const password = passwordInput.value;
-  setBusy(true);
-  message(language() === "ru" ? "Создаём аккаунт…" : "Creating your account…");
-  try {
-    const { data, error } = await supabase.auth.signUp({
-      email,
-      password,
-      options: { emailRedirectTo: window.location.origin + "/" }
-    });
-    if (error) throw error;
-    passwordInput.value = "";
-    if (data.session && data.user) {
-      showAccount(data.user);
-      message(
-        "Аккаунт создан, вход выполнен.",
-        "Account created and signed in.",
-        "success"
-      );
-    } else {
-      message(
-        "Аккаунт создан. Откройте письмо от Supabase и нажмите ссылку подтверждения. Проверьте также папку «Спам». После подтверждения вернитесь на сайт и войдите.",
-        "Account created. Open the email from Supabase and click the confirmation link. Also check your spam folder. After confirming, return to the website and sign in.",
-        "success"
-      );
+function renderProducts(){
+  const search=$("catalogSearch").value.trim().toLowerCase(),category=$("categoryFilter").value;
+  const visible=products.filter(p=>(!category||p.category===category)&&(!search||((p.title||"")+" "+(p.description||"")).toLowerCase().includes(search)));
+  $("catalogCount").textContent=lang()==="ru"?("Товаров: "+products.length):("Listings: "+products.length);
+  const grid=$("productGrid");grid.replaceChildren();
+  if(!visible.length){showCatalogStatus(products.length?(lang()==="ru"?"По вашему запросу ничего не найдено.":"No listings match your search."):(lang()==="ru"?"Пока товаров нет. Вы можете добавить первое предложение после входа.":"No listings yet. Sign in to publish the first offer."),products.length?"No listings match your search.":"No listings yet. Sign in to publish the first offer.");return;}
+  $("catalogStatus").textContent="";$("catalogStatus").className="";
+  visible.forEach(p=>{
+    const card=document.createElement("article");card.className="product-card";
+    const image=safeImageUrl(p.image_url);
+    if(image){const img=document.createElement("img");img.className="product-image";img.src=image;img.alt=p.title||"Product image";img.loading="lazy";img.referrerPolicy="no-referrer";img.onerror=()=>{img.remove();};card.append(img);}
+    else{const ph=document.createElement("div");ph.className="product-image-placeholder";ph.textContent="◇";card.append(ph);}
+    const body=document.createElement("div");body.className="product-card-body";
+    const title=document.createElement("h3");title.textContent=p.title||"";
+    const meta=document.createElement("div");meta.className="product-meta";meta.textContent=categoryName(p.category)+" · "+typeName(p.product_type);
+    const desc=document.createElement("p");desc.className="product-description";desc.textContent=p.description||"";
+    const price=document.createElement("div");price.className="product-price";price.textContent=String(p.price_aur)+" AUR";
+    body.append(title,meta,desc,price);
+    if(currentUser&&p.seller_id===currentUser.id){
+      const actions=document.createElement("div");actions.className="product-card-actions";
+      const edit=document.createElement("button");edit.className="market-button";edit.type="button";edit.textContent=lang()==="ru"?"Редактировать":"Edit";edit.addEventListener("click",()=>beginEdit(p));
+      const del=document.createElement("button");del.className="market-button";del.type="button";del.textContent=lang()==="ru"?"Удалить":"Delete";del.addEventListener("click",()=>deleteProduct(p.id));
+      actions.append(edit,del);body.append(actions);
     }
-  } catch (error) {
-    const text = readableError(error);
-    message(text, text, "error");
-  } finally {
-    setBusy(false);
-  }
-});
+    card.append(body);grid.append(card);
+  });
+}
+async function loadProducts(){
+  showCatalogStatus("Загружаем каталог…","Loading catalog…");
+  const {data,error}=await supabase.from("products").select("id,created_at,seller_id,title,description,category,price_aur,image_url,product_type").order("created_at",{ascending:false});
+  if(error){products=[];renderProducts();showCatalogStatus("Не удалось загрузить каталог: "+error.message,"Could not load catalog: "+error.message,true);return;}
+  products=data||[];renderProducts();
+}
+function beginEdit(p){
+  editingId=p.id;
+  $("editingProductId").value=p.id;
+  $("productTitle").value=p.title||"";
+  $("productCategory").value=p.category||"other";
+  $("productType").value=p.product_type||"digital";
+  $("productPrice").value=p.price_aur;
+  $("productImage").value=p.image_url||"";
+  $("productDescription").value=p.description||"";
+  $("saveProductButton").textContent=lang()==="ru"?"Сохранить изменения":"Save changes";
+  $("cancelEditButton").hidden=false;
+  sellerSay("Редактирование объявления.","Editing listing.");
+  sellerPanel.scrollIntoView({behavior:"smooth",block:"center"});
+}
+function resetProductForm(){
+  editingId=null;productForm.reset();$("editingProductId").value="";
+  $("saveProductButton").textContent=lang()==="ru"?"Опубликовать товар":"Publish listing";
+  $("cancelEditButton").hidden=true;sellerSay("",""); 
+}
+async function deleteProduct(id){
+  if(!confirm(lang()==="ru"?"Удалить это объявление?":"Delete this listing?"))return;
+  const {error}=await supabase.from("products").delete().eq("id",id);
+  if(error){sellerSay("Не удалось удалить: "+error.message,"Could not delete: "+error.message,"error");return;}
+  sellerSay("Объявление удалено.","Listing deleted.","success");await loadProducts();
+}
+$("catalogSearch").addEventListener("input",renderProducts);
+$("categoryFilter").addEventListener("change",renderProducts);
+$("cancelEditButton").addEventListener("click",resetProductForm);
 
-signOutButton.addEventListener("click", async function() {
-  setBusy(true);
-  try {
-    const { error } = await supabase.auth.signOut();
-    if (error) throw error;
-    showAccount(null);
-    message(language() === "ru" ? "Вы вышли из аккаунта." : "You have signed out.", "You have signed out.", "success");
-  } catch (error) {
-    const text = readableError(error);
-    message(text, text, "error");
-  } finally {
-    setBusy(false);
-  }
+form.addEventListener("submit",e=>{e.preventDefault();$("signInButton").click();});
+$("signInButton").addEventListener("click",async()=>{
+  if(!form.reportValidity())return;
+  $("signInButton").disabled=$("signUpButton").disabled=true;
+  say("Выполняется вход…","Signing in…");
+  try{
+    const {data,error}=await supabase.auth.signInWithPassword({email:emailInput.value.trim(),password:passwordInput.value});
+    if(error)throw error;passwordInput.value="";showAccount(data.user);say("Вход выполнен.","You are signed in.","success");
+  }catch(e){say(e.message==="Invalid login credentials"?"Неверная почта или пароль.":e.message,e.message,"error");}
+  finally{$("signInButton").disabled=$("signUpButton").disabled=false;}
 });
-
-supabase.auth.onAuthStateChange(function(event, session) {
-  showAccount(session ? session.user : null);
+$("signUpButton").addEventListener("click",async()=>{
+  if(!form.reportValidity())return;
+  $("signInButton").disabled=$("signUpButton").disabled=true;say("Создаём аккаунт…","Creating your account…");
+  try{
+    const {data,error}=await supabase.auth.signUp({email:emailInput.value.trim(),password:passwordInput.value,options:{emailRedirectTo:window.location.origin+"/"}});
+    if(error)throw error;passwordInput.value="";
+    if(data.session&&data.user){showAccount(data.user);say("Аккаунт создан, вход выполнен.","Account created and signed in.","success");}
+    else say("Аккаунт создан. Откройте письмо от Supabase и нажмите ссылку подтверждения. Проверьте папку «Спам».","Account created. Open the Supabase email and click the confirmation link. Check your spam folder.","success");
+  }catch(e){say(e.message,e.message,"error");}
+  finally{$("signInButton").disabled=$("signUpButton").disabled=false;}
 });
-
-// Restore an existing session after the page is reopened.
-supabase.auth.getSession().then(function({data, error}) {
-  if (error) {
-    message(readableError(error), readableError(error), "error");
-    return;
-  }
-  showAccount(data.session ? data.session.user : null);
+$("signOutButton").addEventListener("click",async()=>{
+  const {error}=await supabase.auth.signOut();if(error){say(error.message,error.message,"error");return;}
+  showAccount(null);say("Вы вышли из аккаунта.","You have signed out.","success");
 });
+productForm.addEventListener("submit",async e=>{
+  e.preventDefault();
+  if(!currentUser){sellerSay("Для размещения войдите в аккаунт.","Sign in to publish.","error");return;}
+  const title=$("productTitle").value.trim(),description=$("productDescription").value.trim();
+  const price=Number($("productPrice").value),image=safeImageUrl($("productImage").value.trim());
+  if(!title||!description||!Number.isFinite(price)||price<=0){sellerSay("Проверьте название, описание и положительную цену.","Check the title, description and positive price.","error");return;}
+  if($("productImage").value.trim()&&!image){sellerSay("Ссылка на изображение должна начинаться с http:// или https://.","Image URL must start with http:// or https://.","error");return;}
+  const payload={title,description,category:$("productCategory").value,product_type:$("productType").value,price_aur:price,image_url:image||null};
+  $("saveProductButton").disabled=true;
+  try{
+    let result;
+    const wasEditing=Boolean(editingId);
+    if(wasEditing)result=await supabase.from("products").update(payload).eq("id",editingId).eq("seller_id",currentUser.id);
+    else result=await supabase.from("products").insert({...payload,seller_id:currentUser.id});
+    if(result.error)throw result.error;
+    resetProductForm();sellerSay(wasEditing?"Изменения сохранены.":"Товар опубликован в каталоге.",wasEditing?"Changes saved.":"Listing published.","success");
+    await loadProducts();
+  }catch(err){sellerSay("Не удалось сохранить: "+err.message,"Could not save: "+err.message,"error");}
+  finally{$("saveProductButton").disabled=false;}
+});
+supabase.auth.onAuthStateChange((_event,session)=>{showAccount(session?session.user:null);});
+const {data:sessionData,error:sessionError}=await supabase.auth.getSession();
+if(sessionError)say(sessionError.message,sessionError.message,"error");
+showAccount(sessionData?.session?.user||null);
+await loadProducts();
 </script>
 </body>
 </html>
+
