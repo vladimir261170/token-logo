@@ -132,6 +132,87 @@ document.getElementById('ruButton').addEventListener('click',()=>setLanguage('ru
 setLanguage(window.currentAURIONLanguage);
 if('IntersectionObserver' in window){const observer=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('visible');observer.unobserve(entry.target)}})},{threshold:.12});document.querySelectorAll('.reveal').forEach(el=>observer.observe(el))}else document.querySelectorAll('.reveal').forEach(el=>el.classList.add('visible'));
 </script>
+<script type="module" id="aurion-public-translation">
+// Public user-generated content is translated only for display. Database values remain unchanged.
+const API_URL='https://hagaevohnfqapbdlnyqc.supabase.co/functions/v1/translate-text';
+const PUBLIC_KEY='sb_publishable_xnzX-_410hVX7Yy-INynTA_DOUUM_s7';
+const SELECTORS=['#productGrid .product-card-body h3','#productGrid .product-description',
+ '#modalTitle','#modalDescription','#publicSellersList .public-seller-card h3',
+ '#publicSellersList .seller-bio','#publicSellerPage .seller-bio',
+ '#publicSellerPage .seller-product-links button',
+ '#publicSellerPage .public-review-card p'];
+const selector=SELECTORS.join(',');
+const original=new WeakMap(),applied=new WeakMap(),requests=new Map();
+let generation=0,scheduled=false,active=0;
+const queue=[];
+function sourceLanguage(text){
+ const cyr=(text.match(/[А-Яа-яЁё]/g)||[]).length;
+ const latin=(text.match(/[A-Za-z]/g)||[]).length;
+ if(cyr===0&&latin===0)return null;
+ return cyr>latin?'ru':'en';
+}
+function fetchTranslation(text,source,target){
+ const key=source+'|'+target+'|'+text;
+ if(requests.has(key))return requests.get(key);
+ const promise=new Promise((resolve,reject)=>{
+  queue.push(async()=>{
+   try{
+    const response=await fetch(API_URL,{method:'POST',headers:{'Content-Type':'application/json','apikey':PUBLIC_KEY},body:JSON.stringify({text,source,target})});
+    if(!response.ok)throw new Error('Translation HTTP '+response.status);
+    const data=await response.json();
+    if(typeof data.translatedText!=='string'||!data.translated)throw new Error('Translation unavailable');
+    resolve(data.translatedText);
+   }catch(error){reject(error)}finally{active--;runQueue()}
+  });runQueue();
+ });
+ requests.set(key,promise);
+ promise.catch(()=>{if(requests.get(key)===promise)requests.delete(key)});
+ if(requests.size>500)requests.delete(requests.keys().next().value);
+ return promise;
+}
+function runQueue(){while(active<3&&queue.length){active++;queue.shift()()}}
+async function process(el,epoch){
+ if(!el.isConnected)return;
+ const now=el.textContent||'';
+ if(!original.has(el)||now!==applied.get(el))original.set(el,now);
+ const raw=original.get(el)||'';
+ const source=sourceLanguage(raw),target=window.currentAURIONLanguage||'ru';
+ if(!source||source===target||raw.trim().length<2||raw.length>5000){
+  if(el.textContent!==raw){applied.set(el,raw);el.textContent=raw}
+  return;
+ }
+ try{
+  const translated=await fetchTranslation(raw,source,target);
+  if(epoch!==generation||!el.isConnected||original.get(el)!==raw||window.currentAURIONLanguage!==target)return;
+  applied.set(el,translated);el.textContent=translated;
+ }catch(error){
+  // Preserve the original when translation is temporarily unavailable.
+  if(epoch===generation&&el.isConnected&&original.get(el)===raw){applied.set(el,raw);el.textContent=raw}
+  console.warn('AURION public translation:',error.message);
+ }
+}
+function refresh(){
+ scheduled=false;const epoch=++generation;
+ document.querySelectorAll(selector).forEach(el=>{process(el,epoch)});
+}
+function schedule(){if(scheduled)return;scheduled=true;queueMicrotask(refresh)}
+const observer=new MutationObserver(records=>{
+ for(const record of records){
+  const el=record.target.nodeType===1?record.target:record.target.parentElement;
+  if(!el)continue;
+  if(el.matches?.(selector)){
+   if(el.textContent===applied.get(el))continue;
+   schedule();return;
+  }
+  if(el.querySelector?.(selector)||el.closest?.('#productGrid,#publicSellersList,#publicSellerPage,#productModal')){
+   schedule();return;
+  }
+ }
+});
+observer.observe(document.body,{childList:true,subtree:true,characterData:true});
+window.addEventListener('aurion-language-change',()=>setTimeout(schedule,0));
+schedule();
+</script>
 <script type="module">
 import {createClient} from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
 const SUPABASE_URL='https://hagaevohnfqapbdlnyqc.supabase.co';
