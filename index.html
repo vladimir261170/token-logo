@@ -558,6 +558,17 @@ function renderAdminDisputes(items){
   const resolution=document.createElement('p');resolution.textContent=adminText('Решение: ','Resolution: ')+(d.resolution||'—');
   const order=document.createElement('p');order.textContent=adminText('Статус заказа: ','Order status: ')+(d.order?.status?orderStatusLabel(d.order.status):'—');
   card.append(title,meta,reason,response,resolution,order);
+  if(d.status==='resolved'){
+   const adminComment=document.createElement('p');
+   adminComment.textContent=adminText('Комментарий администратора: ','Administrator comment: ')+(d.admin_comment||adminText('Не указан','Not provided'));
+   card.append(adminComment);
+   if(d.resolved_at){
+    const decidedAt=document.createElement('p');decidedAt.className='admin-dispute-meta';
+    const dt=new Date(d.resolved_at);
+    decidedAt.textContent=adminText('Дата решения: ','Decision date: ')+(Number.isNaN(dt.getTime())?d.resolved_at:dt.toLocaleString(document.documentElement.lang==='en'?'en-US':'ru-RU'));
+    card.append(decidedAt);
+   }
+  }
   if(d.status==='under_review'){
    const controls=document.createElement('div');controls.className='admin-dispute-actions';
    const select=document.createElement('select');select.setAttribute('aria-label',adminText('Решение по спору','Dispute resolution'));
