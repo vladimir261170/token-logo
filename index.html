@@ -64,6 +64,10 @@ button{font-family:inherit;cursor:pointer}.language-switch button,.auth-button,.
 .review-panel select{width:100%;padding:12px;background:#0b1526;color:var(--gold-bright);border:1px solid var(--border);border-radius:9px;font:inherit}
 .review-panel label{display:block;margin:12px 0 5px;color:var(--gold-bright)}
 .review-feedback{min-height:20px;font-size:13px}
+/* Buyer dispute form */
+.dispute-panel textarea{width:100%;min-height:135px;resize:vertical;padding:12px;background:#0b1526;color:var(--text);border:1px solid var(--border);border-radius:9px;font:inherit}
+.dispute-panel label{display:block;color:var(--gold-bright);margin:12px 0 6px}
+.dispute-notice{font-size:12px;min-height:22px;overflow-wrap:anywhere}
 </style>
 </head>
 <body>
@@ -124,6 +128,7 @@ button{font-family:inherit;cursor:pointer}.language-switch button,.auth-button,.
 
 <div id="chatOverlay" class="chat-overlay" hidden><div class="chat-panel" role="dialog" aria-modal="true" aria-labelledby="chatTitle"><div class="chat-header"><h3 id="chatTitle"></h3><button id="chatClose" class="market-button" type="button"></button></div><p id="chatOrderInfo" class="product-meta"></p><div id="chatHistory" class="chat-history" role="log" aria-live="polite"></div><form id="chatForm" class="chat-form"><textarea id="chatInput" maxlength="2000" required></textarea><button id="chatSend" type="submit" class="market-button primary"></button></form><p id="chatFeedback" class="chat-feedback" role="status"></p></div></div>
 <div id="reviewOverlay" class="review-overlay" hidden><div class="review-panel" role="dialog" aria-modal="true" aria-labelledby="reviewTitle"><h3 id="reviewTitle"></h3><p id="reviewOrderInfo" class="product-meta"></p><form id="reviewForm"><label id="reviewRatingLabel" for="reviewRating"></label><select id="reviewRating" required><option value="5">★★★★★ — 5</option><option value="4">★★★★☆ — 4</option><option value="3">★★★☆☆ — 3</option><option value="2">★★☆☆☆ — 2</option><option value="1">★☆☆☆☆ — 1</option></select><label id="reviewCommentLabel" for="reviewComment"></label><textarea id="reviewComment" maxlength="2000"></textarea><div class="order-actions"><button id="reviewSubmit" class="market-button primary" type="submit"></button><button id="reviewCancel" class="market-button" type="button"></button></div></form><p id="reviewFeedback" class="review-feedback" role="status" aria-live="polite"></p></div></div>
+<div id="disputeOverlay" class="review-overlay" hidden><div class="review-panel dispute-panel" role="dialog" aria-modal="true" aria-labelledby="disputeTitle"><h3 id="disputeTitle"></h3><p id="disputeOrderInfo" class="product-meta"></p><form id="disputeForm"><label id="disputeReasonLabel" for="disputeReason"></label><textarea id="disputeReason" minlength="10" maxlength="2000" required></textarea><p id="disputeHint" class="form-hint"></p><div class="order-actions"><button type="submit" class="market-button primary" id="disputeSubmit"></button><button type="button" class="market-button" id="disputeCancel"></button></div></form><p id="disputeFeedback" class="dispute-notice" role="status" aria-live="polite"></p></div></div>
 <script>
 window.currentAURIONLanguage="ru";
 try{window.currentAURIONLanguage=localStorage.getItem("aurion-language")==="en"?"en":"ru"}catch(e){}
@@ -226,11 +231,12 @@ let currentUser=null,products=[],editingId=null,selectedProductId=null,lastModal
 let profileLoadSequence=0,profileSaving=false,profileRecord=null,activeProfileTab='profile',inboxSequence=0,inboxMessages=new Map();
 let retainedImages=[],pendingFiles=[],galleryIndex=0,uploading=false,orders=[],orderBusy=false,ordersSequence=0,statusBusyId=null,activeChatOrderId=null,chatTimer=null,chatLoading=false,chatSending=false,chatRequest=0,chatLastFocus=null,unreadByOrder=new Map(),notificationTimer=null,notificationBusy=false,notificationEpoch=0;
 let reviewedOrderIds=new Set(),reviewLoading=false,reviewOrderId=null,reviewSubmitting=false,reviewRequest=0;
+let disputeOrderId=null,disputeBusy=false,disputeLastFocus=null;const openedDisputes=new Set();
 const lang=()=>window.currentAURIONLanguage||'ru';
 const tr=(ru,en)=>lang()==='ru'?ru:en;
 function say(ru,en,kind=''){authMessage.textContent=tr(ru,en);authMessage.className='auth-message'+(kind?' '+kind:'')}
 function sellerSay(ru,en,kind=''){$('sellerStatus').textContent=tr(ru,en);$('sellerStatus').className='market-status'+(kind?' '+kind:'')}
-function showAccount(user){const previousId=currentUser?.id;currentUser=user||null;authForms.style.display=user?'none':'block';accountPanel.style.display=user?'block':'none';sellerPanel.hidden=!user;$('ordersPanel').hidden=!user;$('profileDashboard').hidden=!user;if(previousId!==user?.id){profileRecord=null;inboxMessages=new Map();$('inboxList').replaceChildren();$('inboxStatus').textContent='';clearProfileUI();if(user)loadProfile(user.id)}if(!user){closeReview();reviewedOrderIds.clear();closeChat();orders=[];unreadByOrder.clear();renderUnreadAlert();renderOrders();$('modalOrderStatus').textContent=''}else if(previousId!==user.id){reviewedOrderIds.clear();unreadByOrder.clear();renderUnreadAlert();loadOrders()}$('accountEmail').textContent=user?.email||'';if(previousId!==currentUser?.id){notificationEpoch++;resetProductForm();renderProducts()}}
+function showAccount(user){const previousId=currentUser?.id;currentUser=user||null;authForms.style.display=user?'none':'block';accountPanel.style.display=user?'block':'none';sellerPanel.hidden=!user;$('ordersPanel').hidden=!user;$('profileDashboard').hidden=!user;if(previousId!==user?.id){profileRecord=null;inboxMessages=new Map();$('inboxList').replaceChildren();$('inboxStatus').textContent='';clearProfileUI();if(user)loadProfile(user.id)}if(!user){closeDispute();openedDisputes.clear();closeReview();reviewedOrderIds.clear();closeChat();orders=[];unreadByOrder.clear();renderUnreadAlert();renderOrders();$('modalOrderStatus').textContent=''}else if(previousId!==user.id){reviewedOrderIds.clear();unreadByOrder.clear();renderUnreadAlert();loadOrders()}$('accountEmail').textContent=user?.email||'';if(previousId!==currentUser?.id){notificationEpoch++;resetProductForm();renderProducts()}}
 
 // Inbox uses only orders and messages visible to the signed-in user under RLS.
 async function loadInbox(){const seq=++inboxSequence,uid=currentUser?.id;if(!uid)return;const status=$('inboxStatus');status.textContent=tr('Загружаем переписки…','Loading conversations…');if(!orders.length){inboxMessages=new Map();renderInbox();status.textContent='';return}const ids=orders.map(o=>o.id);const {data,error}=await supabase.from('order_messages').select('id,order_id,sender_id,message,created_at').in('order_id',ids).order('created_at',{ascending:false}).limit(1000);if(seq!==inboxSequence||currentUser?.id!==uid)return;if(error){status.textContent=tr('Не удалось загрузить переписки: ','Could not load conversations: ')+error.message;return}inboxMessages=new Map();for(const m of data||[])if(!inboxMessages.has(m.order_id))inboxMessages.set(m.order_id,m);status.textContent='';renderInbox()}
@@ -314,6 +320,14 @@ confirmBtn.textContent=tr('Подтвердить получение','Confirm r
 confirmBtn.addEventListener('click',()=>changeOrderStatus(o,'completed'));
 confirmActions.append(confirmBtn);item.append(confirmActions);
 }
+if(role==='buyer_id'&&['accepted','awaiting_confirmation'].includes(o.status)){
+const disputeActions=document.createElement('div');disputeActions.className='order-actions';
+const disputeButton=document.createElement('button');disputeButton.type='button';disputeButton.className='market-button';
+disputeButton.textContent=openedDisputes.has(o.id)?tr('Спор открыт','Dispute opened'):tr('Открыть спор','Open dispute');
+disputeButton.disabled=openedDisputes.has(o.id)||disputeBusy;
+disputeButton.addEventListener('click',()=>openDispute(o.id));disputeActions.append(disputeButton);item.append(disputeActions);
+if(openedDisputes.has(o.id)){const disputeInfo=document.createElement('p');disputeInfo.className='order-status';disputeInfo.textContent=tr('Спор открыт. Изменение статуса заказа заблокировано.','Dispute opened. Order status changes are blocked.');item.append(disputeInfo)}
+}
 if(role==='buyer_id'&&o.status==='completed'){
 const reviewBtn=document.createElement('button');reviewBtn.type='button';reviewBtn.className='market-button primary';
 const already=reviewedOrderIds.has(o.id);
@@ -323,6 +337,52 @@ reviewBtn.addEventListener('click',()=>openReview(o.id));
 const reviewActions=document.createElement('div');reviewActions.className='order-actions';reviewActions.append(reviewBtn);item.append(reviewActions);
 }
 const chatButton=document.createElement('button');chatButton.type='button';chatButton.className='market-button';chatButton.textContent=tr(role==='buyer_id'?'Написать продавцу':'Открыть чат',role==='buyer_id'?'Message seller':'Open chat');const unread=unreadByOrder.get(o.id)||0;if(unread){const badge=document.createElement('span');badge.className='chat-unread-badge';badge.textContent=unread>99?'99+':String(unread);badge.setAttribute('aria-label',tr('Непрочитанных сообщений: ','Unread messages: ')+unread);chatButton.append(badge)}chatButton.addEventListener('click',()=>openChat(o.id));const chatActions=document.createElement('div');chatActions.className='order-actions';chatActions.append(chatButton);item.append(chatActions);holder.append(item)}}}
+function disputeLabels(){
+$('disputeTitle').textContent=tr('Открыть спор по заказу','Open an order dispute');
+$('disputeReasonLabel').textContent=tr('Причина спора','Reason for dispute');
+$('disputeHint').textContent=tr('Опишите проблему (от 10 до 2000 символов). Это тестовая заявка без оплаты.','Describe the issue (10–2000 characters). This is a test order without payment.');
+$('disputeSubmit').textContent=tr('Отправить спор','Submit dispute');
+$('disputeCancel').textContent=tr('Закрыть','Close');
+$('disputeOrderInfo').textContent=tr('Заказ: ','Order: ')+(disputeOrderId||'');
+}
+function openDispute(orderId){
+if(!currentUser||disputeBusy||openedDisputes.has(orderId))return;
+const order=orders.find(o=>o.id===orderId&&o.buyer_id===currentUser.id&&['accepted','awaiting_confirmation'].includes(o.status));
+if(!order)return;
+disputeOrderId=orderId;disputeLastFocus=document.activeElement;
+$('disputeReason').value='';$('disputeFeedback').textContent='';$('disputeFeedback').className='dispute-notice';$('disputeForm').hidden=false;disputeLabels();
+$('disputeOverlay').hidden=false;$('disputeReason').focus();
+}
+function closeDispute(){
+if(disputeBusy)return;
+$('disputeOverlay').hidden=true;disputeOrderId=null;
+if(disputeLastFocus?.isConnected)disputeLastFocus.focus();disputeLastFocus=null;
+}
+$('disputeCancel').addEventListener('click',closeDispute);
+$('disputeOverlay').addEventListener('click',e=>{if(e.target===$('disputeOverlay'))closeDispute()});
+$('disputeForm').addEventListener('submit',async e=>{
+e.preventDefault();if(disputeBusy||!disputeOrderId||!currentUser)return;
+const orderId=disputeOrderId,userId=currentUser.id,reason=$('disputeReason').value.trim();
+if(reason.length<10||reason.length>2000){$('disputeFeedback').textContent=tr('Введите от 10 до 2000 символов.','Enter 10 to 2000 characters.');return}
+if(!confirm(tr('Открыть спор по этому тестовому заказу?','Open a dispute for this test order?')))return;
+disputeBusy=true;$('disputeSubmit').disabled=true;$('disputeCancel').disabled=true;
+$('disputeFeedback').textContent=tr('Отправляем спор…','Submitting dispute…');
+try{
+const {data:sessionData,error:sessionError}=await supabase.auth.getSession();
+if(sessionError||!sessionData?.session||sessionData.session.user.id!==userId)throw new Error(tr('Сессия истекла. Войдите снова.','Session expired. Please sign in again.'));
+const {data,error}=await supabase.functions.invoke('create-dispute',{body:{order_id:orderId,reason}});
+if(error){let message=error.message;try{const payload=await error.context?.json();if(payload?.error)message=payload.error}catch{}throw new Error(message)}
+if(!data?.success||!data?.dispute?.id)throw new Error(data?.error||tr('Сервер не подтвердил создание спора.','Server did not confirm dispute creation.'));
+if(currentUser?.id!==userId)return;
+openedDisputes.add(orderId);
+$('disputeFeedback').className='dispute-notice success';
+$('disputeFeedback').textContent=tr('Спор успешно открыт. Номер: ','Dispute opened successfully. ID: ')+data.dispute.id;
+$('disputeForm').hidden=true;
+$('ordersMessage').textContent=tr('Спор открыт. Обычное завершение заказа заблокировано на сервере.','Dispute opened. Normal order completion is blocked on the server.');
+renderOrders();
+}catch(err){$('disputeFeedback').className='dispute-notice error';$('disputeFeedback').textContent=tr('Не удалось открыть спор: ','Could not open dispute: ')+err.message}
+finally{disputeBusy=false;$('disputeSubmit').disabled=false;$('disputeCancel').disabled=false}
+});
 async function changeOrderStatus(order,nextStatus){
 if(!currentUser||statusBusyId)return;
 const isSeller=order.seller_id===currentUser.id;
@@ -394,7 +454,7 @@ $('signInButton').addEventListener('click',async()=>{if(!form.reportValidity())r
 $('signUpButton').addEventListener('click',async()=>{if(!form.reportValidity())return;$('signInButton').disabled=$('signUpButton').disabled=true;say('Создаём аккаунт…','Creating your account…');try{const {data,error}=await supabase.auth.signUp({email:emailInput.value.trim(),password:passwordInput.value,options:{emailRedirectTo:window.location.origin+'/'}});if(error)throw error;passwordInput.value='';if(data.session&&data.user){showAccount(data.user);say('Аккаунт создан, вход выполнен.','Account created and signed in.','success')}else say('Аккаунт создан. Откройте письмо от Supabase и нажмите ссылку подтверждения. Проверьте папку «Спам».','Account created. Open the Supabase email and click the confirmation link. Check your spam folder.','success')}catch(e){say(e.message,e.message,'error')}finally{$('signInButton').disabled=$('signUpButton').disabled=false}});
 $('signOutButton').addEventListener('click',async()=>{const {error}=await supabase.auth.signOut();if(error){say(error.message,error.message,'error');return}showAccount(null);say('Вы вышли из аккаунта.','You have signed out.','success')});
 productForm.addEventListener('submit',async e=>{e.preventDefault();if(!currentUser){sellerSay('Для размещения войдите в аккаунт.','Sign in to publish.','error');return}const title=$('productTitle').value.trim(),description=$('productDescription').value.trim(),price=Number($('productPrice').value),image=safeImageUrl($('productImage').value.trim());if(!title||!description||!Number.isFinite(price)||price<=0){sellerSay('Проверьте название, описание и положительную цену.','Check the title, description and positive price.','error');return}if($('productImage').value.trim()&&!image){sellerSay('Неверная ссылка на изображение.','Invalid image URL.','error');return}if(retainedImages.length+pendingFiles.length>5){sellerSay('Максимум 5 фотографий.','Maximum 5 photos.','error');return}const {data:authData,error:authError}=await supabase.auth.getUser();if(authError||!authData?.user||authData.user.id!==currentUser.id){sellerSay('Сессия истекла. Войдите снова.','Session expired. Sign in again.','error');return}const owner=authData.user.id;const wasEditing=Boolean(editingId),targetId=editingId;const oldProduct=wasEditing?products.find(p=>p.id===targetId):null;if(wasEditing&&(!oldProduct||oldProduct.seller_id!==owner)){sellerSay('Объявление не найдено.','Listing not found.','error');return}uploading=true;$('saveProductButton').disabled=true;renderEditorGallery();let uploadedPaths=[];try{sellerSay('Сохраняем фотографии и объявление…','Saving photos and listing…');const uploaded=await uploadPhotos(pendingFiles,owner);uploadedPaths=uploaded.paths;const all=[...retainedImages,...uploaded.urls];const cover=all[0]||image||null;const payload={title,description,category:$('productCategory').value,product_type:$('productType').value,price_aur:price,image_url:cover,image_urls:all};let result;if(wasEditing)result=await supabase.from('products').update(payload).eq('id',targetId).eq('seller_id',owner).select('id');else result=await supabase.from('products').insert({...payload,seller_id:owner}).select('id');if(result.error)throw result.error;if(!result.data?.length)throw new Error(tr('Запись не сохранена. Проверьте права доступа.','Listing was not saved. Check permissions.'));uploadedPaths=[];resetProductForm();sellerSay(wasEditing?'Изменения сохранены.':'Товар опубликован в каталоге.',wasEditing?'Changes saved.':'Listing published.','success');await loadProducts()}catch(err){if(uploadedPaths.length)await supabase.storage.from('product-images').remove(uploadedPaths);sellerSay('Не удалось сохранить: '+err.message,'Could not save: '+err.message,'error')}finally{uploading=false;$('saveProductButton').disabled=false;renderEditorGallery()}});
-window.addEventListener('aurion-language-change',()=>{const openSellerId=$('publicSellerPage').hidden?null:$('publicSellerPage').dataset.sellerId;renderPublicSellers();if(openSellerId&&publicSellers.some(s=>s.id===openSellerId))openPublicSeller(openSellerId,false);updateProfileUnread();renderInbox();if(profileRecord)showProfileRecord(profileRecord);renderUnreadAlert();chatText();renderEditorGallery();renderProducts();renderOrders();if(!$('reviewOverlay').hidden)renderReviewLabels();if(selectedProductId){const p=products.find(x=>x.id===selectedProductId);if(p)renderModal(p)}if(editingId)$('saveProductButton').textContent=tr('Сохранить изменения','Save changes');else $('saveProductButton').textContent=tr('Опубликовать товар','Publish listing')});
+window.addEventListener('aurion-language-change',()=>{const openSellerId=$('publicSellerPage').hidden?null:$('publicSellerPage').dataset.sellerId;renderPublicSellers();if(openSellerId&&publicSellers.some(s=>s.id===openSellerId))openPublicSeller(openSellerId,false);updateProfileUnread();renderInbox();if(profileRecord)showProfileRecord(profileRecord);renderUnreadAlert();chatText();if(!$('disputeOverlay').hidden)disputeLabels();renderEditorGallery();renderProducts();renderOrders();if(!$('reviewOverlay').hidden)renderReviewLabels();if(selectedProductId){const p=products.find(x=>x.id===selectedProductId);if(p)renderModal(p)}if(editingId)$('saveProductButton').textContent=tr('Сохранить изменения','Save changes');else $('saveProductButton').textContent=tr('Опубликовать товар','Publish listing')});
 supabase.auth.onAuthStateChange((_event,session)=>{showAccount(session?.user||null)});
 const {data:sessionData,error:sessionError}=await supabase.auth.getSession();if(sessionError)say(sessionError.message,sessionError.message,'error');showAccount(sessionData?.session?.user||null);await loadProducts();await loadPublicSellers();await loadSellerRatings();
 </script>
