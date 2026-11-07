@@ -91,6 +91,16 @@ button{font-family:inherit;cursor:pointer}.language-switch button,.auth-button,.
   visibility: visible !important;
 }
 .inactive-product-label{display:inline-block;align-self:flex-start;font-size:12px;line-height:1.4;color:#ffdf94;background:#3b3020;border:1px solid #b58a35;border-radius:8px;padding:5px 9px}.product-card-actions button{white-space:normal}
+
+/* AURION Marketplace — per-seller statistics */
+.seller-stats{margin:20px 0;padding:17px;border:1px solid var(--border);border-radius:12px;background:rgba(9,18,32,.55)}
+.seller-stats-head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:10px}
+.seller-stats-head h3{margin:0}.seller-stats-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.seller-stat{border:1px solid rgba(228,196,119,.22);border-radius:10px;padding:13px;background:#122139;min-width:0}
+.seller-stat-label{display:block;font-size:12px;color:var(--muted);line-height:1.4}
+.seller-stat-value{display:block;font-size:23px;font-weight:bold;color:var(--gold-bright);overflow-wrap:anywhere}
+.seller-stats-help{font-size:12px;color:var(--muted);margin-top:12px}
+@media(max-width:650px){.seller-stats-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 </style>
 </head>
 <body>
@@ -134,7 +144,14 @@ button{font-family:inherit;cursor:pointer}.language-switch button,.auth-button,.
   <div><button type="submit" id="profileSaveButton" class="market-button primary" data-ru="Сохранить профиль" data-en="Save profile">Сохранить профиль</button></div>
  </form><p id="profileStatus" class="profile-notice" role="status" aria-live="polite"></p></div>
  <div class="profile-view" data-profile-view="purchases" hidden><p data-ru="История покупок и статусы заказов находятся в разделе заказов." data-en="Purchase history and order statuses are available in the orders section.">История покупок и статусы заказов находятся в разделе заказов.</p><div class="profile-links"><button type="button" class="market-button primary" id="goPurchases" data-ru="Открыть мои покупки" data-en="Open my purchases">Открыть мои покупки</button></div></div>
- <div class="profile-view" data-profile-view="sales" hidden><p data-ru="Управляйте своими объявлениями в каталоге и полученными заказами." data-en="Manage your listings in the catalog and incoming orders.">Управляйте своими объявлениями в каталоге и полученными заказами.</p><div class="profile-links"><button type="button" class="market-button primary" id="goListings" data-ru="Добавить или изменить товар" data-en="Add or edit a listing">Добавить или изменить товар</button><button type="button" class="market-button" id="goSales" data-ru="Полученные заказы" data-en="Received orders">Полученные заказы</button></div></div>
+ <div class="profile-view" data-profile-view="sales" hidden>
+<div class="seller-stats" id="sellerStatsSection">
+<div class="seller-stats-head"><h3 data-ru="Статистика моих продаж" data-en="My sales statistics">Статистика моих продаж</h3><button id="refreshSellerStats" class="market-button" type="button" data-ru="Обновить статистику" data-en="Refresh statistics">Обновить статистику</button></div>
+<p id="sellerStatsStatus" class="orders-message" role="status" aria-live="polite"></p>
+<div id="sellerStatsGrid" class="seller-stats-grid" hidden></div>
+<p class="seller-stats-help" data-ru="Тестовые заказы без оплаты. Сумма известных стоимостей заказов — не фактическая выручка. Старые заказы без цены считаются отдельно." data-en="Test orders without payment. Sum of known order values is not actual revenue. Legacy orders with no price are counted separately.">Тестовые заказы без оплаты. Сумма известных стоимостей заказов — не фактическая выручка. Старые заказы без цены считаются отдельно.</p>
+</div>
+<p data-ru="Управляйте своими объявлениями в каталоге и полученными заказами." data-en="Manage your listings in the catalog and incoming orders.">Управляйте своими объявлениями в каталоге и полученными заказами.</p><div class="profile-links"><button type="button" class="market-button primary" id="goListings" data-ru="Добавить или изменить товар" data-en="Add or edit a listing">Добавить или изменить товар</button><button type="button" class="market-button" id="goSales" data-ru="Полученные заказы" data-en="Received orders">Полученные заказы</button></div></div>
  <div class="profile-view" data-profile-view="messages" hidden><p id="profileUnreadSummary"></p><div class="profile-links"><button type="button" class="market-button" id="goMessages" data-ru="Обновить переписки" data-en="Refresh conversations">Обновить переписки</button></div><p id="inboxStatus" class="profile-notice" role="status" aria-live="polite"></p><div id="inboxList" class="inbox-list"></div></div>
   <div class="profile-view" data-profile-view="notifications" hidden><div class="notification-heading"><p id="notificationsSummary"></p><button type="button" class="market-button" id="refreshNotifications" data-ru="Обновить уведомления" data-en="Refresh notifications">Обновить уведомления</button></div><p id="notificationsStatus" class="profile-notice" role="status" aria-live="polite"></p><div id="notificationsList" class="notifications-list"></div></div>
 </div>
@@ -281,7 +298,7 @@ async function checkAdminAccess(uid,epoch){
   if(epoch===adminAccessEpoch&&currentUser?.id===uid)$('openAdminPanel').hidden=true;
  }
 }
-function showAccount(user){const previousId=currentUser?.id;currentUser=user||null;authForms.style.display=user?'none':'block';accountPanel.style.display=user?'block':'none';sellerPanel.hidden=!user;$('ordersPanel').hidden=!user;$('profileDashboard').hidden=!user;if(previousId!==user?.id){$('openAdminPanel').hidden=true;$('adminPanel').hidden=true;adminAccessEpoch++;if(user)checkAdminAccess(user.id,adminAccessEpoch);profileRecord=null;inboxMessages=new Map();$('inboxList').replaceChildren();$('inboxStatus').textContent='';resetOrderNotifications();clearProfileUI();if(user){loadProfile(user.id);loadOrderNotifications(true)}}if(!user){$('adminPanel').hidden=true;closeDispute();openedDisputes.clear();disputeRecords.clear();closeSellerDispute();closeReview();reviewedOrderIds.clear();closeChat();orders=[];unreadByOrder.clear();renderUnreadAlert();renderOrders();$('modalOrderStatus').textContent=''}else if(previousId!==user.id){reviewedOrderIds.clear();unreadByOrder.clear();renderUnreadAlert();loadOrders()}$('accountEmail').textContent=user?.email||'';if(previousId!==currentUser?.id){notificationEpoch++;resetProductForm();renderProducts()}}
+function showAccount(user){const previousId=currentUser?.id;currentUser=user||null;if(previousId!==user?.id)resetSellerStats();authForms.style.display=user?'none':'block';accountPanel.style.display=user?'block':'none';sellerPanel.hidden=!user;$('ordersPanel').hidden=!user;$('profileDashboard').hidden=!user;if(previousId!==user?.id){$('openAdminPanel').hidden=true;$('adminPanel').hidden=true;adminAccessEpoch++;if(user)checkAdminAccess(user.id,adminAccessEpoch);profileRecord=null;inboxMessages=new Map();$('inboxList').replaceChildren();$('inboxStatus').textContent='';resetOrderNotifications();clearProfileUI();if(user){loadProfile(user.id);loadOrderNotifications(true)}}if(!user){$('adminPanel').hidden=true;closeDispute();openedDisputes.clear();disputeRecords.clear();closeSellerDispute();closeReview();reviewedOrderIds.clear();closeChat();orders=[];unreadByOrder.clear();renderUnreadAlert();renderOrders();$('modalOrderStatus').textContent=''}else if(previousId!==user.id){reviewedOrderIds.clear();unreadByOrder.clear();renderUnreadAlert();loadOrders()}$('accountEmail').textContent=user?.email||'';if(previousId!==currentUser?.id){notificationEpoch++;resetProductForm();renderProducts()}}
 
 // Inbox uses only orders and messages visible to the signed-in user under RLS.
 async function loadInbox(){const seq=++inboxSequence,uid=currentUser?.id;if(!uid)return;const status=$('inboxStatus');status.textContent=tr('Загружаем переписки…','Loading conversations…');if(!orders.length){inboxMessages=new Map();renderInbox();status.textContent='';return}const ids=orders.map(o=>o.id);const {data,error}=await supabase.from('order_messages').select('id,order_id,sender_id,message,created_at').in('order_id',ids).order('created_at',{ascending:false}).limit(1000);if(seq!==inboxSequence||currentUser?.id!==uid)return;if(error){status.textContent=tr('Не удалось загрузить переписки: ','Could not load conversations: ')+error.message;return}inboxMessages=new Map();for(const m of data||[])if(!inboxMessages.has(m.order_id))inboxMessages.set(m.order_id,m);status.textContent='';renderInbox()}
@@ -290,11 +307,51 @@ function renderInbox(){const holder=$('inboxList');holder.replaceChildren();if(!
 function clearProfileUI(){$('profileDisplayName').value='';$('profileBio').value='';$('profileIsPublic').checked=false;$('profileAvatarFile').value='';$('profileStatus').textContent='';$('profileSummary').textContent='';$('profileAvatarDisplay').replaceChildren(document.createTextNode('◇'));$('profileAvatarDisplay').className='profile-placeholder'}
 function showProfileRecord(record){profileRecord=record;$('profileDisplayName').value=record?.display_name||'';$('profileBio').value=record?.bio||'';$('profileIsPublic').checked=!!record?.is_public;const label=record?.display_name||currentUser?.email||'';$('profileSummary').textContent=label;const holder=$('profileAvatarDisplay');holder.replaceChildren();const url=safeImageUrl(record?.avatar_url);if(url){const img=document.createElement('img');img.className='profile-avatar';img.alt=tr('Аватар профиля','Profile avatar');img.src=url;img.referrerPolicy='no-referrer';img.addEventListener('error',()=>{holder.replaceChildren(document.createTextNode('◇'));holder.className='profile-placeholder'},{once:true});holder.className='';holder.append(img)}else{holder.className='profile-placeholder';holder.textContent='◇'}}
 async function loadProfile(uid){const seq=++profileLoadSequence;$('profileStatus').textContent=tr('Загружаем профиль…','Loading profile…');const {data,error}=await supabase.from('profiles').select('id,display_name,bio,avatar_url,is_public').eq('id',uid).maybeSingle();if(seq!==profileLoadSequence||currentUser?.id!==uid)return;if(error){$('profileStatus').textContent=tr('Ошибка загрузки профиля: ','Profile load error: ')+error.message;return}if(!data){$('profileStatus').textContent=tr('Для аккаунта пока нет записи в profiles. Необходимо создать её с безопасными правами доступа.','This account has no profiles row yet. A secure profile-creation policy is required.');return}showProfileRecord(data);$('profileStatus').textContent=''}
-function switchProfileTab(tab){activeProfileTab=tab;if(tab==='messages')loadInbox();if(tab==='notifications')loadOrderNotifications();document.querySelectorAll('[data-profile-tab]').forEach(b=>b.classList.toggle('primary',b.dataset.profileTab===tab));document.querySelectorAll('[data-profile-view]').forEach(v=>v.hidden=v.dataset.profileView!==tab);updateProfileUnread()}
+function switchProfileTab(tab){activeProfileTab=tab;if(tab==='sales')loadSellerStats();if(tab==='messages')loadInbox();if(tab==='notifications')loadOrderNotifications();document.querySelectorAll('[data-profile-tab]').forEach(b=>b.classList.toggle('primary',b.dataset.profileTab===tab));document.querySelectorAll('[data-profile-view]').forEach(v=>v.hidden=v.dataset.profileView!==tab);updateProfileUnread()}
 function updateProfileUnread(){const n=Array.from(unreadByOrder.values()).reduce((a,b)=>a+b,0);$('profileUnreadSummary').textContent=tr('Непрочитанных сообщений: ','Unread messages: ')+n}
 document.querySelectorAll('[data-profile-tab]').forEach(b=>b.addEventListener('click',()=>switchProfileTab(b.dataset.profileTab)));
 $('goPurchases').addEventListener('click',()=>{$('ordersPanel').scrollIntoView({behavior:'smooth'});$('buyerOrders').focus?.()});
 $('goSales').addEventListener('click',()=>$('sellerOrders').scrollIntoView({behavior:'smooth'}));
+
+// Personalized seller statistics. The RPC uses SECURITY INVOKER and orders RLS.
+let sellerStatsRequest=0;
+function resetSellerStats(){sellerStatsRequest++;$('sellerStatsGrid').replaceChildren();$('sellerStatsGrid').hidden=true;$('sellerStatsStatus').textContent=''}
+function renderSellerStats(stats){
+ const rows=[
+ ['total_orders','Всего заказов','Total orders'],
+ ['pending_orders','Ожидают','Pending'],
+ ['completed_orders','Завершено','Completed'],
+ ['cancelled_orders','Отменено','Cancelled'],
+ ['resolved_buyer_orders','Споры: покупатель','Disputes: buyer'],
+ ['resolved_seller_orders','Споры: продавец','Disputes: seller'],
+ ['orders_without_amount','Заказы без стоимости','Orders without amount'],
+ ['known_amount_aur','Сумма известных заказов (AUR)','Known order value (AUR)']
+ ];
+ const grid=$('sellerStatsGrid');grid.replaceChildren();
+ for(const [key,ru,en] of rows){
+  const card=document.createElement('div');card.className='seller-stat';
+  const label=document.createElement('span');label.className='seller-stat-label';label.textContent=tr(ru,en);
+  const value=document.createElement('strong');value.className='seller-stat-value';
+  const raw=stats[key];value.textContent=raw===null||raw===undefined?'—':String(raw);
+  card.append(label,value);grid.append(card);
+ }
+ grid.hidden=false;
+}
+async function loadSellerStats(){
+ const uid=currentUser?.id;
+ if(!uid){resetSellerStats();return}
+ const request=++sellerStatsRequest;
+ $('sellerStatsStatus').textContent=tr('Загружаем статистику…','Loading statistics…');
+ const {data,error}=await supabase.rpc('get_seller_statistics');
+ if(request!==sellerStatsRequest||currentUser?.id!==uid)return;
+ if(error){$('sellerStatsGrid').hidden=true;$('sellerStatsStatus').textContent=tr('Не удалось загрузить статистику: ','Could not load statistics: ')+error.message;return}
+ const stats=Array.isArray(data)?data[0]:data;
+ if(!stats){$('sellerStatsGrid').hidden=true;$('sellerStatsStatus').textContent=tr('Сервер не вернул статистику.','No statistics returned by the server.');return}
+ renderSellerStats(stats);$('sellerStatsStatus').textContent=tr('Статистика обновлена.','Statistics updated.');
+}
+$('refreshSellerStats').addEventListener('click',loadSellerStats);
+window.addEventListener('aurion-language-change',()=>{if(activeProfileTab==='sales'&&currentUser)loadSellerStats()});
+
 $('goListings').addEventListener('click',()=>sellerPanel.scrollIntoView({behavior:'smooth'}));
 $('goMessages').addEventListener('click',loadInbox);
 // Notifications are stored in Supabase. RLS restricts reads and marking as read
