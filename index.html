@@ -116,7 +116,7 @@ button{font-family:inherit;cursor:pointer}.language-switch button,.auth-button,.
   <button type="button" class="market-button" data-profile-tab="purchases" data-ru="Мои покупки" data-en="My Purchases">Мои покупки</button>
   <button type="button" class="market-button" data-profile-tab="sales" data-ru="Мои продажи" data-en="My Sales">Мои продажи</button>
   <button type="button" class="market-button" data-profile-tab="messages" data-ru="Сообщения" data-en="Messages">Сообщения</button>
-  <button type="button" class="market-button" data-profile-tab="notifications" data-ru="Уведомления" data-en="Notifications">Уведомления <span id="notificationsBadge" class="chat-unread-badge" hidden></span></button>
+  <button type="button" class="market-button" data-profile-tab="notifications"><span data-ru="Уведомления" data-en="Notifications">Уведомления</span> <span id="notificationsBadge" class="chat-unread-badge" hidden></span></button>
  </div>
  <div class="profile-view" data-profile-view="profile"><form id="profileForm" class="profile-form">
   <div><label for="profileDisplayName" data-ru="Отображаемое имя" data-en="Display name">Отображаемое имя</label><input id="profileDisplayName" maxlength="80" required></div>
@@ -298,8 +298,8 @@ function resetOrderNotifications(){
 }
 function updateOrderNotificationCount(){
  const unread=orderNotifications.filter(n=>!n.is_read).length;
- const badge=$('notificationsBadge');badge.hidden=unread===0;
- badge.textContent=unread>99?'99+':String(unread);
+ const badge=$('notificationsBadge');
+ if(badge){badge.hidden=unread===0;badge.textContent=unread>99?'99+':String(unread);}
  $('notificationsSummary').textContent=tr('Непрочитанных уведомлений: ','Unread notifications: ')+unread;
 }
 function notificationEventTitle(n){
