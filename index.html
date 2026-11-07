@@ -83,6 +83,13 @@ button{font-family:inherit;cursor:pointer}.language-switch button,.auth-button,.
 .notification-card-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
 .notification-card-actions button{padding:7px 12px;font-size:12px}
 .notification-read-label{font-size:12px;color:var(--muted)}
+
+/* AURION: All sections remain visible even if scroll reveal does not trigger. */
+.reveal, .reveal.visible {
+  opacity: 1 !important;
+  transform: none !important;
+  visibility: visible !important;
+}
 </style>
 </head>
 <body>
