@@ -71,6 +71,18 @@ button{font-family:inherit;cursor:pointer}.language-switch button,.auth-button,.
 .dispute-summary{margin:12px 0;padding:12px;border:1px solid var(--border);border-radius:9px;background:#15263d;overflow-wrap:anywhere}.dispute-summary p{white-space:pre-wrap;margin:5px 0}.dispute-summary strong{color:var(--gold-bright)}.dispute-panel textarea{max-width:100%}
 
 .admin-dispute-card{border:1px solid rgba(228,196,119,.35);border-radius:12px;padding:16px;background:#101c2e;display:grid;gap:8px}.admin-dispute-card p{overflow-wrap:anywhere;white-space:pre-wrap}.admin-dispute-meta{font-size:12px;color:var(--muted)}.admin-dispute-actions{display:flex;gap:9px;flex-wrap:wrap}.admin-dispute-actions textarea{width:100%;min-height:80px;padding:10px;background:#0b1526;color:var(--text);border:1px solid var(--border);border-radius:9px;font:inherit}.admin-dispute-actions select{padding:9px;background:#0b1526;color:var(--text);border:1px solid var(--border);border-radius:9px}
+/* Order and dispute notifications (isolated per authenticated user) */
+.notifications-list{display:grid;gap:12px;margin-top:14px}
+.notification-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.notification-card{padding:15px;border-radius:12px;border:1px solid var(--border);background:#101c2e;overflow-wrap:anywhere}
+.notification-card.unread{border-color:#e4c477;background:#1c2a3e}
+.notification-card-head{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center}
+.notification-card-title{color:var(--gold-bright);font-weight:bold}
+.notification-card-date{font-size:12px;color:var(--muted)}
+.notification-card p{margin:7px 0 9px;white-space:pre-wrap;font-size:14px}
+.notification-card-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.notification-card-actions button{padding:7px 12px;font-size:12px}
+.notification-read-label{font-size:12px;color:var(--muted)}
 </style>
 </head>
 <body>
@@ -104,6 +116,7 @@ button{font-family:inherit;cursor:pointer}.language-switch button,.auth-button,.
   <button type="button" class="market-button" data-profile-tab="purchases" data-ru="Мои покупки" data-en="My Purchases">Мои покупки</button>
   <button type="button" class="market-button" data-profile-tab="sales" data-ru="Мои продажи" data-en="My Sales">Мои продажи</button>
   <button type="button" class="market-button" data-profile-tab="messages" data-ru="Сообщения" data-en="Messages">Сообщения</button>
+  <button type="button" class="market-button" data-profile-tab="notifications" data-ru="Уведомления" data-en="Notifications">Уведомления <span id="notificationsBadge" class="chat-unread-badge" hidden></span></button>
  </div>
  <div class="profile-view" data-profile-view="profile"><form id="profileForm" class="profile-form">
   <div><label for="profileDisplayName" data-ru="Отображаемое имя" data-en="Display name">Отображаемое имя</label><input id="profileDisplayName" maxlength="80" required></div>
@@ -115,6 +128,7 @@ button{font-family:inherit;cursor:pointer}.language-switch button,.auth-button,.
  <div class="profile-view" data-profile-view="purchases" hidden><p data-ru="История покупок и статусы заказов находятся в разделе заказов." data-en="Purchase history and order statuses are available in the orders section.">История покупок и статусы заказов находятся в разделе заказов.</p><div class="profile-links"><button type="button" class="market-button primary" id="goPurchases" data-ru="Открыть мои покупки" data-en="Open my purchases">Открыть мои покупки</button></div></div>
  <div class="profile-view" data-profile-view="sales" hidden><p data-ru="Управляйте своими объявлениями в каталоге и полученными заказами." data-en="Manage your listings in the catalog and incoming orders.">Управляйте своими объявлениями в каталоге и полученными заказами.</p><div class="profile-links"><button type="button" class="market-button primary" id="goListings" data-ru="Добавить или изменить товар" data-en="Add or edit a listing">Добавить или изменить товар</button><button type="button" class="market-button" id="goSales" data-ru="Полученные заказы" data-en="Received orders">Полученные заказы</button></div></div>
  <div class="profile-view" data-profile-view="messages" hidden><p id="profileUnreadSummary"></p><div class="profile-links"><button type="button" class="market-button" id="goMessages" data-ru="Обновить переписки" data-en="Refresh conversations">Обновить переписки</button></div><p id="inboxStatus" class="profile-notice" role="status" aria-live="polite"></p><div id="inboxList" class="inbox-list"></div></div>
+  <div class="profile-view" data-profile-view="notifications" hidden><div class="notification-heading"><p id="notificationsSummary"></p><button type="button" class="market-button" id="refreshNotifications" data-ru="Обновить уведомления" data-en="Refresh notifications">Обновить уведомления</button></div><p id="notificationsStatus" class="profile-notice" role="status" aria-live="polite"></p><div id="notificationsList" class="notifications-list"></div></div>
 </div>
 <div id="ordersPanel" class="orders-panel" hidden><h3 data-ru="Заказы AURION — тестовый режим" data-en="AURION Orders — Test Mode">Заказы AURION — тестовый режим</h3><p data-ru="Заявки без оплаты. Токены AUR не списываются и доставка не выполняется автоматически." data-en="Requests without payment. No AUR tokens are charged and delivery is not automatic.">Заявки без оплаты. Токены AUR не списываются и доставка не выполняется автоматически.</p><div class="auth-actions"><button id="refreshOrders" type="button" class="market-button" data-ru="Обновить заказы" data-en="Refresh orders">Обновить заказы</button></div><div id="chatAlert" class="chat-alert" role="status" aria-live="polite" hidden></div><p id="ordersMessage" class="orders-message" role="status" aria-live="polite"></p><h3 data-ru="Мои покупки" data-en="My Purchases">Мои покупки</h3><div id="buyerOrders" class="orders-list"></div><h3 style="margin-top:20px" data-ru="Полученные заказы" data-en="Received Orders">Полученные заказы</h3><div id="sellerOrders" class="orders-list"></div></div>
 <div class="catalog-heading"><h2 data-ru="Каталог товаров и услуг" data-en="Products & Services Catalog">Каталог товаров и услуг</h2><span class="coming-soon" id="catalogCount">...</span></div><p data-ru="Каталог открыт для всех посетителей. Для размещения предложения войдите в аккаунт." data-en="The catalog is public. Sign in to publish your offer.">Каталог открыт для всех посетителей. Для размещения предложения войдите в аккаунт.</p><div class="catalog-controls"><input id="catalogSearch" type="search" placeholder="Поиск по названию и описанию" data-placeholder-ru="Поиск по названию и описанию" data-placeholder-en="Search titles and descriptions" aria-label="Search"><select id="categoryFilter" aria-label="Category"><option value="" data-ru="Все категории" data-en="All categories">Все категории</option><option value="design" data-ru="Дизайн и графика" data-en="Design & Graphics">Дизайн и графика</option><option value="it" data-ru="IT и разработка" data-en="IT & Development">IT и разработка</option><option value="digital" data-ru="Цифровые товары" data-en="Digital Products">Цифровые товары</option><option value="education" data-ru="Обучение" data-en="Education">Обучение</option><option value="marketing" data-ru="Маркетинг" data-en="Marketing">Маркетинг</option><option value="other" data-ru="Другие услуги" data-en="Other Services">Другие услуги</option></select></div><div id="catalogStatus" class="loading-state" data-ru="Загружаем каталог…" data-en="Loading catalog…">Загружаем каталог…</div><div id="productGrid" class="product-grid"></div>
@@ -240,6 +254,7 @@ const authMessage=$('authMessage'),authForms=$('authForms'),accountPanel=$('acco
 const sellerPanel=$('sellerPanel'),productForm=$('productForm');
 let currentUser=null,products=[],editingId=null,selectedProductId=null,lastModalFocus=null,loadSequence=0;
 let profileLoadSequence=0,profileSaving=false,profileRecord=null,activeProfileTab='profile',inboxSequence=0,inboxMessages=new Map();
+let orderNotifications=[],orderNotificationsSequence=0,orderNotificationsBusy=false,orderNotificationsTimer=null;
 let retainedImages=[],pendingFiles=[],galleryIndex=0,uploading=false,orders=[],orderBusy=false,ordersSequence=0,statusBusyId=null,activeChatOrderId=null,chatTimer=null,chatLoading=false,chatSending=false,chatRequest=0,chatLastFocus=null,unreadByOrder=new Map(),notificationTimer=null,notificationBusy=false,notificationEpoch=0;
 let reviewedOrderIds=new Set(),reviewLoading=false,reviewOrderId=null,reviewSubmitting=false,reviewRequest=0;
 let disputeOrderId=null,disputeBusy=false,disputeLastFocus=null;const openedDisputes=new Set();const disputeRecords=new Map();let disputeListError='',disputeListSequence=0,sellerDisputeId=null,sellerDisputeOrderId=null,sellerDisputeBusy=false;
@@ -258,7 +273,7 @@ async function checkAdminAccess(uid,epoch){
   if(epoch===adminAccessEpoch&&currentUser?.id===uid)$('openAdminPanel').hidden=true;
  }
 }
-function showAccount(user){const previousId=currentUser?.id;currentUser=user||null;authForms.style.display=user?'none':'block';accountPanel.style.display=user?'block':'none';sellerPanel.hidden=!user;$('ordersPanel').hidden=!user;$('profileDashboard').hidden=!user;if(previousId!==user?.id){$('openAdminPanel').hidden=true;$('adminPanel').hidden=true;adminAccessEpoch++;if(user)checkAdminAccess(user.id,adminAccessEpoch);profileRecord=null;inboxMessages=new Map();$('inboxList').replaceChildren();$('inboxStatus').textContent='';clearProfileUI();if(user)loadProfile(user.id)}if(!user){$('adminPanel').hidden=true;closeDispute();openedDisputes.clear();disputeRecords.clear();closeSellerDispute();closeReview();reviewedOrderIds.clear();closeChat();orders=[];unreadByOrder.clear();renderUnreadAlert();renderOrders();$('modalOrderStatus').textContent=''}else if(previousId!==user.id){reviewedOrderIds.clear();unreadByOrder.clear();renderUnreadAlert();loadOrders()}$('accountEmail').textContent=user?.email||'';if(previousId!==currentUser?.id){notificationEpoch++;resetProductForm();renderProducts()}}
+function showAccount(user){const previousId=currentUser?.id;currentUser=user||null;authForms.style.display=user?'none':'block';accountPanel.style.display=user?'block':'none';sellerPanel.hidden=!user;$('ordersPanel').hidden=!user;$('profileDashboard').hidden=!user;if(previousId!==user?.id){$('openAdminPanel').hidden=true;$('adminPanel').hidden=true;adminAccessEpoch++;if(user)checkAdminAccess(user.id,adminAccessEpoch);profileRecord=null;inboxMessages=new Map();$('inboxList').replaceChildren();$('inboxStatus').textContent='';resetOrderNotifications();clearProfileUI();if(user){loadProfile(user.id);loadOrderNotifications(true)}}if(!user){$('adminPanel').hidden=true;closeDispute();openedDisputes.clear();disputeRecords.clear();closeSellerDispute();closeReview();reviewedOrderIds.clear();closeChat();orders=[];unreadByOrder.clear();renderUnreadAlert();renderOrders();$('modalOrderStatus').textContent=''}else if(previousId!==user.id){reviewedOrderIds.clear();unreadByOrder.clear();renderUnreadAlert();loadOrders()}$('accountEmail').textContent=user?.email||'';if(previousId!==currentUser?.id){notificationEpoch++;resetProductForm();renderProducts()}}
 
 // Inbox uses only orders and messages visible to the signed-in user under RLS.
 async function loadInbox(){const seq=++inboxSequence,uid=currentUser?.id;if(!uid)return;const status=$('inboxStatus');status.textContent=tr('Загружаем переписки…','Loading conversations…');if(!orders.length){inboxMessages=new Map();renderInbox();status.textContent='';return}const ids=orders.map(o=>o.id);const {data,error}=await supabase.from('order_messages').select('id,order_id,sender_id,message,created_at').in('order_id',ids).order('created_at',{ascending:false}).limit(1000);if(seq!==inboxSequence||currentUser?.id!==uid)return;if(error){status.textContent=tr('Не удалось загрузить переписки: ','Could not load conversations: ')+error.message;return}inboxMessages=new Map();for(const m of data||[])if(!inboxMessages.has(m.order_id))inboxMessages.set(m.order_id,m);status.textContent='';renderInbox()}
@@ -267,13 +282,83 @@ function renderInbox(){const holder=$('inboxList');holder.replaceChildren();if(!
 function clearProfileUI(){$('profileDisplayName').value='';$('profileBio').value='';$('profileIsPublic').checked=false;$('profileAvatarFile').value='';$('profileStatus').textContent='';$('profileSummary').textContent='';$('profileAvatarDisplay').replaceChildren(document.createTextNode('◇'));$('profileAvatarDisplay').className='profile-placeholder'}
 function showProfileRecord(record){profileRecord=record;$('profileDisplayName').value=record?.display_name||'';$('profileBio').value=record?.bio||'';$('profileIsPublic').checked=!!record?.is_public;const label=record?.display_name||currentUser?.email||'';$('profileSummary').textContent=label;const holder=$('profileAvatarDisplay');holder.replaceChildren();const url=safeImageUrl(record?.avatar_url);if(url){const img=document.createElement('img');img.className='profile-avatar';img.alt=tr('Аватар профиля','Profile avatar');img.src=url;img.referrerPolicy='no-referrer';img.addEventListener('error',()=>{holder.replaceChildren(document.createTextNode('◇'));holder.className='profile-placeholder'},{once:true});holder.className='';holder.append(img)}else{holder.className='profile-placeholder';holder.textContent='◇'}}
 async function loadProfile(uid){const seq=++profileLoadSequence;$('profileStatus').textContent=tr('Загружаем профиль…','Loading profile…');const {data,error}=await supabase.from('profiles').select('id,display_name,bio,avatar_url,is_public').eq('id',uid).maybeSingle();if(seq!==profileLoadSequence||currentUser?.id!==uid)return;if(error){$('profileStatus').textContent=tr('Ошибка загрузки профиля: ','Profile load error: ')+error.message;return}if(!data){$('profileStatus').textContent=tr('Для аккаунта пока нет записи в profiles. Необходимо создать её с безопасными правами доступа.','This account has no profiles row yet. A secure profile-creation policy is required.');return}showProfileRecord(data);$('profileStatus').textContent=''}
-function switchProfileTab(tab){activeProfileTab=tab;if(tab==='messages')loadInbox();document.querySelectorAll('[data-profile-tab]').forEach(b=>b.classList.toggle('primary',b.dataset.profileTab===tab));document.querySelectorAll('[data-profile-view]').forEach(v=>v.hidden=v.dataset.profileView!==tab);updateProfileUnread()}
+function switchProfileTab(tab){activeProfileTab=tab;if(tab==='messages')loadInbox();if(tab==='notifications')loadOrderNotifications();document.querySelectorAll('[data-profile-tab]').forEach(b=>b.classList.toggle('primary',b.dataset.profileTab===tab));document.querySelectorAll('[data-profile-view]').forEach(v=>v.hidden=v.dataset.profileView!==tab);updateProfileUnread()}
 function updateProfileUnread(){const n=Array.from(unreadByOrder.values()).reduce((a,b)=>a+b,0);$('profileUnreadSummary').textContent=tr('Непрочитанных сообщений: ','Unread messages: ')+n}
 document.querySelectorAll('[data-profile-tab]').forEach(b=>b.addEventListener('click',()=>switchProfileTab(b.dataset.profileTab)));
 $('goPurchases').addEventListener('click',()=>{$('ordersPanel').scrollIntoView({behavior:'smooth'});$('buyerOrders').focus?.()});
 $('goSales').addEventListener('click',()=>$('sellerOrders').scrollIntoView({behavior:'smooth'}));
 $('goListings').addEventListener('click',()=>sellerPanel.scrollIntoView({behavior:'smooth'}));
 $('goMessages').addEventListener('click',loadInbox);
+// Notifications are stored in Supabase. RLS restricts reads and marking as read
+// to the authenticated recipient. We also filter by recipient_id for clarity.
+function resetOrderNotifications(){
+ orderNotificationsSequence++;orderNotifications=[];orderNotificationsBusy=false;
+ $('notificationsList').replaceChildren();$('notificationsStatus').textContent='';
+ updateOrderNotificationCount();
+}
+function updateOrderNotificationCount(){
+ const unread=orderNotifications.filter(n=>!n.is_read).length;
+ const badge=$('notificationsBadge');badge.hidden=unread===0;
+ badge.textContent=unread>99?'99+':String(unread);
+ $('notificationsSummary').textContent=tr('Непрочитанных уведомлений: ','Unread notifications: ')+unread;
+}
+function notificationEventTitle(n){
+ if(lang()==='ru')return n.title||'Уведомление';
+ const names={new_order:'New order',order_accepted:'Order accepted',dispute_opened:'Dispute opened',seller_responded:'Seller responded to dispute',dispute_resolved:'Dispute decision'};
+ return names[n.event_type]||n.title||'Notification';
+}
+function notificationEventMessage(n){
+ if(lang()==='ru')return n.message||'';
+ const names={new_order:'You have received a new order. Open My Sales to review it.',order_accepted:'The seller accepted your order.',dispute_opened:'A buyer opened a dispute. Review the reason and respond.',seller_responded:'The seller responded to your dispute. Await an administrator decision.'};
+ if(n.event_type==='dispute_resolved'){
+  const decision=(n.message||'').toLowerCase();
+  return decision.includes('в пользу покупателя')?'An administrator resolved the dispute in favor of the buyer.':decision.includes('в пользу продавца')?'An administrator resolved the dispute in favor of the seller.':(n.message||'');
+ }
+ return names[n.event_type]||n.message||'';
+}
+function renderOrderNotifications(){
+ const list=$('notificationsList');list.replaceChildren();updateOrderNotificationCount();
+ if(!currentUser)return;
+ if(!orderNotifications.length){const p=document.createElement('p');p.className='empty-state';p.textContent=tr('Уведомлений пока нет. Они появятся при событиях заказов и споров.','No notifications yet. They will appear when orders and disputes change.');list.append(p);return}
+ for(const n of orderNotifications){
+  const card=document.createElement('article');card.className='notification-card'+(n.is_read?'':' unread');
+  const head=document.createElement('div');head.className='notification-card-head';
+  const title=document.createElement('strong');title.className='notification-card-title';title.textContent=notificationEventTitle(n);
+  const date=document.createElement('span');date.className='notification-card-date';
+  const dt=new Date(n.created_at);date.textContent=Number.isNaN(dt.getTime())?'':dt.toLocaleString(lang()==='ru'?'ru-RU':'en-US');head.append(title,date);
+  const msg=document.createElement('p');msg.textContent=notificationEventMessage(n);
+  const actions=document.createElement('div');actions.className='notification-card-actions';
+  if(n.is_read){const read=document.createElement('span');read.className='notification-read-label';read.textContent=tr('Прочитано','Read');actions.append(read)}
+  else{const btn=document.createElement('button');btn.type='button';btn.className='market-button';btn.textContent=tr('Отметить прочитанным','Mark as read');btn.addEventListener('click',async()=>{
+   if(!currentUser||btn.disabled)return;const uid=currentUser.id;btn.disabled=true;
+   const {data,error}=await supabase.from('notifications').update({is_read:true}).eq('id',n.id).eq('recipient_id',uid).select('id');
+   if(currentUser?.id!==uid)return;
+   if(error||!data?.length){btn.disabled=false;$('notificationsStatus').textContent=tr('Не удалось отметить уведомление: ','Could not mark notification: ')+(error?.message||tr('запись не обновлена','record not updated'));return}
+   const current=orderNotifications.find(x=>x.id===n.id);if(current)current.is_read=true;
+   $('notificationsStatus').textContent='';renderOrderNotifications();
+  });actions.append(btn)}
+  card.append(head,msg,actions);list.append(card);
+ }
+}
+async function loadOrderNotifications(silent=false){
+ const uid=currentUser?.id;if(!uid||orderNotificationsBusy)return;
+ const seq=++orderNotificationsSequence;orderNotificationsBusy=true;
+ if(!silent)$('notificationsStatus').textContent=tr('Загружаем уведомления…','Loading notifications…');
+ try{
+  const {data,error}=await supabase.from('notifications').select('id,recipient_id,order_id,event_type,title,message,is_read,created_at').eq('recipient_id',uid).order('created_at',{ascending:false}).limit(100);
+  if(error)throw error;
+  if(currentUser?.id!==uid||seq!==orderNotificationsSequence)return;
+  orderNotifications=data||[];$('notificationsStatus').textContent='';renderOrderNotifications();
+ }catch(err){if(currentUser?.id===uid&&seq===orderNotificationsSequence)$('notificationsStatus').textContent=tr('Ошибка загрузки уведомлений: ','Notification load error: ')+err.message}
+ finally{if(seq===orderNotificationsSequence)orderNotificationsBusy=false}
+}
+$('refreshNotifications').addEventListener('click',()=>loadOrderNotifications());
+$('ruButton').addEventListener('click',renderOrderNotifications);
+$('enButton').addEventListener('click',renderOrderNotifications);
+// Refresh while the page is active; no external push service is required.
+orderNotificationsTimer=setInterval(()=>{if(currentUser&&!document.hidden)loadOrderNotifications(true)},30000);
+document.addEventListener('visibilitychange',()=>{if(!document.hidden&&currentUser)loadOrderNotifications(true)});
+
 $('profileForm').addEventListener('submit',async e=>{e.preventDefault();if(!currentUser||profileSaving)return;const uid=currentUser.id;const name=$('profileDisplayName').value.trim(),bio=$('profileBio').value.trim(),file=$('profileAvatarFile').files[0];if(!profileRecord){$('profileStatus').textContent=tr('Профиль не найден. Сначала настройте создание профилей.','Profile not found. Set up profile creation first.');return}if(!name||name.length>80||bio.length>1000){$('profileStatus').textContent=tr('Проверьте имя и описание.','Check the name and bio.');return}if(file&&(!ALLOWED_TYPES.has(file.type)||file.size===0||file.size>2*1024*1024)){$('profileStatus').textContent=tr('Только JPG, PNG или WebP до 2 МБ.','Only JPG, PNG or WebP up to 2 MB.');return}profileSaving=true;$('profileSaveButton').disabled=true;$('profileStatus').textContent=tr('Сохраняем профиль…','Saving profile…');try{const {data:auth,error:authError}=await supabase.auth.getUser();if(authError||auth?.user?.id!==uid)throw new Error(tr('Войдите в аккаунт повторно.','Please sign in again.'));let avatar_url=profileRecord.avatar_url||null;if(file){const ext=file.type==='image/png'?'png':file.type==='image/webp'?'webp':'jpg';const path=uid+'/'+crypto.randomUUID()+'.'+ext;const {error:uploadError}=await supabase.storage.from('avatars').upload(path,file,{contentType:file.type,upsert:false});if(uploadError)throw uploadError;avatar_url=supabase.storage.from('avatars').getPublicUrl(path).data.publicUrl}const {data,error}=await supabase.from('profiles').update({display_name:name,bio,avatar_url,is_public:$('profileIsPublic').checked}).eq('id',uid).select('id,display_name,bio,avatar_url,is_public').single();if(error)throw error;if(currentUser?.id!==uid)return;showProfileRecord(data);$('profileAvatarFile').value='';$('profileStatus').textContent=tr('Профиль сохранён.','Profile saved.');loadPublicSellers()}catch(err){$('profileStatus').textContent=tr('Не удалось сохранить: ','Could not save: ')+err.message}finally{profileSaving=false;$('profileSaveButton').disabled=false}});
 
 
