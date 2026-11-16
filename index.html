@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   for (let index = 0; index < 200; index += 1) {
     const star = document.createElement('span');
-    const period = 2.5 + Math.random() * 6;
+    const period = 1.25 + Math.random() * 3;
     star.style.left = (Math.random() * 100) + '%';
     star.style.top = (Math.random() * 100) + '%';
     star.style.color = colors[index % colors.length];
