@@ -7,6 +7,51 @@
 <meta name="description" content="AURION — цифровая экосистема на BNB Smart Chain: цифровые товары, услуги, дизайн, IT, обучение и маркетинг.">
 <title>AURION — Digital Ecosystem on BNB Smart Chain</title>
 <style>
+/* Decorative stars behind the page content. */
+body { isolation: isolate; }
+body::before, body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  animation: aurion-twinkle 6s ease-in-out infinite alternate;
+}
+body::before {
+  background-image:
+    radial-gradient(circle at 5% 18%, #9ad6ff 1px, transparent 3px),
+    radial-gradient(circle at 14% 62%, #ffd37a 1px, transparent 3px),
+    radial-gradient(circle at 23% 36%, #d3a6ff 1px, transparent 2px),
+    radial-gradient(circle at 31% 87%, #ff9ec4 1px, transparent 3px),
+    radial-gradient(circle at 43% 11%, #9ff4dc 1px, transparent 3px),
+    radial-gradient(circle at 58% 69%, #a3cbff 1px, transparent 2px),
+    radial-gradient(circle at 67% 24%, #ffd37a 1px, transparent 3px),
+    radial-gradient(circle at 77% 78%, #d3a6ff 1px, transparent 3px),
+    radial-gradient(circle at 89% 44%, #9ff4dc 1px, transparent 3px),
+    radial-gradient(circle at 96% 92%, #ff9ec4 1px, transparent 2px);
+}
+body::after {
+  background-image:
+    radial-gradient(circle at 3% 74%, #d3a6ff 1px, transparent 3px),
+    radial-gradient(circle at 11% 31%, #ff9ec4 1px, transparent 2px),
+    radial-gradient(circle at 20% 92%, #9ff4dc 1px, transparent 3px),
+    radial-gradient(circle at 35% 52%, #a3cbff 1px, transparent 2px),
+    radial-gradient(circle at 49% 90%, #ffd37a 1px, transparent 3px),
+    radial-gradient(circle at 56% 18%, #d3a6ff 1px, transparent 2px),
+    radial-gradient(circle at 65% 58%, #ff9ec4 1px, transparent 3px),
+    radial-gradient(circle at 79% 33%, #9ff4dc 1px, transparent 2px),
+    radial-gradient(circle at 91% 12%, #a3cbff 1px, transparent 3px),
+    radial-gradient(circle at 97% 65%, #ffd37a 1px, transparent 3px);
+  animation-duration: 8s;
+  animation-delay: -4s;
+}
+@keyframes aurion-twinkle {
+  from { opacity: .25; }
+  to { opacity: .88; }
+}
+@media (prefers-reduced-motion: reduce) {
+  body::before, body::after { animation: none; opacity: .55; }
+}
 :root{--bg:#0b1220;--panel:#111d30;--gold:#e4c477;--gold-bright:#ffe6a0;--gold-dark:#b8892e;--text:#f4f1e8;--muted:#b7bdc9;--border:rgba(228,196,119,.28)}
 *{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:100px}body{margin:0;font-family:Arial,Helvetica,sans-serif;color:var(--text);background:radial-gradient(ellipse at 50% 0%,rgba(201,154,50,.12),transparent 42%),radial-gradient(ellipse at 0% 40%,rgba(33,64,105,.16),transparent 45%),var(--bg);line-height:1.7;min-height:100vh}a{color:var(--gold);text-decoration:none}a:hover{color:var(--gold-bright)}
 header{text-align:center;padding:45px 20px 25px;position:relative;overflow:hidden}header:before{content:"";position:absolute;width:420px;height:420px;border:1px solid rgba(228,196,119,.09);border-radius:50%;left:50%;top:-260px;transform:translateX(-50%);pointer-events:none}.logo{width:145px;height:145px;object-fit:contain;display:block;margin:0 auto 16px;animation:glow 4s ease-in-out infinite}@keyframes glow{0%,100%{filter:drop-shadow(0 0 12px rgba(228,196,119,.2))}50%{filter:drop-shadow(0 0 28px rgba(228,196,119,.65))}}h1{font-size:clamp(34px,6vw,52px);letter-spacing:5px;background:linear-gradient(120deg,#fff0bd,#d2a849,#fff0bd);background-clip:text;-webkit-background-clip:text;color:transparent;margin:0 0 8px}.tagline{color:var(--muted);font-size:15px;letter-spacing:1.5px}.language-switch{display:flex;justify-content:center;gap:8px;margin:22px 0 5px}
