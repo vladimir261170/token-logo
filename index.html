@@ -7,6 +7,26 @@
 <meta name="description" content="AURION — цифровая экосистема на BNB Smart Chain: цифровые товары, услуги, дизайн, IT, обучение и маркетинг.">
 <title>AURION — Digital Ecosystem on BNB Smart Chain</title>
 <style>
+/* Soft light along the viewport edges. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at left center, rgba(87, 123, 255, .34), transparent 65%) left / min(32vw, 28rem) 100% no-repeat,
+    radial-gradient(ellipse at right center, rgba(178, 94, 255, .30), transparent 65%) right / min(32vw, 28rem) 100% no-repeat,
+    linear-gradient(to bottom, rgba(87, 123, 255, .14), transparent 14%, transparent 86%, rgba(178, 94, 255, .14));
+  animation: aurion-edge-glow 8s ease-in-out infinite;
+}
+@keyframes aurion-edge-glow {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  body::before { animation: none; opacity: .45; }
+}
 /* Decorative stars behind the page content. */
 body { isolation: isolate; }
 .aurion-stars {
