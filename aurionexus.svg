@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" role="img">
+  <title>AURIONEXUS</title>
+  <circle cx="16" cy="16" r="15" fill="#0d0d0d" stroke="#d4af37" stroke-width="1.5"/>
+  <circle cx="16" cy="16" r="11" fill="none" stroke="#b38f27" stroke-width=".75" stroke-dasharray=".8 1.5"/>
+  <circle cx="16" cy="16" r="9" fill="#141414" stroke="#d4af37" stroke-width=".5"/>
+  <g fill="#d4af37">
+    <circle cx="16" cy="8" r=".5"/>
+    <circle cx="24" cy="16" r=".5"/>
+    <circle cx="16" cy="24" r=".5"/>
+    <circle cx="8" cy="16" r=".5"/>
+    <path d="M10.7 14.2 14.7 11.3 18.9 15.3 17.6 16.4 14.6 13.6 12.4 15.2v2.2l-1.7 1.5z"/>
+    <path d="M21.1 12.9v4.7l-3.9 2.9-3.9-3.9 1.3-1.3 2.8 2.9 2.1-1.6v-2z"/>
+  </g>
+</svg>
